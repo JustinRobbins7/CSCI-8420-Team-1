@@ -50,7 +50,7 @@ Based on the purpose of Liberapay, the software security features should revolve
 
 ## 2. Motivation
 
-Our team inspected a handful of open source projects, and we ended up deciding to work with Liberapay because it met our goals. We wanted a project that is interesting, active, popular, and comprised of components that we can build security requirements around. Liberapay has over 358 contributors which indicated to us that it was active and popular.  And as addressed in some of the other sections in this proposal; Liberapay is a platform that facilitates donations to organizations. And hence it consists of components that are exposed in some fashion to the internet, network, or other systems. The nature of this project will allow us to build some interesting security requirements and perhaps find some security concerns as well. 
+Our team inspected a handful of open source projects, and we ended up deciding to work with Liberapay because it met our goals. We wanted a project that is interesting, active, popular, and comprised of components that we can build security requirements around. Liberapay has over 358 contributors which indicated to us that it was active and popular.  As addressed in some of the other sections in this proposal, Liberapay is a platform that facilitates donations to organizations. Liberapay consists of components that are exposed in some fashion to the internet, network, or other systems, providing a place to look for security flaws. The nature of this project will allow us to build some interesting security requirements and perhaps find some security concerns as well.
 
 
 ## 3. Project Description
@@ -63,7 +63,7 @@ As an open-source software project, Liberapay has a well-established codebase th
 - The sum of donor charges processed for the latest week was $6,930
 
 ## 4. License and Contribution Policies
-The Liberapay project has very lax licensing and contribution policies. The project is listed with the CC0 Creative Commons License, which allows the code to be used wherever and has little to no protections for the project. This will allow us to examine and contribute to the project freely. The license has allowed the project to be extremely free with regards to the contributors that help develop the project, with over 1000 issues and over 900 pull requests. The project has no official contributor agreement or processes. The primary way that individuals contribute to the project is be raising issues and submitting pull requests that are approved by a smaller core of developers. Other than the developer oversight, no restriction are made to submit issues and pull requests.
+The Liberapay project has very lax licensing and contribution policies. The project is listed with the CC0 Creative Commons License, which allows the code to be used wherever and has little to no protections for the project. This will allow us to examine and contribute to the project freely. The license has allowed the project to be extremely free with regards to the contributors that help develop the project, with over 1000 issues and over 900 pull requests. The project has no official contributor agreement or processes. The primary way that individuals contribute to the project is be raising issues and submitting pull requests that are approved by a smaller core of developers. Other than developer oversight, no restriction are made to submit issues and pull requests.
 
 
 ## 5. Summary of Software Security History
