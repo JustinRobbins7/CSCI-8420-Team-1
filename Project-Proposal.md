@@ -9,6 +9,10 @@ Link to Liebrapay Github: [Liberapay Project](https://github.com/liberapay/liber
 ### *1.1. Systems Engineering View*
 ![Systems Engineering View](/Images/SA.png)
 
+#### _SYSTEM-OF-INTEREST View_
+![System Engineering View Zoomed](/Images/SA_Zoom.PNG)
+
+#### _PDF Version_
 ![Systems Engineering View PDF](/Images/SA.pdf)
 
 ### *1.2. Possible Threats to Operational Environment*
