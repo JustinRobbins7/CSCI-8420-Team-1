@@ -2,4 +2,4 @@
 Group Repository for Team 1 in CSCI-8420
 
 
-![Nick's Portrait](pexels-element-digital-1470168.jpg)
+![Nick's Portrait](/Images/pexels-element-digital-1470168.jpg)
