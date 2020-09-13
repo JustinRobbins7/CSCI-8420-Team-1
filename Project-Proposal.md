@@ -11,6 +11,30 @@ Link to Liebrapay Github: [Liberapay Project](https://github.com/liberapay/liber
 ### *1.2. Possible Threats to Operational Environment*
 
 ### *1.3. Software Security Features*
+Based on the purpose of Liberapay, the software security features should revolve around three main categories: Payment Process, User Data Management, and Miscellaneous.
+
+<ins>Payment</ins>
+* SSL Protocol
+* PCI Compliance
+* Tokenization 
+* Monitor transactions for possible fraud, money laundering, and terrorism financing
+
+<ins>User Data</ins>
+* Authentication/Authorization
+* Access Control
+* Cookies Control
+* Backups/Recovery
+* Encryption
+* Data Masking
+* Deletions/Erasure 
+* X-XSS Protection
+* Cross-Site Request Forgery (CSRF) Protection
+* Content Security Policy Settings
+* Validate Redirects and Forwards
+* X-Frame Options (Clickjacking protection)
+
+<ins>Miscellaneous</ins>
+* Compliance with GDPR guidelines of Europe
 
 
 ## 2. Motivation
@@ -30,6 +54,40 @@ The Liberapay project has very lax licensing and contribution policies. The proj
 
 
 ## 5. Summary of Software Security History
+In this section, we highlight the software security history of Liberapay. The history can be divided into three main categories: vulnerabilities, security-related engineering decisions, and changes that were added/removed.
+
+<ins>Vulnerabilities</ins>
+
+Liberapay has a bug bounty program on the platform, HackerOne, that allows users to report potential issues. Along with the issues tab on their GitHub repository, some of the security issues were also reported from the bug bounty. Here are a few of them:
+
+* [Missing back-end user input validation can lead to DOS flaw](https://hackerone.com/reports/361337)
+* [Broken Authentication and session management OWASP A2](https://hackerone.com/reports/449671)
+* [OAuth credentials are stored in the DB instead of the secrets vault](https://github.com/liberapay/liberapay.com/issues/1673)
+* [Storing redirect URLs in the path and querystring is a security risk](https://github.com/liberapay/liberapay.com/issues/496)
+* [Usage of 'pickle' is potentially dangerous](https://github.com/liberapay/liberapay.com/issues/1132)
+* [SQL injection vulnerability in liberapay.com](https://github.com/liberapay/liberapay.com/issues/559)
+* [Email address is exposed in verification URL](https://github.com/liberapay/liberapay.com/issues/492)
+* [Paying failures aren't handled properly](https://github.com/liberapay/liberapay.com/issues/249)
+
+<ins>Security-Related Engineering Decisions</ins>
+
+Liberapay has set up some security-related engineering to assure security as best as possible. Here are a few of them:
+
+* All network connections are encrypted, except for some communications between machines located in the same datacenter.
+* As a precaution against identity theft in case of data leak, the identity information of Liberapay account owners is stored encrypted in their database.
+* When a user inputs a password, it gets cross-checked against a "pwned passwords" to assess compromisation of password.
+* A generic rate limit has been implemented for "unsafe" HTTP requests, among other components.
+* Content Security Policy (CSP) was implemented to prevent cross-site scripting, prevent mixed content issues, as well as report violations for investigation.
+* Liberapay does not tell creators who their patrons are to avoid personal information leaks.
+* Liberapay allows users to link other social media to their accounts, but only store public information. No private data is stored.
+* Liberapay restricts cookies to same-site requests as an additional protection against CSRF and enforcing privacy by preventing tracking of users through those widgets.
+
+<ins>Add/Remove Changes</ins>
+
+Along with fixing issues, Liberapay has also taken some measures to improve security. Here are  a few of them.
+
+* [Moved from python2 to python 3](https://github.com/liberapay/liberapay.com/pull/1399)
+* [Replaced 'pickle' library in python to CBOR to avoid Remote Code Execution vulnerability through code injection](https://github.com/liberapay/liberapay.com/pull/1455)
 
 
 ## 6. Project GitHub Links
