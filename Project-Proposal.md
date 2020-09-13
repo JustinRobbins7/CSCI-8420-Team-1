@@ -12,7 +12,9 @@ Link to Liebrapay Github: [Liberapay Project](https://github.com/liberapay/liber
 ![Systems Engineering View PDF](/Images/SA.pdf)
 
 ### *1.2. Possible Threats to Operational Environment*
-
+Due to the nature of Liberapay there are possible threats within its operational environment.  Those threats exist because of the vulnerabilities (discussed in the vulnerabilities section below) that Liberapay has.  The two main possible threats that we have identified when it comes to Liberapay pertain to:
+1. Interception of payment information (Monetary Concerns):  Since Liberapay deals with donations/crowdfunding. An opportunity could exist for attackers to intercept such transactions and gain access to financial information of users.
+2. Unauthorized access to private information (Privacy Concerns): Users of Liberapay have to register accounts to use it. Those accounts contain private information pertaining to the user, such as statements, names, goals etc... An opportunity could exist for attackers to get unauthorized access to an account and obtain a victim’s private information.
 ### *1.3. Software Security Features*
 Based on the purpose of Liberapay, the software security features should revolve around three main categories: Payment Process, User Data Management, and Miscellaneous.
 
@@ -41,6 +43,8 @@ Based on the purpose of Liberapay, the software security features should revolve
 
 
 ## 2. Motivation
+
+Our team inspected a handful of open source projects, and we ended up deciding to work with Liberapay because it met our goals. We wanted a project that is interesting, active, popular, and comprised of components that we can build security requirements around. Liberapay has over 358 contributors which indicated to us that it was active and popular.  And as addressed in some of the other sections in this proposal; Liberapay is a platform that facilitates donations to organizations. And hence it consists of components that are exposed in some fashion to the internet, network, or other systems. The nature of this project will allow us to build some interesting security requirements and perhaps find some security concerns as well. 
 
 
 ## 3. Project Description
