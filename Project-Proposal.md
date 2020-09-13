@@ -1,7 +1,7 @@
 # Team 1 Project Proposal: Liberapay
 
 Written by Team 1:
-Joel Allou, Mohammd H. Al Huneidi, Miti Marredy, Justin Robbins, and Nicholas Sabata
+Joel Allou, Mohammd H. Al Huneidi, Miti Mareddy, Justin Robbins, and Nicholas Sabata
 
 Link to Liebrapay Github: [Liberapay Project](https://github.com/liberapay/liberapay.com)
 
