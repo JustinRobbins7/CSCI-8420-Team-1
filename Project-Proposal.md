@@ -15,6 +15,8 @@ Link to Liebrapay Github: [Liberapay Project](https://github.com/liberapay/liber
 #### _PDF Version_
 ![Systems Engineering View PDF](/Images/SA.pdf)
 
+---
+
 ### *1.2. Possible Threats to Operational Environment*
 Due to the nature of Liberapay there are possible threats within its operational environment.  Those threats exist because of the vulnerabilities (discussed in the vulnerabilities section below) that Liberapay has.  The two main possible threats that we have identified when it comes to Liberapay pertain to:
 1. Interception of payment information (Monetary Concerns):  Since Liberapay deals with donations/crowdfunding. An opportunity could exist for attackers to intercept such transactions and gain access to financial information of users.
