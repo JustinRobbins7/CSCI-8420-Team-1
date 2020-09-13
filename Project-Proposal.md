@@ -7,6 +7,7 @@ Link to Liebrapay Github: [Liberapay Project](https://github.com/liberapay/liber
 
 ## 1. Operation Environment
 ### *1.1. Systems Engineering View*
+![Systems Engineering View](/Images/SA.pdf)
 
 ### *1.2. Possible Threats to Operational Environment*
 
