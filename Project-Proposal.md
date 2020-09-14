@@ -1,7 +1,7 @@
 # Team 1 Project Proposal: Liberapay
 
 Written by Team 1:
-Joel Allou, Mohammd H. Al Huneidi, Miti Mareddy, Justin Robbins, and Nicholas Sabata
+Joel Allou, Mohammad H. Al Huneidi, Miti Mareddy, Justin Robbins, and Nicholas Sabata
 
 Link to Liberapay Github: [Liberapay Project](https://github.com/liberapay/liberapay.com)
 
@@ -63,7 +63,7 @@ As an open-source software project, Liberapay has a well-established codebase th
 - The sum of donor charges processed for the latest week was $6,930
 
 ## 4. License and Contribution Policies
-The Liberapay project has very lax licensing and contribution policies. The project is listed with the CC0 Creative Commons License, which allows the code to be used wherever and has little to no protections for the project. This will allow us to examine and contribute to the project freely. The license has allowed the project to be extremely free with regards to the contributors that help develop the project, with over 1000 issues and over 900 pull requests. The project has no official contributor agreement or processes. The primary way that individuals contribute to the project is be raising issues and submitting pull requests that are approved by a smaller core of developers. Other than developer oversight, no restriction are made to submit issues and pull requests.
+The Liberapay project has very lax licensing and contribution policies. The project is listed with the CC0 Creative Commons License, which allows the code to be used wherever and has little to no protections for the project. This will allow us to examine and contribute to the project freely. The license has allowed the project to be extremely free with regards to the contributors that help develop the project, with over 1000 issues and over 900 pull requests. The project has no official contributor agreement or processes. The primary way that individuals contribute to the project is be raising issues and submitting pull requests that are approved by a smaller core of developers. Other than developer oversight, no restrictions are made to submit issues and pull requests.
 
 
 ## 5. Summary of Software Security History
