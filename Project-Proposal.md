@@ -5,7 +5,7 @@ Joel Allou, Mohammad H. Al Huneidi, Miti Mareddy, Justin Robbins, and Nicholas S
 
 Link to Liberapay Github: [Liberapay Project](https://github.com/liberapay/liberapay.com)
 
-## 1. Operation Environment
+## 1. Operational Environment
 ### *1.1. Systems Engineering View*
 ![Systems Engineering View](/Images/SA.png)
 
@@ -18,13 +18,14 @@ Link to Liberapay Github: [Liberapay Project](https://github.com/liberapay/liber
 ---
 
 ### *1.2. Possible Threats to Operational Environment*
-Due to the nature of Liberapay there are possible threats within its operational environment.  Those threats exist because of the vulnerabilities (discussed in the vulnerabilities section below) that Liberapay has.  The two main possible threats that we have identified when it comes to Liberapay pertain to:
-1. Interception of payment information (Monetary Concerns):  Since Liberapay deals with donations/crowdfunding. An opportunity could exist for attackers to intercept such transactions and gain access to financial information of users.
+Due to the nature of Liberapay there are possible threats within its operational environment. Those threats exist because of the vulnerabilities (discussed in the Vulnerabilities section below) that Liberapay has. The two main possible threats that we have identified when it comes to Liberapay pertain to:
+1. Interception of payment information (Monetary Concerns): Since Liberapay deals with donations/crowdfunding, an opportunity could exist for attackers to intercept such transactions and gain access to financial information of users.
 2. Unauthorized access to private information (Privacy Concerns): Users of Liberapay have to register accounts to use it. Those accounts contain private information pertaining to the user, such as statements, names, goals etc... An opportunity could exist for attackers to get unauthorized access to an account and obtain a victim’s private information.
+
 ### *1.3. Software Security Features*
 Based on the purpose of Liberapay, the software security features should revolve around three main categories: Payment Process, User Data Management, and Miscellaneous.
 
-<ins>Payment</ins>
+<ins>Payment Process</ins>
 * SSL Protocol
 * PCI Compliance
 * Tokenization 
@@ -47,11 +48,8 @@ Based on the purpose of Liberapay, the software security features should revolve
 <ins>Miscellaneous</ins>
 * Compliance with GDPR guidelines of Europe
 
-
 ## 2. Motivation
-
-Our team inspected a handful of open source projects, and we ended up deciding to work with Liberapay because it met our goals. We wanted a project that is interesting, active, popular, and comprised of components that we can build security requirements around. Liberapay has over 358 contributors which indicated to us that it was active and popular.  As addressed in some of the other sections in this proposal, Liberapay is a platform that facilitates donations to organizations. Liberapay consists of components that are exposed in some fashion to the internet, network, or other systems, providing a place to look for security flaws. The nature of this project will allow us to build some interesting security requirements and perhaps find some security concerns as well.
-
+Our team inspected a handful of open source projects, and we ended up deciding to work with Liberapay because it met our goals. We wanted a project that was interesting, active, popular, and comprised of components that we can build security requirements around. Liberapay currently has about 477 contributors, which indicated to us that it was both active and popular. As addressed in some of the other sections in this project proposal, Liberapay is a platform that facilitates donations to organizations. Liberapay consists of components that are exposed in some fashion to the internet, network, or other systems providing a place to look for security flaws. The nature of this project will allow us to build some interesting security requirements and perhaps find some security concerns as well.
 
 ## 3. Project Description
 Liberapay is a non-profit organization that enables individuals to support the people who build free software and spread free knowledge by donating toward their work. As an organization, Liberapay provides an accessible web platform where people can donate money recurrently to various teams, organizations, and individuals and crowdfund workable incomes for these creators to accomplish their work. Liberapay’s users are composed of both donors and creators, and all processing payments are currently supported through Stripe and PayPal.
@@ -63,11 +61,10 @@ As an open-source software project, Liberapay has a well-established codebase th
 - The sum of donor charges processed for the latest week was $6,930
 
 ## 4. License and Contribution Policies
-The Liberapay project has very lax licensing and contribution policies. The project is listed with the CC0 Creative Commons License, which allows the code to be used wherever and has little to no protections for the project. This will allow us to examine and contribute to the project freely. The license has allowed the project to be extremely free with regards to the contributors that help develop the project, with over 1000 issues and over 900 pull requests. The project has no official contributor agreement or processes. The primary way that individuals contribute to the project is be raising issues and submitting pull requests that are approved by a smaller core of developers. Other than developer oversight, no restrictions are made to submit issues and pull requests.
-
+The Liberapay project has very lax licensing and contribution policies. The project is listed with the CC0 Creative Commons License, which allows the code to be used wherever and has little to no protections for the project. This will allow us to examine and contribute to the project freely. The license has allowed the project to be extremely free with regards to the contributors that help develop the project, with over 1000 issues and over 900 pull requests. The project has no official contributor agreement or processes. The primary way that individuals contribute to the project is by raising issues and submitting pull requests that are approved by a smaller core of developers. Other than developer oversight, no restrictions are made to submit issues and pull requests.
 
 ## 5. Summary of Software Security History
-In this section, we highlight the software security history of Liberapay. The history can be divided into three main categories: vulnerabilities, security-related engineering decisions, and changes that were added/removed.
+In this section, we highlight the software security history of Liberapay. The history can be divided into three main categories: Vulnerabilities, Security-Related Engineering Decisions, and Added/Removed Changes.
 
 <ins>Vulnerabilities</ins>
 
@@ -95,13 +92,12 @@ Liberapay has set up some security-related engineering to assure security as bes
 * Liberapay allows users to link other social media to their accounts, but only store public information. No private data is stored.
 * Liberapay restricts cookies to same-site requests as an additional protection against CSRF and enforcing privacy by preventing tracking of users through those widgets.
 
-<ins>Add/Remove Changes</ins>
+<ins>Added/Removed Changes</ins>
 
-Along with fixing issues, Liberapay has also taken some measures to improve security. Here are  a few of them.
+Along with fixing issues, Liberapay has also taken some measures to improve security. Here are a few of them.
 
 * [Moved from python2 to python 3](https://github.com/liberapay/liberapay.com/pull/1399)
 * [Replaced 'pickle' library in python to CBOR to avoid Remote Code Execution vulnerability through code injection](https://github.com/liberapay/liberapay.com/pull/1455)
-
 
 ## 6. Project GitHub Links
 Here are links to our Github Pages: \
