@@ -3,7 +3,7 @@
 Written by Team 1:
 Joel Allou, Mohammd H. Al Huneidi, Miti Mareddy, Justin Robbins, and Nicholas Sabata
 
-Link to Liebrapay Github: [Liberapay Project](https://github.com/liberapay/liberapay.com)
+Link to Liberapay Github: [Liberapay Project](https://github.com/liberapay/liberapay.com)
 
 ## 1. Operation Environment
 ### *1.1. Systems Engineering View*
@@ -30,7 +30,7 @@ Based on the purpose of Liberapay, the software security features should revolve
 * Tokenization 
 * Monitor transactions for possible fraud, money laundering, and terrorism financing
 
-<ins>User Data</ins>
+<ins>User Data Management</ins>
 * Authentication/Authorization
 * Access Control
 * Cookies Control
