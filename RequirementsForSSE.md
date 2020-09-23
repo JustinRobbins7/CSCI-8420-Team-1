@@ -21,20 +21,20 @@ Link to Liberapay Github: [Liberapay Project](https://github.com/liberapay/liber
  
 ### Customer - Login (1/5)
 
-#### Use Case
+#### *Use Case*
 
-##### Goals/Description
+<ins>Goals/Description:</ins>
 Provide authentication mechanism.
 
-##### Scenario Example
+<ins>Scenario Example:</ins>
 A user logs in into his/her Liberapay's account.
 
-##### Description
+<ins>Description</ins>
 - A user visits Liberaypay's website
 - The user enters email and password
 - The systems validates credentials and accept and reject request
 
-#### Mis-Use Case(s)
+#### *Mis-Use Case(s)*
 
 Below, we detail couple of ways that a hacker tries to infiltrate a user's account.
 
@@ -50,13 +50,15 @@ The hacker uses system to automatically checks all the combinations of password 
 5) If all of the methods above fail, the hacker tries to analyze user permissions and see if he/she can access the database through weak permissions settings.
 If entry is successful, the hacker then alter information in the database.
 
-#### Security Requirements
+#### *Security Requirements*
+
+<ins>Derived Security Features</ins>
 
 Below, we detail security measures that must be taken to mitigate hacker's success in accessing a user's account. The number of each security measure corresponds to the misuse case number in the misuse case section.
 
 1) There should be password policies set in place to rate limit login attempts, ensure that user enters strong password, and observe unusual activities.
 
-2) All communications between server and client should be secure by using protocols like SSL and firewals, in order to mitigates issues like packet sniffing.
+2) All communications between server and client should be secure by using protocols like SSL and firewalls, in order to mitigates issues like packet sniffing.
 
 3) Every input sent to the server or DB should be verified and confirmed before moving to the next step. Each requests that is malicious should automatically be revoked and flagged.
 
@@ -64,9 +66,24 @@ Below, we detail security measures that must be taken to mitigate hacker's succe
 
 5) Permissions for access/editing of database should be properly defined using standard policies.
 
-Observation of current OSS:
+<ins>Current Security Features</ins>
 
-#### (Mis)use case Diagram
+Below, we detail existing security measures that Liberaypay has taken to mitigate issues discussed above. The number of each security measure corresponds to the misuse case number in the misuse case section.
+
+Replaced 'pickle' library in python to CBOR to avoid Remote Code Execution vulnerability through code injection
+
+1) To mitigate brute force password checking, Liberapay has taken the following measures:
+ - All passwords get cross-checked agains a "pwned passwords" ([Link to Issue](https://github.com/liberapay/liberapay.com/issues/986))
+ - A generic rate limit has been implemented for "unsafe" HTTP requests, among other components. ([Link to Issue](https://github.com/liberapay/liberapay.com/issues/658))
+2) [Liberay](https://liberapay.com/about/privacy) affirms that "All network connections are encrypted, except for some communications between machines located in the same datacenter".
+
+3) ...
+
+4) ...
+
+5) ...
+
+#### *(Mis)use case Diagram*
  
  ![Diagram 1](/Images/RequirementsDiagram1.png)
 
