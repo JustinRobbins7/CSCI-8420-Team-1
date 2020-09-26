@@ -7,22 +7,22 @@ Link to Liberapay Github: [Liberapay Project](https://github.com/liberapay/liber
 
 ## 1. Use/Misuse Case Analysis
 
-### 1.1. *Use Cases*
- - Identify five essential interactions of your open-source software (system-of-interest) with its environment of operation. You will most likely identify these interactions based on the enabling systems or other systems in your systems engineering view from the previous assignment. Ideally, the interactions need to be spread across different external interactors (humans or systems) of your software. Once different external interactors have been identified, the interactions can focus on the most sensitive features used by the external interactor. 
- - Develop use-cases diagrams related to the five interactions. The use-cases should be about features supported by your software (system of interest) 
+### 1.1. Use/Misuse Case 1 - Donation Renewal
+![Donation Renewal Misuse Case Diagram](/Images/LiberapayDonationRenewalUseCase.png)
  
- Use Case 1 - Donation Renewal
- ![Donation Renewal Misuse Case Diagram](/Images/LiberapayDonationRenewalUseCase.png)
- 
- 
- ### 1.2. *Misuse Cases*
- - The misusers should be contextualized in your environment of operation and relevant to the interactions identified above. Use names for mis-users that help the reader understand their motives, resources, attack of choice, and the available access to the system to carry out their attack.
- - Iterate between use and misuse cases to elaborate additional security functions. Embed the final diagram in your report.
+This use case focuses around a user being notified that a donation they have chosen to start is about to recur. Liberapay allows for both automatic withdrawal from accounts and the manual payment of recurring donations. The Liberapay scheduler tells the email system to send reminder emails to donators when the time comes to pay their donation once again. While this use case primarily works under the assumption that the user has set up manual payments, the phishing emails are also applicable to the automatic payments as reminder emails are sent regardless of the type of repayment. Once the email is received, a donator using manual repayment must login to Liberapay and then login to their chosen payment handler. 
 
-### 1.3. *Reflection*
- - Assess alignment of security requirements derived from mis-use case analysis with advertised features of the open-source software. Review OSS project documentation and codebase to support your observations. Summarize your observations.
- 
- 
+The misuse case for this use case focuses on an attacker trying to leverage the email system and other methods to acquire the login information of the donator and to use it to login to their Liberapay account, or possibly their payment vendor account if they use the same email and password. Sending a phishing email to trick users into giving the attacker their login data is an old trick, but still works on many users. To mitigate this, Liberapay could use a standardized emailing template to make sure that their emails look professional and ensure that their emails are easily recognizable by donators. Unfortunately, this kind of standardized emailing also lends itself to duplication if the attacker has access to the template. Liberapay would then need to have some form of authentication to ensure that hackers cannot duplication their emails and fool consumers. Unfortunately, phishing countermeasures will only mitigate the danger of users being fooled by phony emails. Other ways the attacker could acquire this login information is by executing a dictionary attack / brute force attack on the donator's login account to simply guess their password. Implementing a limit on login attempts heavily mitigates this problem. However, if the attacker executes the attack on other websites, they may still be able to acquire login information if the user uses the same password on multiple web sites. This sort of attack cannot be prevented by Liberapay, because it reaches web sites otuside of the system's operations. 
+
+Despite this, Liberapay can prevent an attacker from logging in with stolen user data. Implementing two-factor authentication ensures that the donator's account cannot be accessed even with their account information, as long as their secondary security device is uncompromised. The final interactions in this misuse case deal with the attacker trying to leverage an XSS attack to acquire the session cookies from a legitmate user, and then use that session cookie to access the donators' account directly, without needing to authenticate via 2FA. By implementing measures that mitigate or prevent XSS attacks, Liberapay can protect their users from such an attack. Liberapay can also mitigate this issue by only using timed session cookies that expire after a short time, makign stolen cookies useless shortly after they are acquired. 
+
+In summary, this misuse case derives the following security requirements: login authentication, standardized emailing, email authentication, login attempt limits, two-factor authentication, short timed session cookies, and XSS attack countermeasures. Liberapay support basic login information, storing this information in an encrypted database. Liberapay also limits the attempts that can be made to log in from a certain device, preventing login for a few hours once a login has failed. The issue [here](https://github.com/liberapay/liberapay.com/issues/1609) briefly discusses how Liberapay handles limited logins, by forcing a user to directly login with their email if they make too many failed attempts. Liberapay implements a [timed-based one time password algorithm](https://github.com/liberapay/liberapay.com/issues/926) to include two-factor authentication in their system, significantly increasing the security of Liberapay. Unfortunately, it seems that while [many](https://github.com/liberapay/liberapay.com/issues?q=xss) XSS attack-related issues have been dealt with, there are still some attack vectors that have not been plugged. These issues could allow attackers to bypass the other security measures of Liberapay and access customer sessions. Liberapay does not satisfy the timed session cookie security requirement or the authenticated email requirements. The latter is understandable, as the resources put into the project would be wasted by sufficiently ignorant donators. However, Liberapay does use automated, and thus standardized emailing, so their messages are recognizable.
+
+### 1.2. Use/Misuse Case
+### 1.3. Use/Misuse Case
+### 1.4. Use/Misuse Case
+### 1.5. Use/Misuse Case
+
 ### Customer - Login (1/5)
 
 #### *Use Case*
