@@ -7,23 +7,9 @@ Link to Liberapay Github: [Liberapay Project](https://github.com/liberapay/liber
 
 ## 1. Use/Misuse Case Analysis
 
-### 1.1. Use/Misuse Case 1 - Donation Renewal
-![Donation Renewal Misuse Case Diagram](/Images/LiberapayDonationRenewalUseCase.png)
- 
-This use case focuses around a user being notified that a donation they have chosen to start is about to recur. Liberapay allows for both automatic withdrawal from accounts and the manual payment of recurring donations. The Liberapay scheduler tells the email system to send reminder emails to donators when the time comes to pay their donation once again. While this use case primarily works under the assumption that the user has set up manual payments, the phishing emails are also applicable to the automatic payments as reminder emails are sent regardless of the type of repayment. Once the email is received, a donator using manual repayment must login to Liberapay and then login to their chosen payment handler. 
-
-The misuse case for this use case focuses on an attacker trying to leverage the email system and other methods to acquire the login information of the donator and to use it to login to their Liberapay account, or possibly their payment vendor account if they use the same email and password. Sending a phishing email to trick users into giving the attacker their login data is an old trick, but still works on many users. To mitigate this, Liberapay could use a standardized emailing template to make sure that their emails look professional and ensure that their emails are easily recognizable by donators. Unfortunately, this kind of standardized emailing also lends itself to duplication if the attacker has access to the template. Liberapay would then need to have some form of authentication to ensure that hackers cannot duplication their emails and fool consumers. Unfortunately, phishing countermeasures will only mitigate the danger of users being fooled by phony emails. Other ways the attacker could acquire this login information is by executing a dictionary attack / brute force attack on the donator's login account to simply guess their password. Implementing a limit on login attempts heavily mitigates this problem. However, if the attacker executes the attack on other websites, they may still be able to acquire login information if the user uses the same password on multiple web sites. This sort of attack cannot be prevented by Liberapay, because it reaches web sites otuside of the system's operations. 
-
-Despite this, Liberapay can prevent an attacker from logging in with stolen user data. Implementing two-factor authentication ensures that the donator's account cannot be accessed even with their account information, as long as their secondary security device is uncompromised. The final interactions in this misuse case deal with the attacker trying to leverage an XSS attack to acquire the session cookies from a legitmate user, and then use that session cookie to access the donators' account directly, without needing to authenticate via 2FA. By implementing measures that mitigate or prevent XSS attacks, Liberapay can protect their users from such an attack. Liberapay can also mitigate this issue by only using timed session cookies that expire after a short time, makign stolen cookies useless shortly after they are acquired. 
-
-In summary, this misuse case derives the following security requirements: login authentication, standardized emailing, email authentication, login attempt limits, two-factor authentication, short timed session cookies, and XSS attack countermeasures. Liberapay support basic login information, storing this information in an encrypted database. Liberapay also limits the attempts that can be made to log in from a certain device, preventing login for a few hours once a login has failed. The issue [here](https://github.com/liberapay/liberapay.com/issues/1609) briefly discusses how Liberapay handles limited logins, by forcing a user to directly login with their email if they make too many failed attempts. Liberapay implements a [timed-based one time password algorithm](https://github.com/liberapay/liberapay.com/issues/926) to include two-factor authentication in their system, significantly increasing the security of Liberapay. Unfortunately, it seems that while [many](https://github.com/liberapay/liberapay.com/issues?q=xss) XSS attack-related issues have been dealt with, there are still some attack vectors that have not been plugged. These issues could allow attackers to bypass the other security measures of Liberapay and access customer sessions. Liberapay does not satisfy the timed session cookie security requirement or the authenticated email requirements. The latter is understandable, as the resources put into the project would be wasted by sufficiently ignorant donators. However, Liberapay does use automated, and thus standardized emailing, so their messages are recognizable.
-
 ### 1.2. Use/Misuse Case
-### 1.3. Use/Misuse Case
-### 1.4. Use/Misuse Case
-### 1.5. Use/Misuse Case
 
-### Customer - Login (1/5)
+### 1.1 - Customer Login
 
 #### *Use Case*
 
@@ -91,10 +77,100 @@ Replaced 'pickle' library in python to CBOR to avoid Remote Code Execution vulne
  
  ![Diagram 1](/Images/RequirementsDiagram1.png)
 
+### 1.2. Donation Renewal
 
-## 2. Liberapay Documentation Review
+#### *Use Case*
+<ins>Goals/Description:</ins>
+Donator renews donation
+
+<ins>Scenario Example:</ins>
+A user is send a donation renewal email and logs into theri account to pay.
+
+<ins>Description</ins>
+- A user is sent an email by Liberapay
+- The user enters email and password into Liberapay
+- The user enters email and password into their chosen payment system
+
+#### *Mis-Use Case(s)*
+
+Below, we detail couple of ways that an attacker tries to acquire and use user information.
+
+1) The attacker attempts to phish a user's password by sending them a phony donation email that links to a site where they can steal the user's information. To extends this method, the attacker can duplicate Liberapay's existing standard email template to appear more authentic.
+
+2) If the first method doesn't work, the attack can try to brute force the user's password and login through a dictionary attack.
+
+3) If the second method doesn't work, the attacker can try to wide nthe scope of the attack to other website the user may use, trying to exploit weaknesses in their systems.
+
+4) If the first or third method works, the attacker tries to login in with the stolen username and password information and access the user's account.
+
+5) If the fourth method fails, the attacker tries to steal a session cookie with an XSS scripting attack to spoof an authentic user session.
+
+#### *Security Requirements*
+<ins>Derived Security Features</ins>
+
+Below, we detail security measures that must be taken to mitigate and prevent the attacker's success in accessing a user's account.
+
+1) Liberapay should use a standard, official-looking emailing template to mitigate the chance that users mistake a poorly crafted email for a Liberapay email.
+
+2) Liberapay should have some system in place to help users verify that their emails are from the Liberapay notification system.
+
+3) There should be password policies set in place to limit the amount of login attempts that can be attempted in a short amount of time.
+
+4) Liberapay should implement two-factor authentication to prevent malicious users from accessing a user's account even if they successfully acquire their login information.
+
+5) Liberapay should implement timed session cookies to mitigate the time malicious users can use stolen session cookies to spoof a fake logged-in user session.
+
+6) Liberapay should implement systems to prevent XSS attacks from bypassing their security to access users' private data and sessions.
+
+<ins>Current Security Features</ins>
+
+1) Liberapay utilizes a standard email format since they automatically send emails to recurring donators.
+
+2) Liberapay does not have any official emailing authentication method. This is somewhat expected, since all this requirement would do is mitigate the issue, not prevent it.
+
+3) Liberapay does limit the amount of login attempts a single user can perform; once this occurs, users can only login through emails sent by Liberapay when requested.
+     - The issue [here](https://github.com/liberapay/liberapay.com/issues/1609) briefly discusses how Liberapay handles limited logins.
+
+4) Liberapay does implement a time-based one time password algorithm to add 2FA to their system, dramatically improving login security in the face of stolen login data.
+     - The issue [here](https://github.com/liberapay/liberapay.com/issues/926) shows the debate on which method of 2FA Liberapay was to implement.
+     
+5) Liberapay does not seem to implement timed session cookies.
+
+6) Liberapay has resolved a lot of issues related to XSS attacks; however, a few known attack vector still remain, and could be used to access data unintended or most users.
+     - The issue page [here](https://github.com/liberapay/liberapay.com/issues?q=xss) displays the issues related to past and current XSS attack issues.
+     
+#### *Written Summary*
+This use case focuses around a user being notified that a donation they have chosen to start is about to recur. Liberapay allows for both automatic withdrawal from accounts and the manual payment of recurring donations. The Liberapay scheduler tells the email system to send reminder emails to donators when the time comes to pay their donation once again. While this use case primarily works under the assumption that the user has set up manual payments, the phishing emails are also applicable to the automatic payments as reminder emails are sent regardless of the type of repayment. Once the email is received, a donator using manual repayment must login to Liberapay and then login to their chosen payment handler. 
+
+The misuse case for this use case focuses on an attacker trying to leverage the email system and other methods to acquire the login information of the donator and to use it to login to their Liberapay account, or possibly their payment vendor account if they use the same email and password. Sending a phishing email to trick users into giving the attacker their login data is an old trick, but still works on many users. To mitigate this, Liberapay could use a standardized emailing template to make sure that their emails look professional and ensure that their emails are easily recognizable by donators. Unfortunately, this kind of standardized emailing also lends itself to duplication if the attacker has access to the template. Liberapay would then need to have some form of authentication to ensure that hackers cannot duplication their emails and fool consumers. Unfortunately, phishing countermeasures will only mitigate the danger of users being fooled by phony emails. Other ways the attacker could acquire this login information is by executing a dictionary attack / brute force attack on the donator's login account to simply guess their password. Implementing a limit on login attempts heavily mitigates this problem. However, if the attacker executes the attack on other websites, they may still be able to acquire login information if the user uses the same password on multiple web sites. This sort of attack cannot be prevented by Liberapay, because it reaches web sites otuside of the system's operations. 
+
+Despite this, Liberapay can prevent an attacker from logging in with stolen user data. Implementing two-factor authentication ensures that the donator's account cannot be accessed even with their account information, as long as their secondary security device is uncompromised. The final interactions in this misuse case deal with the attacker trying to leverage an XSS attack to acquire the session cookies from a legitmate user, and then use that session cookie to access the donators' account directly, without needing to authenticate via 2FA. By implementing measures that mitigate or prevent XSS attacks, Liberapay can protect their users from such an attack. Liberapay can also mitigate this issue by only using timed session cookies that expire after a short time, makign stolen cookies useless shortly after they are acquired. 
+
+In summary, this misuse case derives the following security requirements: login authentication, standardized emailing, email authentication, login attempt limits, two-factor authentication, short timed session cookies, and XSS attack countermeasures. Liberapay support basic login information, storing this information in an encrypted database. Liberapay also limits the attempts that can be made to log in from a certain device, preventing login for a few hours once a login has failed. The issue [here](https://github.com/liberapay/liberapay.com/issues/1609) briefly discusses how Liberapay handles limited logins, by forcing a user to directly login with their email if they make too many failed attempts. Liberapay implements a [timed-based one time password algorithm](https://github.com/liberapay/liberapay.com/issues/926) to include two-factor authentication in their system, significantly increasing the security of Liberapay. Unfortunately, it seems that while [many](https://github.com/liberapay/liberapay.com/issues?q=xss) XSS attack-related issues have been dealt with, there are still some attack vectors that have not been plugged. These issues could allow attackers to bypass the other security measures of Liberapay and access customer sessions. Liberapay does not satisfy the timed session cookie security requirement or the authenticated email requirements. The latter is understandable, as the resources put into the project would be wasted by sufficiently ignorant donators. However, Liberapay does use automated, and thus standardized emailing, so their messages are recognizable.
+
+#### *(Mis)use case Diagram*
+![Donation Renewal Misuse Case Diagram](/Images/LiberapayDonationRenewalUseCase.png)
+ 
+
+
+
+### 1.3. Use/Misuse Case
+### 1.4. Use/Misuse Case
+### 1.5. Use/Misuse Case
+
+## 2.1 Liberapay Documentation Review
  - Review OSS project documentation for security-related configuration and installation issues. Summarize your observations.
 
-## 3. Planning and Reflection
+## 2.2. GitHub Information
+Here are links to our Github Pages: \
+Master Branch: [Home Page](https://github.com/JustinRobbins7/CSCI-8420-Team-1) \
+Issues Page: [Issues Page](https://github.com/JustinRobbins7/CSCI-8420-Team-1/issues) \
+Project Board: [Project Board](https://github.com/JustinRobbins7/CSCI-8420-Team-1/projects/2) 
+
+Contribution Records: \
+Github Pulse: [Pulse Page](https://github.com/JustinRobbins7/CSCI-8420-Team-1/pulse) \
+Github Contributors: [Contributors Page](https://github.com/JustinRobbins7/CSCI-8420-Team-1/graphs/contributors) 
+
+## 2.3. Planning and Reflection
  - Include a link to your team GitHub repository that shows your internal project task assignments and collaborations to finish this task. 
  - Include a reflection of your teamwork for this assignment. What issues occurred? How did you resolve them? What did you plan to change moving forward? 
