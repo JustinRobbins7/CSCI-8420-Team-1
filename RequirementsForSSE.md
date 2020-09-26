@@ -84,7 +84,7 @@ Replaced 'pickle' library in python to CBOR to avoid Remote Code Execution vulne
 Donator renews donation
 
 <ins>Scenario Example:</ins>
-A user is send a donation renewal email and logs into theri account to pay.
+A user is sent a donation renewal email and logs into their account to pay.
 
 <ins>Description</ins>
 - A user is sent an email by Liberapay
