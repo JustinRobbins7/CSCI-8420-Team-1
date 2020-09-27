@@ -155,6 +155,53 @@ In summary, this misuse case derives the following security requirements: login 
 
 
 ### 1.3. Use/Misuse Case
+
+
+#### *Use Case*
+
+<ins>Goals/Description:</ins>
+The user's goal here is to sign up on LiberaPay .
+
+<ins>Scenario Example:</ins>
+A user visits LiberaPay to create an account
+
+<ins>Description</ins>
+- User visits LiberaPay
+- The user utilizes the sign up feature to create an account
+- The user provides his email to create his account and clicks on sign up.
+
+#### *Mis-Use Case(s)*
+
+Below, we detail a way in which an attacker can abuse the sign up feature to flood the database with spam accounts.
+
+1) The hacker utilizes the pre-existing sign up feature available on LiberaPay
+
+2) The hacker utilizes a script to create lots of accounts. 
+
+3) If the system prevents the hacker from creating the accounts, then the hacker utilizes a VPN.
+
+#### *Security Requirements*
+
+<ins>Derived Security Features</ins>
+
+Below, we detail security measures that must be taken to prevent the above from occuring. 
+
+1) There should be a limit to how many accounts a person can be created from one IP Address in a certain time frame.
+
+2) There should be a limit to how many accounts which can be created globally in a certain time span.  
+
+3) Captcha technology should be utilized to slow down and prevent scripts/bots from flooding spam accounts.
+
+4) LiberaPay should contain spam removal jobs that remove from their database spam accounts by analyzing certain behavioral patterns.
+
+<ins>Current Security Features</ins>
+
+From our analysis it appears that LiberaPay does not currently implement any measures to prevent flooding of database with spam accounts.
+[CURRENTLY PERFORMING ADDITIONAL ANALYSIS]
+
+
+.... [DIAGRAM TO BE ADDED HERE.]
+
 ### 1.4. Use/Misuse Case
 ### 1.5. Use/Misuse Case
 
