@@ -279,8 +279,7 @@ The following details security measures to counter a successful attack in access
 
 ## 2.1 Liberapay Documentation Review
 
-
-### OSS Security Configuration
+#### OSS Security Configuration
 
 
 For the security configuration of the Liberapay, we will look at both the configurations that the system does as well as the configuration that the user can do.
@@ -296,21 +295,19 @@ For the security configuration of the Liberapay, we will look at both the config
 #### User Security Configuration
 
 
-From the customer's point of view, Liberapay does not have a lot configureable items. One of the only thing that a customer can configure, however, is based on security and privacy. Liberapay allows customers to be able to define who can access their profile and information, which is not only a privacy concern but also a security one. Having ownership about viewership amplifies protection of assets and information. (See screenshot below):
+   From the customer's point of view, Liberapay does not have a lot configureable items. One of the only thing that a customer can configure, however, is based on security and privacy. Liberapay allows customers to be able to define who can access their profile and information, which is not only a privacy concern but also a security one. Having ownership about viewership amplifies protection of assets and information. (See screenshot below):
 
 ![Security Config](/Images/privacysecurityconfig.PNG)
 
-There is a security-related configuration related to changin passwords that could be a risk factor. When the user changes passwords, Liberapay double checks the password against known vulnerable passwords that have been leaked. If the user's password turns out to be one of those vulnerable passwords, Liberapay warns the user, but still allows to move forward with that password. Although it is good to give user options, in this case, the user should NOT be given the option to move forward with a vulnerable password as that will immediately endager the customer's account, which could result in a seucurity breach. (See screenshot below):
+   There is a security-related configuration related to changin passwords that could be a risk factor. When the user changes passwords, Liberapay double checks the password against known vulnerable passwords that have been leaked. If the user's password turns out to be one of those vulnerable passwords, Liberapay warns the user, but still allows to move forward with that password. Although it is good to give user options, in this case, the user should NOT be given the option to move forward with a vulnerable password as that will immediately endager the customer's account, which could result in a seucurity breach. (See screenshot below):
 
 
  ![Password Config](/Images/passwordconfig.PNG)
  
  
- 
- 
 ### Documentation Issues
 
-Liberaypay is a website-based product and therefore does not require any installation. However, when using the application, there are various complaints that have come from the customer about the lack of information and documentation. Below, we highlight some of them:
+   Liberaypay is a website-based product and therefore does not require any installation. Configuration occurs within the client view as denoted in the section above. However, when using the application, there are various complaints that have come from customers about the lack of information and documentation available. Below, we highlight some of them:
 
  - Lack of information about pledges:
  Liberapay allows pledging to people who haven't joined the site yet. No money is collected for pledges, they only become real donations when the recipients join. This could be a security issue as if a hacker was able to access a user's account, they could use that feature and potentially steal money from the user.
@@ -319,7 +316,9 @@ Liberaypay is a website-based product and therefore does not require any install
  - Lack of information about privacy:
  There was another customer who sent an email regarding what information was saved when it came to payment process. More importantly, there were concerned about the information cookies was transporting, whether Liberapay sells the customer's data, and whether there are any third parties involved. [Issue](https://github.com/liberapay/liberapay.com/issues/1719)
  
-For the complains above, it is worth noting that Liberapay took on those issues, and fixed them by adding more documentation about how Liberaypay works, and more importantly about security and privacy concerns.
+For the complaints above, it is worth noting that Liberapay took on those issues and addressed them by adding more documentation about security and privacy concerns within the platform.
+
+The overall documentation on installation and configuration within Liberapay suggests that most security issues stem from interaction with external payment platforms and recent compliance efforts to adhere to GDPR. As Liberapay is primarily based in France it is subject to EU regulations — including the General Data Protection Regulation (GDPR). For example — [GDPR](https://github.com/liberapay/liberapay.org/issues/35). 
  
 
 ## 2.2. GitHub Information
