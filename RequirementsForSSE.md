@@ -28,14 +28,15 @@ A user logs in into his/her Liberapay's account.
 
 Below, we detail couple of ways that a hacker tries to infiltrate a user's account.
 
-1) At first, the hacker tries to use existing leaked password information to see if he/she can access the user's account.
+1) Check against known leaked password
 
 2) If the first method doesn't work, the hacker tries to analyze packets communications between the client and server and modifies the packet to gain entry.
 
-3) a) If the second method doesn't work, the hacker then tries to perform SQL Injections on all the queries and tries to see if he/she is able to infiltrate with that method.
-   b) Along with the SQL Injections, the hacker also tries to access the database and manipulate query string to alter information in the database.
+3) If the second method doesn't work, the hacker then tries to perform SQL Injections on all the queries and tries to see if he/she is able to infiltrate with that method.
 
-4) If all of the methods above fail, the hacker tries to analyze user permissions and see if he/she can access the database through weak permissions settings.
+4) Along with the SQL Injections, the hacker also tries to access the database and manipulate query string to alter information in the database.
+
+5) If all of the methods above fail, the hacker tries to analyze user permissions and see if he/she can access the database through weak permissions settings.
 If entry is successful, the hacker then alter information in the database.
 
 #### *Security Requirements*
@@ -50,21 +51,25 @@ Below, we detail security measures that must be taken to mitigate hacker's succe
 
 3) Every input sent to the server or DB should be verified and confirmed before moving to the next step. Each requests that is malicious should automatically be revoked and flagged.
 
-4) Permissions for access/editing of database should be properly defined using standard policies.
+4) Same as above.
+
+5) Permissions for access/editing of database should be properly defined using standard policies.
 
 <ins>Current Security Features</ins>
 
 Below, we detail existing security measures that Liberaypay has taken to mitigate issues discussed above. The number of each security measure corresponds to the misuse case number in the misuse case section.
 
+Replaced 'pickle' library in python to CBOR to avoid Remote Code Execution vulnerability through code injection
+
 1) To mitigate against using leaked password information leak, Liberapay has taken the following measures:
  - All passwords get cross-checked agains a "pwned passwords" ([Link to Issue](https://github.com/liberapay/liberapay.com/issues/986))
- 
 2) [Liberay](https://liberapay.com/about/privacy) affirms that "All network connections are encrypted, except for some communications between machines located in the same datacenter".
 
-3) There was an issue where a tester was able to inject SQL code. Although Liberapay deemed the impact as being low, they fixed the SQL interpolation to decrease that threat. ([Issue](https://github.com/liberapay/liberapay.com/issues/559))
+3) ...
 
-4) Further inspection of the code base is needed to assure that permissions for access/editing are well defined.
+4) ...
 
+5) ...
 
 #### *(Mis)use case Diagram*
  
@@ -218,18 +223,54 @@ An organization sets up a team and receives a payment.
 
 The following details ways a '_Fraudulent Actor_' tries to access an organizations payments:
 
-1) 
+1) Utilizing a compromised account/ known usernid & password information, the _fraudulent actor_ attempts to utilize existing account features to change an organizations account information.
+
+2) If this attempt is thwarted, the _fraudulent actor_ attempts to pivot by modifying the original organization email effectively taking control of the account.
+
+3) Barring this, the _fraudulent actor_ adds themselves as a teammember of the organization in order to receive a portion of donations received by the organization.
+
+4) If the previous methods didn't work, the _fraudulent actor_ may attempt to directly change the payment address via a different process than account settings which would reroute any donations the organization receives.
+
+5) If situation 4 is prevented, the _fraudulent actor_ may attempt to reroute payments via Liberapays API Widget — which acts as an extension of an organizations account.
+
+6) If the method in situation 5 fails, the attacker attempts to modify the transaction ledger in order to divert funds away from the target organization.
+
+7) Barring situation 6, the _fraudulent actor_ then attempts to intercept the payment information in an attempt to change the target address.
 
 #### *Security Requirements*
 <ins>Derived Security Features:</ins>
 
 The following details security measures to counter a successful attack in accessing an organizations payments:
 
-1) 
+1) Liberapay's website should send account modification verification notifications to an organization in order to alert it of account changes.
+
+2) Liberapay's notifications should be sent out to the organization head as well as 'team members' listed within the organization.
+
+3) The site should provide a feature to see all teammembers listed within an organization as well as their activity details in a dashboard.
+
+4) An organizations payment verification should be conducted from a payment-processor such as Stripe/PayPal/MangoPay as well as Liberapay itself.
+
+5) An organizations Liberapay API key should be registered with their account, and only usable in a 'read-only' format.
+
+6) Liberapay should implement a distributed transaction ledger shared across an organization to prevent changes/ modification to a ledger.
+
+7) Liberapay should include strong encryption with payment related communications to prevent attackers intercepting payment information.
 
 <ins>Current Security Features:</ins>
 
-1) 
+1) Liberapay doesn't currently support account modification notifications for individuals or organizations.
+
+2) Liberapay sends payment notifications to an organizations team, but currently does not send team change notifications.
+
+3) Liberapay supports team [dashboards](https://en.liberapay.com/about/teams) showing members and team history as well.
+
+4) Liberapay currently supports using merchantIDs in order to enable payment account verifications on Stripe/PayPal.
+
+5) Liberapay supports a read-only [API](https://github.com/liberapay/liberapay.com/issues/688), with APIs from Stripe/PayPal for payment processing.
+
+6) Liberapay currently does not support a distributed/ duplicate transaction ledger across an organization. There is support for a duplicate register between Liberapay and a payment-processor such as Stripe/PayPal [suggested here](https://gitter.im/liberapay/salon) — however that is only accessible to the payment-processor account holder and not each team member.
+
+7) Liberapay currently utilizes [Fernet](https://github.com/liberapay/liberapay.com/blob/master/liberapay/security/crypto.py) for symmetric encyption of all messages passed between it and payment-platforms.
      
 #### *Written Summary*
 
@@ -241,41 +282,29 @@ The following details security measures to counter a successful attack in access
 ### 1.5. Use/Misuse Case
 
 ## 2.1 Liberapay Documentation Review
-
-
-### OSS Security Configuration
-
-For the security configuration of the Liberapay, we will look at both the configurations that the system does as well as the configuration that the user can do.
-
-#### System Security Configuration
-
- - Cryptography: 
-  For handling security data, Liberaypay uses Symmetric encryption and decryption. According to the [comments](https://github.com/liberapay/liberapay.com/blob/master/liberapay/security/crypto.py) on their code base, they currently use Fernet. They also use Concise Binary Object Representation (CBOR) to serialize objects before encryption.
-
- - Security Headers: 
-  Liberaypay also has several [security headers](https://github.com/liberapay/liberapay.com/blob/master/liberapay/security/__init__.py) configurations to prevent attakcs. Some of the headers they use is allowing CORS for assets, X-Frame Options to prevent click-jacking, CSP to prevent against code injection, and more.
-  
-#### User Security Configuration
+ - Review OSS project documentation for security-related configuration and installation issues. Summarize your observations.
  
-From the customer's point of view, Liberapay does not have a lot configureable items. One of the only thing that a customer can configure, however, is based on security and privacy. Liberapay allows customers to be able to define who can access their profile and information, which is not only a privacy concern but also a security one. Having ownership about viewership amplifies protection of assets and information. (See screenshot below):
-
-![Security Config](/Images/privacysecurityconfig.PNG)
-
-There is a security-related configuration related to changin passwords that could be a risk factor. When the user changes passwords, Liberapay double checks the password against known vulnerable passwords that have been leaked. If the user's password turns out to be one of those vulnerable passwords, Liberapay warns the user, but still allows to move forward with that password. Although it is good to give user options, in this case, the user should NOT be given the option to move forward with a vulnerable password as that will immediately endager the customer's account, which could result in a seucurity breach. (See screenshot below):
  
- ![Password Config](/Images/passwordconfig.PNG)
+ - Cryptography
+ - Security Headers
  
+ 
+From the customer's point of view, Liberapay does not have a lot configureable items. The only thing that a customer can configure, however, is based on security and privacy. Liberapay allows customers to be able to define who can access their profile and information, which is not only a privacy concern but also a security one. Having ownership about viewership amplifies protection of assets and information. (See screenshot below):
 
-### Documentation Issues
 
-Liberaypay is a website-based product and therefore does not require any installation. However, when using the application, there are various complaints that have come from the customer about the lack of information and documentation. Below, we highlight some of them:
+There is security-related configuration, that could be a risk factor, is related to changing passwords. When the user changes passwords, Liberay double checks the password against known vulnerable passwords that have been leaked. If the user's password turns out to be one of those vulnerable passwords, Liberapay warns the user, but still allows to move forward with that password. Although it is good to give user options, in this case, the user should be given the option to move forward with a vulnerable password as that will immediately endager the customer's account, which could result in a seucurity breach. (See screenshot below):
+ 
+ 
+ 
+ 
+Liberaypay is a website-based product and therefore does not require any installation. However, when using the application, there are various complains that have come from the customer about the lack of information and documentation. Below, we highlight some of them:
 
  - Lack of information about pledges:
  Liberapay allows pledging to people who haven't joined the site yet. No money is collected for pledges, they only become real donations when the recipients join. This could be a security issue as if a hacker was able to access a user's account, they could use that feature and potentially steal money from the user.
- There was a customer who complained that they were not understanding how pledges work and that there was a lack of documentation about this topic, which unable them to proceed. ([Issue](https://github.com/liberapay/liberapay.com/issues/1863))
+ There was a customer who complained that they were not understanding how pledges work and that there was a lack of documentation about this topic, which unable them to proceed. [Issue](https://github.com/liberapay/liberapay.com/issues/1863)
  
  - Lack of information about privacy:
- There was another customer who sent an email regarding what information was saved when it came to payment process. More importantly, there were concerned about the information cookies was transporting, whether Liberapay sells the customer's data, and whether there are any third parties involved. ([Issue](https://github.com/liberapay/liberapay.com/issues/1719))
+ There was another customer who sent an email regarding what information was saved when it came to payment process. More importantly, there were concerned about the information cookies was transporting, whether Liberapay sells the customer's data, and whether there are any third parties involved. [Issue](https://github.com/liberapay/liberapay.com/issues/1719)
  
 For the complains above, it is worth noting that Liberapay took on those issues, and fixed them by adding more documentation about how Liberaypay works, and more importantly about security and privacy concerns.
  
