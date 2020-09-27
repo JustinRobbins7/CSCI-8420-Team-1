@@ -7,8 +7,6 @@ Link to Liberapay Github: [Liberapay Project](https://github.com/liberapay/liber
 
 ## 1. Use/Misuse Case Analysis
 
-### 1.2. Use/Misuse Case
-
 ### 1.1 - Customer Login
 
 #### *Use Case*
