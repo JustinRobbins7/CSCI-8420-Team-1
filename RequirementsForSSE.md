@@ -155,7 +155,7 @@ In summary, this misuse case derives the following security requirements: login 
 
 
 ### 1.3. Use/Misuse Case
-
+![Signup Flood Attack Misuse Case Diagram](/Images/Sign up flood misuse case.png)
 
 #### *Use Case*
 
@@ -192,12 +192,12 @@ Below, we detail security measures that must be taken to prevent the above from 
 
 3) Captcha technology should be utilized to slow down and prevent scripts/bots from flooding spam accounts.
 
-4) LiberaPay should contain spam removal jobs that remove from their database spam accounts by analyzing certain behavioral patterns.
+4) LiberaPay should contain spam removal jobs that remove from their database spam accounts by analyzing patterns.
 
 <ins>Current Security Features</ins>
 
 From our analysis it appears that LiberaPay does not currently implement any measures to prevent flooding of database with spam accounts.
-[CURRENTLY PERFORMING ADDITIONAL ANALYSIS]
+
 
 
 .... [DIAGRAM TO BE ADDED HERE.]
@@ -220,4 +220,6 @@ Github Contributors: [Contributors Page](https://github.com/JustinRobbins7/CSCI-
 
 ## 2.3. Planning and Reflection
  - Include a link to your team GitHub repository that shows your internal project task assignments and collaborations to finish this task. 
- - Include a reflection of your teamwork for this assignment. What issues occurred? How did you resolve them? What did you plan to change moving forward? 
+ - Include a reflection of your teamwork for this assignment. What issues occurred? How did you resolve them? What did you plan to change moving forward?
+ Our team continued to collaborate, and conduct meetings once or twice a week to report progress. We collectively analyzed LiberaPay in greater detail and each team member was tasked with preparing a misuse case. During our weekly scheduled meetings we evaluated and provided constructive feedback to each other's work to make sure that we are all on track. We've realized after meeting with Dr. Robin Ghandi that we needed to simplify some of our diagrams. No major issues occurred during this phase and the team plans to continue conducting weekly meetings to stay on track and resolve any blockers.
+ 
