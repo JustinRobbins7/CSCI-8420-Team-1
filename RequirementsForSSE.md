@@ -206,7 +206,7 @@ From our analysis it appears that LiberaPay does not currently implement any mea
 
 #### *(Mis)use case Diagram*
  
- ![Diagram 4](/Images/SA Organization Process.png)
+![Diagram 4](/Images/SA%20Organization%20Process.png)
 
 ### 1.2. Donation Renewal
 
