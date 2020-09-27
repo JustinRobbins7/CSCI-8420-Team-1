@@ -272,7 +272,7 @@ The following details security measures to counter a successful attack in access
 
 #### *(Mis)use case Diagram*
  
-![Diagram 4](/Images/SA%20Organization%20Process%20(1).png)
+![Diagram 4](/Images/SA%20Organization%20Process%20(2).png)
 
 
 ### 1.5. Use/Misuse Case
