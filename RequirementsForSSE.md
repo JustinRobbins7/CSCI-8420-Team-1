@@ -267,6 +267,27 @@ The following details security measures to counter a successful attack in access
 7) Liberapay currently utilizes [Fernet](https://github.com/liberapay/liberapay.com/blob/master/liberapay/security/crypto.py) for symmetric encyption of all messages passed between it and payment-platforms.
      
 #### *Written Summary*
+This case focuses on the scenario of using an organization account and receiving donations from that account. The associated misuse case gleaned from the regular use case for this scenario involves a _fraudulent actor_ who intends on diverting or siphoning payments from an organization. In order to achieve this goal, the attacker first attempts to exploit weaknesses in Liberapay's account management features
+
+
+1) Utilizing a compromised account/ known usernid & password information, the _fraudulent actor_ attempts to utilize existing account features to change an organizations account information.
+
+2) If this attempt is thwarted, the _fraudulent actor_ attempts to pivot by modifying the original organization email effectively taking control of the account.
+
+3) Barring this, the _fraudulent actor_ adds themselves as a teammember of the organization in order to receive a portion of donations received by the organization.
+
+4) If the previous methods didn't work, the _fraudulent actor_ may attempt to directly change the payment address via a different process than account settings which would reroute any donations the organization receives.
+
+5) If situation 4 is prevented, the _fraudulent actor_ may attempt to reroute payments via Liberapays API Widget — which acts as an extension of an organizations account.
+
+6) If the method in situation 5 fails, the attacker attempts to modify the transaction ledger in order to divert funds away from the target organization.
+
+7) Barring situation 6, the _fraudulent actor_ then attempts to intercept the payment information in an attempt to change the target address.
+This misuse case generates the following security requirements: 
+
+Existing measure within Liberapay to mitigate these issues include ...
+
+There is still scope for Liberapay to implement systems to address...
 
 
 #### *(Mis)use case Diagram*
