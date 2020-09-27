@@ -56,16 +56,23 @@ Below, we detail security measures that must be taken to mitigate hacker's succe
 
 Below, we detail existing security measures that Liberaypay has taken to mitigate issues discussed above. The number of each security measure corresponds to the misuse case number in the misuse case section.
 
-Replaced 'pickle' library in python to CBOR to avoid Remote Code Execution vulnerability through code injection
-
 1) To mitigate against using leaked password information leak, Liberapay has taken the following measures:
  - All passwords get cross-checked agains a "pwned passwords" ([Link to Issue](https://github.com/liberapay/liberapay.com/issues/986))
  
-2) [Liberay](https://liberapay.com/about/privacy) affirms that "All network connections are encrypted, except for some communications between machines located in the same datacenter".
+2) [Liberapay](https://liberapay.com/about/privacy) affirms that "All network connections are encrypted, except for some communications between machines located in the same datacenter".
 
 3) There was an issue where a tester was able to inject SQL code. Although Liberapay deemed the impact as being low, they fixed the SQL interpolation to decrease that threat. ([Issue](https://github.com/liberapay/liberapay.com/issues/559))
 
 4) Further inspection of the code base is needed to assure that permissions for access/editing are well defined.
+
+#### *Written Summary*
+
+This case focuses on the scenario of a user logging in into his/her Liberapay's account. Liberapay has two options when it comes to logging. The first option is to use the usual email/password to access one's account. The second option is to input one's email only and let Liberapay send a custom link to access the account. The associated misuse case is based on usual tactics to exploit vulnerability in user authentication systems. In order to achieve this goal, the attacker first attempts to exploit existing leaked passwords. These passwords are ones that have been collected and known to be usual, vulnerable passwords. The hacker usually uses an automated way to test each password and check for validity. Another attack that branches off the first one is SQL Injection and Manipulation of Query String. This type of attack would allow a fraudulent actor to take advantage of weak SQL interpolation and weak  database security. The hacker can also try to intercept communication between the server and client and modify such communication to gain valuable insight. If all of these methods fail, the fradulent actor can try to investigate the database(s) and check user permissions to see if he/she infiltrate through weak permissions and access important information of users.
+
+This misuse case generates the following security requirements: Strong (standard) password policies, Well-Defined User Permission Settings, Input Validation, Secure Connections (SSL Protocols, etc..), and Data Encryption. Having strong password policies such as cross checking vulnerable passwords, ensuring strong password input can deter a fradulent actor from using the first method. When it comes to SQL Injection and Query String Manipulation, having a back-end that thoroughly examines requests and validate/sanitize input can mitigate such attacks as well as making sure that the user does not accidentally provide wrong data. Havubg a secure and encrypted connection will ensure that hacker is not able to listen in and alter communication and packets. Lastly, for database attacks and user permission maluse, ensuring that permissions are well set and that rights are defined will ensure that any fradulent actor does not have access.
+
+Existing measure within Liberapay to address these security requirements. Liberapay cross checks passwords and rate limits login attempts to ensure that hacker does not take advantage. Adding to that, they also affirm that all of their data and communication and secure and encrpyted. As part of an issue, they also worked on strenghtening the SQL interpolation to mitigate SQL injection and query String Manipulation.
+
 
 #### *(Mis)use case Diagram*
  
