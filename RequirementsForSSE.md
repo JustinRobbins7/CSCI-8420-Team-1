@@ -28,8 +28,7 @@ A user logs in into his/her Liberapay's account.
 
 Below, we detail couple of ways that a hacker tries to infiltrate a user's account.
 
-1) The hacker attempts to login into a user's account through brute force method.
-The hacker uses system to automatically checks all the combinations of password against the database and manages to infiltrate the user's account.
+1) Check against known leaked password
 
 2) If the first method doesn't work, the hacker tries to analyze packets communications between the client and server and modifies the packet to gain entry.
 
@@ -46,7 +45,7 @@ If entry is successful, the hacker then alter information in the database.
 
 Below, we detail security measures that must be taken to mitigate hacker's success in accessing a user's account. The number of each security measure corresponds to the misuse case number in the misuse case section.
 
-1) There should be password policies set in place to rate limit login attempts, ensure that user enters strong password, and observe unusual activities.
+1) There should be password policies set in place to ensure that user enters strong password, check against leaked password, and observe unusual activities.
 
 2) All communications between server and client should be secure by using protocols like SSL and firewalls, in order to mitigates issues like packet sniffing.
 
@@ -62,9 +61,8 @@ Below, we detail existing security measures that Liberaypay has taken to mitigat
 
 Replaced 'pickle' library in python to CBOR to avoid Remote Code Execution vulnerability through code injection
 
-1) To mitigate brute force password checking, Liberapay has taken the following measures:
+1) To mitigate against using leaked password information leak, Liberapay has taken the following measures:
  - All passwords get cross-checked agains a "pwned passwords" ([Link to Issue](https://github.com/liberapay/liberapay.com/issues/986))
- - A generic rate limit has been implemented for "unsafe" HTTP requests, among other components. ([Link to Issue](https://github.com/liberapay/liberapay.com/issues/658))
 2) [Liberay](https://liberapay.com/about/privacy) affirms that "All network connections are encrypted, except for some communications between machines located in the same datacenter".
 
 3) ...
@@ -249,6 +247,31 @@ The following details security measures to counter a successful attack in access
 
 ## 2.1 Liberapay Documentation Review
  - Review OSS project documentation for security-related configuration and installation issues. Summarize your observations.
+ 
+ 
+ - Cryptography
+ - Security Headers
+ 
+ 
+From the customer's point of view, Liberapay does not have a lot configureable items. The only thing that a customer can configure, however, is based on security and privacy. Liberapay allows customers to be able to define who can access their profile and information, which is not only a privacy concern but also a security one. Having ownership about viewership amplifies protection of assets and information. (See screenshot below):
+
+
+There is security-related configuration, that could be a risk factor, is related to changing passwords. When the user changes passwords, Liberay double checks the password against known vulnerable passwords that have been leaked. If the user's password turns out to be one of those vulnerable passwords, Liberapay warns the user, but still allows to move forward with that password. Although it is good to give user options, in this case, the user should be given the option to move forward with a vulnerable password as that will immediately endager the customer's account, which could result in a seucurity breach. (See screenshot below):
+ 
+ 
+ 
+ 
+Liberaypay is a website-based product and therefore does not require any installation. However, when using the application, there are various complains that have come from the customer about the lack of information and documentation. Below, we highlight some of them:
+
+ - Lack of information about pledges:
+ Liberapay allows pledging to people who haven't joined the site yet. No money is collected for pledges, they only become real donations when the recipients join. This could be a security issue as if a hacker was able to access a user's account, they could use that feature and potentially steal money from the user.
+ There was a customer who complained that they were not understanding how pledges work and that there was a lack of documentation about this topic, which unable them to proceed. [Issue](https://github.com/liberapay/liberapay.com/issues/1863)
+ 
+ - Lack of information about privacy:
+ There was another customer who sent an email regarding what information was saved when it came to payment process. More importantly, there were concerned about the information cookies was transporting, whether Liberapay sells the customer's data, and whether there are any third parties involved. [Issue](https://github.com/liberapay/liberapay.com/issues/1719)
+ 
+For the complains above, it is worth noting that Liberapay took on those issues, and fixed them by adding more documentation about how Liberaypay works, and more importantly about security and privacy concerns.
+ 
 
 ## 2.2. GitHub Information
 Here are links to our Github Pages: \
