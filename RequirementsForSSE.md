@@ -5,6 +5,7 @@ Joel Allou, Mohammad H. Al Huneidi, Miti Mareddy, Justin Robbins, and Nicholas S
 
 Link to Liberapay Github: [Liberapay Project](https://github.com/liberapay/liberapay.com)
 
+
 ## 1. Use/Misuse Case Analysis
 
 ### 1.1 - Customer Login
@@ -71,10 +72,10 @@ This misuse case generates the following security requirements: Strong (standard
 
 Existing measure within Liberapay to address these security requirements. Liberapay cross checks passwords and rate limits login attempts to ensure that hacker does not take advantage. Adding to that, they also affirm that all of their data and communication and secure and encrpyted. As part of an issue, they also worked on strenghtening the SQL interpolation to mitigate SQL injection and query String Manipulation.
 
-
 #### *(Mis)use case Diagram*
  
- ![Diagram 1](/Images/RequirementsDiagram1.png)
+![Diagram 1](/Images/RequirementsDiagram1.png)
+
 
 ### 1.2. Donation Renewal
 
@@ -149,12 +150,9 @@ In summary, this misuse case derives the following security requirements: login 
 
 #### *(Mis)use case Diagram*
 ![Donation Renewal Misuse Case Diagram](/Images/LiberapayDonationRenewalUseCase.png)
- 
-
 
 
 ### 1.3. Use/Misuse Case
-
 
 #### *Use Case*
 
@@ -202,6 +200,7 @@ From our analysis it appears that LiberaPay does not currently implement any mea
 As briefly discussed above. An analysis has been conducted on the registering process of LiberaPay. The Above example illustrates the steps that the user can take to register an account. We've observed that the registering process unfortunately currently provides an opportunity for attackers. LiberaPay does not have a limit or any mechanisms in place that prevent the creation of multiple accounts in a short span of time. This allows an attacker to flood the database with dummy/spam accounts which could prevent other uses from creating legitimate accounts on LiberaPay. We've performed a misuse case analysis to try and think of opportunities that LiberaPay can leverage to better protect their system from such attacks. We've introduced in the diagram below such opportunities and thought of ways in which the attacker can improvise against them to help provide LiberaPay with multiple layers of protection against such attacks.
 
 ![Signup Flood Attack Misuse Case Diagram](/Images/Sign%20up%20flood%20misuse%20case.png)
+
 
 ### 1.4. Organization Donation Payment
 
@@ -276,13 +275,38 @@ The following details security measures to counter a successful attack in access
 
    Existing measure within Liberapay to address these security requirements include support for team [dashboards](https://en.liberapay.com/about/teams). These allow registered members of a team to view other members as well as participation history within that specific Liberapay organization. The platform also offers support for external payment verification via its partnered payment-platforms. The platform also currently supports a read-only [API](https://github.com/liberapay/liberapay.com/issues/688) with no native support for payment processing/ details. Liberapay also utilizes strong encryption protocols — specifically [Fernet](https://github.com/liberapay/liberapay.com/blob/master/liberapay/security/crypto.py) for symmetric encyption. There is still scope for Liberapay to implement features to address the other security requirements mentioned above. The platform does not support notifications for account changes, nor does it send notifications to all members of an organization. Liberapay also has scope to include a distributed/ duplicated ledger across an organization — where currently only a master copy is in use (refer [here](https://gitter.im/liberapay/salon) for community discussion for this topic).
 
-
 #### *(Mis)use case Diagram*
  
 ![Diagram 4](/Images/SA%20Organization%20Process%20(2).png)
 
 
 ### 1.5. Use/Misuse Case
+
+#### *Use Case*
+<ins>Goals/Description:</ins>
+"Placeholder"
+
+<ins>Scenario Example:</ins>
+"Placeholder"
+
+<ins>Description</ins>
+"Placeholder"
+
+#### *Mis-Use Case(s)*
+"Placeholder"
+
+#### *Security Requirements*
+<ins>Derived Security Features</ins>
+"Placeholder"
+
+<ins>Current Security Features</ins>
+"Placeholder"
+     
+#### *Written Summary*
+"Placeholder"
+
+#### *(Mis)use case Diagram*
+![Diagram 5](/Images/LiberapaySetupDonationUseCase.png)
 
 ## 2.1 Liberapay Documentation Review
 
@@ -309,9 +333,7 @@ The documentation on the security configuration of Liberapay suggests features f
 
    There is a security-related configuration related to changing passwords that could be a risk factor. When the user changes passwords, Liberapay double checks the password against known vulnerable passwords that have been leaked. If the user's password turns out to be one of those vulnerable passwords, Liberapay warns the user, but still allows to move forward with that password. Although it is good to give user options, in this case, the user should NOT be given the option to move forward with a vulnerable password as that will immediately endager the customer's account, which could result in a seucurity breach. (See screenshot below):
 
-
- ![Password Config](/Images/passwordconfig.PNG)
- 
+![Password Config](/Images/passwordconfig.PNG) 
  
 ### Documentation Issues
 
@@ -337,7 +359,7 @@ Contribution Records: \
 Github Pulse: [Pulse Page](https://github.com/JustinRobbins7/CSCI-8420-Team-1/pulse) \
 Github Contributors: [Contributors Page](https://github.com/JustinRobbins7/CSCI-8420-Team-1/graphs/contributors) 
 
+
 ## 2.3. Planning and Reflection
 
- Our team continued to collaborate, and conduct meetings once or twice a week to report progress. We collectively analyzed LiberaPay in greater detail and each team member was tasked with preparing a misuse case. During our weekly scheduled meetings we evaluated and provided constructive feedback to each other's work to make sure that we are all on track. We've realized after meeting with Dr. Robin Ghandi that we needed to simplify some of our diagrams. No major issues occurred during this phase and the team plans to continue conducting weekly meetings to stay on track and resolve any blockers.
- 
+Our team continued to collaborate, and conduct meetings once or twice a week to report progress. We collectively analyzed LiberaPay in greater detail and each team member was tasked with preparing a misuse case. During our weekly scheduled meetings we evaluated and provided constructive feedback to each other's work to make sure that we are all on track. We've realized after meeting with Dr. Robin Ghandi that we needed to simplify some of our diagrams. No major issues occurred during this phase and the team plans to continue conducting weekly meetings to stay on track and resolve any blockers.
