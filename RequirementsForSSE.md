@@ -219,7 +219,6 @@ Github Pulse: [Pulse Page](https://github.com/JustinRobbins7/CSCI-8420-Team-1/pu
 Github Contributors: [Contributors Page](https://github.com/JustinRobbins7/CSCI-8420-Team-1/graphs/contributors) 
 
 ## 2.3. Planning and Reflection
- - Include a link to your team GitHub repository that shows your internal project task assignments and collaborations to finish this task. 
 
  Our team continued to collaborate, and conduct meetings once or twice a week to report progress. We collectively analyzed LiberaPay in greater detail and each team member was tasked with preparing a misuse case. During our weekly scheduled meetings we evaluated and provided constructive feedback to each other's work to make sure that we are all on track. We've realized after meeting with Dr. Robin Ghandi that we needed to simplify some of our diagrams. No major issues occurred during this phase and the team plans to continue conducting weekly meetings to stay on track and resolve any blockers.
  
