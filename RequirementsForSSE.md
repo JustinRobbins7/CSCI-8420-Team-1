@@ -203,6 +203,48 @@ From our analysis it appears that LiberaPay does not currently implement any mea
 ![Signup Flood Attack Misuse Case Diagram](/Images/Sign%20up%20flood%20misuse%20case.png)
 
 ### 1.4. Use/Misuse Case
+
+#### *(Mis)use case Diagram*
+ 
+ ![Diagram 4](/Images/SA Organization Process.png)
+
+### 1.2. Donation Renewal
+
+#### *Use Case*
+<ins>Goals/Description:</ins>
+The Organization receives a payment.
+
+<ins>Scenario Example:</ins>
+An organization sets up a team and receives a payment.
+
+<ins>Description</ins>
+- An organization sets up an account.
+- An organization receives a donation.
+
+#### *Mis-Use Case(s)*
+
+The following details ways a '_Fraudulent Actor_' tries to access an organizations payments:
+
+1) 
+
+#### *Security Requirements*
+<ins>Derived Security Features:</ins>
+
+The following details security measures to counter a successful attack in accessing an organizations payments:
+
+1) 
+
+<ins>Current Security Features:</ins>
+
+1) 
+     
+#### *Written Summary*
+
+
+
+
+
+
 ### 1.5. Use/Misuse Case
 
 ## 2.1 Liberapay Documentation Review
