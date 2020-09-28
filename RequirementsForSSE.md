@@ -248,11 +248,11 @@ A user decides to donate supportive funds for some creators and their work
 
 #### *Misuse Case(s)*
 
-Below, we detail a couple of ways that an attacker tries to acquire and utilize user information:
-1) The attacker attempts to modify query strings in the payment form URL.
-2) The attacker attempts to modify the payment's profile name via URL.
-3) The attacker tries to spoof the payment form for stealing payment information.
-4) The attacker attempts to intercept user payment details by a man-in-the-middle attack.
+Below, we detail a couple of ways that an attacker tries to acquire and utilize user information.
+1) The attacker attempts to modify query strings in the payment form's URL.
+2) If the first method fails, the attacker attempts to modify the profile name via URL.
+3) If both methods fail, the attacker tries to spoof the payment form for stealing users' payment information.
+4) The attacker attempts to intercept user payment details through a man-in-the-middle attack.
 
 #### *Security Requirements*
 
@@ -261,20 +261,20 @@ Below, we detail a couple of ways that an attacker tries to acquire and utilize 
 Below, we detail security measures that must be taken to mitigate and prevent the attacker's success in falsifying or intercepting a user's payment information. The number next to each security measure corresponds to the misuse case number from the Misuse Case(s) sub-section above.
 1) Query string values within the payment URLs should be checked and verified that they are not being manipulated by outside attackers.
 2) Procedures should be implemented that cross-check the URL's profile name with the current user so that sudden account changes cannot be allowed.
-3) Liberapay should implement some form of authentication on the payment form to ensure that user's are not redirected to false payment forms that could be injected by potential attackers.
-4) Liberapay must enforce forms of verification and authentication processes for the payment credentials being entered and stored about users.
+3) Liberapay should implement some form of authentication on the payment form to ensure that users are not redirected to false payment forms that could be created by potential attackers.
+4) Liberapay must enforce verification and authentication processes for the payment credentials being entered and stored by users.
 
 <ins>Current Security Features</ins>
 
 Below, we detail existing security measures that Liberapay has taken to mitigate these issues being discussed. Similarly, the number next to each security measure corresponds to the misuse case number from the Misuse Case(s) sub-section above.
-1) Liberapay verifies query string values within the URL for legitimacy.
-2) Liberapay authenticates the profile name in the URL to ensure there's a matching user.
-3) Liberapay authenticates the payment form to detect if there's a potential URL redirect occurring for users.
-4) Liberapay enables Stripe and Paypal to verify payment credentials that are being processed.
+1) Liberapay verifies query string values within the URL for actual legitimacy.
+2) Liberapay authenticates the profile name in the URL to ensure that it matches the current user.
+3) Liberapay authenticates the payment form to detect if any fake URL redirects are being targeted toward users.
+4) Liberapay enables Stripe and Paypal to help verify payment credentials that are being processed.
 
 #### *Written Summary*
 
-This use case focuses around a user attempting to set up a donation for funding some creator. When setting up a donation, Liberapay has the donor explore different creators for funding and then go through the payment process of putting together the recurring donation. When setting up a donation, the donor determines their payment details such as the payment amount and renewal methods. Once the payment details have been entered, the donor has to enter their payment credentials for either card or Paypal (based on their preferred payment method) so that Liberapay can have the payment processed and donated to the desired creator. With Liberapay's donation process, donors can select multiple  creators to fund to support their work.
+This use case focuses around a user attempting to set up a donation for funding some creator. When setting up a donation, Liberapay has the donor explore different creators for funding and then go through the payment process of putting together the recurring donation. When setting up a donation, the donor determines their payment details such as the payment amount and renewal method. Once the payment details have been entered, the donor has to enter their payment credentials for either card or Paypal (based on their preferred payment method) so that Liberapay can have the payment processed and donated to the desired creator. With Liberapay's donation process, donors can select multiple creators to fund to support their work.
 
 The misuse cases for this use case revolve around an attacker attempting to modify activities with the payment form and the payment being processed through Liberapay. To start, a potential attacker may seek to modify query strings appended to the payment form's URL which could threaten the payment details being used on the payment page. By having Liberapay verify these query string values for legitamacy in the URL, the attacker may then attempt to modify the profile name embedded inside the payment form's URL (in turn determining which user is actually making the donation). Because Liberapay authenticates whether a profile name matches the current user, this detects when an attacker attempts to modify this portion of the payment form's URL and restricts this sort of activity from occurring. Since Liberapay also authenticates the payment form as a whole in respect to any URL redirects, this essentially prevents an attacker from being able to spoof the payment form and redirect donors to a false payment page for the purpose of stealing their information. Lastly, even if an attacker decided to intercept any user payment details during payment processing (such as a man-in-the-middle attack), Liberapay verifies that the payment credentials are being processed safely and authenticated by Stripe/Paypal as appropriate.
 
