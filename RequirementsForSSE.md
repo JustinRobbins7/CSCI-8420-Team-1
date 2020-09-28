@@ -12,7 +12,7 @@ Link to Liberapay Github: [Liberapay Project](https://github.com/liberapay/liber
 #### *Use Case*
 
 <ins>Goals/Description:</ins>
-Provide authentication mechanism.
+Provide authentication mechanism
 
 <ins>Scenario Example:</ins>
 A user logs in into his/her Liberapay's account.
@@ -20,44 +20,44 @@ A user logs in into his/her Liberapay's account.
 <ins>Description</ins>
 - A user visits Liberapay's website
 - The user enters email and password
-- The systems validates credentials and accept and reject request
+- The system validates credentials and accepts/rejects request
 
 #### *Misuse Case(s)*
 
 Below, we detail couple of ways that a hacker tries to infiltrate a user's account.
 1) At first, the hacker tries to use existing leaked password information to see if he/she can access the user's account.
-2) If the first method doesn't work, the hacker tries to analyze packets communications between the client and server and modifies the packet to gain entry.
+2) If the first method doesn't work, the hacker tries to analyze packet communications between the client and server and modifies the packet to gain entry.
 3) a) If the second method doesn't work, the hacker then tries to perform SQL Injections on all the queries and tries to see if he/she is able to infiltrate with that method.
-   b) Along with the SQL Injections, the hacker also tries to access the database and manipulate query string to alter information in the database.
-4) If all of the methods above fail, the hacker tries to analyze user permissions and see if he/she can access the database through weak permissions settings.
-If entry is successful, the hacker then alter information in the database.
+   b) Along with the SQL Injections, the hacker also tries to access the database and manipulate query strings to alter information in the database.
+4) If all of the methods above fail, the hacker tries to analyze user permissions and see if he/she can access the database through weak permission settings.
+If entry is successful, the hacker then alters information in the database.
 
 #### *Security Requirements*
 
 <ins>Derived Security Features</ins>
 
-Below, we detail security measures that must be taken to mitigate hacker's success in accessing a user's account. The number of each security measure corresponds to the misuse case number in the misuse case section.
-1) There should be password policies set in place to ensure that user enters strong password, check against leaked password, and observe unusual activities.
-2) All communications between server and client should be secure by using protocols like SSL and firewalls, in order to mitigates issues like packet sniffing.
-3) Every input sent to the server or DB should be verified and confirmed before moving to the next step. Each requests that is malicious should automatically be revoked and flagged.
-4) Permissions for access/editing of database should be properly defined using standard policies.
+Below, we detail security measures that must be taken to mitigate and prevent the attacker's success in accessing a user's account. The number next to each security measure corresponds to the misuse case number from the Misuse Case(s) sub-section above.
+1) There should be password policies set in place to ensure that users enter strong passwords, checks are made against leaked passwords, and unusual activities are observed.
+2) All communications between the server and client should be secure by using protocols like SSL and firewalls in order to mitigate issues such as packet sniffing.
+3) Every input sent to the server or database should be verified and confirmed before moving onto the next step. Each request that is malicious should automatically be revoked and flagged.
+4) Permissions for access/editing the database should be properly defined using standard policies.
 
 <ins>Current Security Features</ins>
 
-Below, we detail existing security measures that Liberapay has taken to mitigate issues discussed above. The number of each security measure corresponds to the misuse case number in the misuse case section.
-1) To mitigate against using leaked password information leak, Liberapay has taken the following measures:
+Below, we detail existing security measures that Liberapay has taken to mitigate these issues being discussed. Similarily, the number next to each security measure corresponds to the misuse case number from the Misuse Case(s) sub-section above.
+1) To mitigate against using leaked password information, Liberapay has taken the following measures:
 - All passwords get cross-checked agains a "pwned passwords" ([Link to Issue](https://github.com/liberapay/liberapay.com/issues/986))
 2) [Liberapay](https://liberapay.com/about/privacy) affirms that "All network connections are encrypted, except for some communications between machines located in the same datacenter".
 3) There was an issue where a tester was able to inject SQL code. Although Liberapay deemed the impact as being low, they fixed the SQL interpolation to decrease that threat. ([Issue](https://github.com/liberapay/liberapay.com/issues/559))
-4) Further inspection of the code base is needed to assure that permissions for access/editing are well defined.
+4) Further inspection of the codebase is needed to assure that permissions for access/editing are well defined.
 
 #### *Written Summary*
 
-This case focuses on the scenario of a user logging in into his/her Liberapay's account. Liberapay has two options when it comes to logging. The first option is to use the usual email/password to access one's account. The second option is to input one's email only and let Liberapay send a custom link to access the account. The associated misuse case is based on usual tactics to exploit vulnerability in user authentication systems. In order to achieve this goal, the attacker first attempts to exploit existing leaked passwords. These passwords are ones that have been collected and known to be usual, vulnerable passwords. The hacker usually uses an automated way to test each password and check for validity. Another attack that branches off the first one is SQL Injection and Manipulation of Query String. This type of attack would allow a fraudulent actor to take advantage of weak SQL interpolation and weak database security. The hacker can also try to intercept communication between the server and client and modify such communication to gain valuable insight. If all of these methods fail, the fradulent actor can try to investigate the database(s) and check user permissions to see if he/she infiltrate through weak permissions and access important information of users.
+This case focuses on the scenario of a user logging in into his/her Liberapay account. Liberapay has two options when it comes to logging. The first option is to use the usual email/password to access one's account. The second option is to input one's email only and then let Liberapay send a custom link to access that account. The associated misuse case is based on usual tactics to exploit vulnerability in user authentication systems. In order to achieve this goal, the attacker first attempts to exploit existing leaked passwords. These passwords are ones that have been collected and known to be usual, vulnerable passwords. The hacker usually uses an automated way to test each password and check for validity. Another attack that branches off the first one is SQL Injection and Manipulation of Query String. This type of attack would allow a fraudulent actor to take advantage of weak SQL interpolation and weak database security. The hacker can also try to intercept communication between the server and client and modify such communication to gain valuable insight. If all of these methods fail, the fradulent actor can try to investigate the database(s) and check user permissions to see if he/she infiltrated through weak permissions and accessed important information of users.
 
-This misuse case generates the following security requirements: Strong (standard) password policies, Well-Defined User Permission Settings, Input Validation, Secure Connections (SSL Protocols, etc..), and Data Encryption. Having strong password policies such as cross checking vulnerable passwords, ensuring strong password input can deter a fradulent actor from using the first method. When it comes to SQL Injection and Query String Manipulation, having a back-end that thoroughly examines requests and validate/sanitize input can mitigate such attacks as well as making sure that the user does not accidentally provide wrong data. Havubg a secure and encrypted connection will ensure that hacker is not able to listen in and alter communication and packets. Lastly, for database attacks and user permission maluse, ensuring that permissions are well set and that rights are defined will ensure that any fradulent actor does not have access.
+This misuse case generates the following security requirements: Strong (Standard) Password Policies, Well-Defined User Permission Settings, Input Validation, Secure Connections (SSL Protocols, etc..), and Data Encryption. Having strong password policies, such as cross-checking vulnerable passwords, ensure that strong password inputs can deter a fradulent actor from using the first method. When it comes to SQL Injection and Query String Manipulation, having a back-end that thoroughly examines requests and validates/sanitizes input can mitigate such attacks as well as making sure that the user does not accidentally provide wrong data. Having a secure and encrypted connection will ensure that the hacker is unable to listen in and alter communications or packets. Lastly, for database attacks and user permission misuse, ensuring that permissions are well-set and that rights are defined will ensure that any fradulent actor does not have any access.
 
-Existing measure within Liberapay to address these security requirements. Liberapay cross checks passwords and rate limits login attempts to ensure that hacker does not take advantage. Adding to that, they also affirm that all of their data and communication and secure and encrpyted. As part of an issue, they also worked on strenghtening the SQL interpolation to mitigate SQL injection and query String Manipulation.
+Existing measures within Liberapay help to address these security requirements. Liberapay cross-checks passwords and rate limits login attempts to ensure that hackers do not take advantage. Adding to that, they also affirm that all of their data and communications are secure and encrpyted. As part of an issue, they also worked on strenghtening the SQL interpolation to mitigate SQL injection and query string manipulation.
 
 #### *Use/Misuse Case Diagram*
 
@@ -92,7 +92,7 @@ Below, we detail couple of ways that an attacker tries to acquire and use user i
 
 <ins>Derived Security Features</ins>
 
-Below, we detail security measures that must be taken to mitigate and prevent the attacker's success in accessing a user's account.
+Below, we detail security measures that must be taken to mitigate and prevent the attacker's success in accessing a user's account. The number next to each security measure corresponds to the misuse case number from the Misuse Case(s) sub-section above.
 1) Liberapay should use a standard, official-looking emailing template to mitigate the chance that users mistake a poorly crafted email for a Liberapay email.
 2) Liberapay should have some system in place to help users verify that their emails are from the Liberapay notification system.
 3) There should be password policies set in place to limit the amount of login attempts that can be attempted in a short amount of time.
@@ -102,6 +102,7 @@ Below, we detail security measures that must be taken to mitigate and prevent th
 
 <ins>Current Security Features</ins>
 
+Below, we detail existing security measures that Liberapay has taken to mitigate these issues being discussed. Similarily, the number next to each security measure corresponds to the misuse case number from the Misuse Case(s) sub-section above.
 1) Liberapay utilizes a standard email format since they automatically send emails to recurring donators.
 2) Liberapay does not have any official emailing authentication method. This is somewhat expected, since all this requirement would do is mitigate the issue, not prevent it.
 3) Liberapay does limit the amount of login attempts a single user can perform; once this occurs, users can only login through emails sent by Liberapay when requested.
@@ -152,7 +153,7 @@ Below, we detail a way in which an attacker can abuse the sign up feature to flo
 
 <ins>Derived Security Features</ins>
 
-Below, we detail security measures that must be taken to prevent the above from occuring. 
+Below, we detail security measures that must be taken to prevent the attacker's success in this scenario. The number next to each security measure corresponds to the misuse case number from the Misuse Case(s) sub-section above.
 1) There should be a limit to how many accounts a person can be created from one IP Address in a certain time frame.
 2) There should be a limit to how many accounts which can be created globally in a certain time span.  
 3) Captcha technology should be utilized to slow down and prevent scripts/bots from flooding spam accounts.
@@ -160,7 +161,7 @@ Below, we detail security measures that must be taken to prevent the above from 
 
 <ins>Current Security Features</ins>
 
-From our analysis it appears that Liberapay does not currently implement any measures to prevent flooding of database with spam accounts.
+From our analysis, it appears that Liberapay does not currently implement any measures to prevent the flooding of their database with spam accounts.
 
 #### *Written Summary*
 
@@ -199,7 +200,7 @@ The following details ways a '_Fraudulent Actor_' tries to access an organizatio
 
 <ins>Derived Security Features:</ins>
 
-The following details security measures to counter a successful attack in accessing an organizations payments:
+Below, we detail security measures that must be taken to counter a successful attack in accessing an organization's payment. The number next to each security measure corresponds to the misuse case number from the Misuse Case(s) sub-section above.
 1) Liberapay's website should send account modification verification notifications to an organization in order to alert it of account changes.
 2) Liberapay's notifications should be sent out to the organization head as well as 'team members' listed within the organization.
 3) The site should provide a feature to see all teammembers listed within an organization as well as their activity details in a dashboard.
@@ -210,6 +211,7 @@ The following details security measures to counter a successful attack in access
 
 <ins>Current Security Features:</ins>
 
+Below, we detail existing security measures that Liberapay has taken to mitigate these issues being discussed. Similarily, the number next to each security measure corresponds to the misuse case number from the Misuse Case(s) sub-section above.
 1) Liberapay doesn't currently support account modification notifications for individuals or organizations.
 2) Liberapay sends payment notifications to an organizations team, but currently does not send team change notifications.
 3) Liberapay supports team [dashboards](https://en.liberapay.com/about/teams) showing members and team history as well.
@@ -257,7 +259,7 @@ Below, we detail a couple of ways that an attacker tries to acquire and utilize 
 
 <ins>Derived Security Features</ins>
 
-Below, we detail security measures that must be taken to mitigate and prevent the attacker's success in falsifying or intercepting payment information.
+Below, we detail security measures that must be taken to mitigate and prevent the attacker's success in falsifying or intercepting a user's payment information. The number next to each security measure corresponds to the misuse case number from the Misuse Case(s) sub-section above.
 1) Query string values within the payment URLs should be checked and verified that they are not being manipulated by outside attackers.
 2) Procedures should be implemented that cross-check the URL's profile name with the current user so that sudden account changes cannot be allowed.
 3) Liberapay should implement some form of authentication on the payment form to ensure that user's are not redirected to false payment forms that could be injected by potential attackers.
@@ -265,7 +267,7 @@ Below, we detail security measures that must be taken to mitigate and prevent th
 
 <ins>Current Security Features</ins>
 
-Below, we detail existing security measures that Liberapay has taken to mitigate issues discussed above. The number of each security measure corresponds to the misuse case number in the misuse case section.
+Below, we detail existing security measures that Liberapay has taken to mitigate these issues being discussed. Similarily, the number next to each security measure corresponds to the misuse case number from the Misuse Case(s) sub-section above.
 1) Liberapay verifies query string values within the URL for legitimacy.
 2) Liberapay authenticates the profile name in the URL to ensure there's a matching user.
 3) Liberapay authenticates the payment form to detect if there's a potential URL redirect occurring for users.
@@ -279,7 +281,7 @@ The misuse cases for this use case revolve aruond an attacker attempting to modi
 
 #### *Use/Misuse Case Diagram*
 
-![Setup Donation Process Diagram](/Images/LiberapaySetupDonationUseCase.png)
+![Set Up Donation Process Diagram](/Images/LiberapaySetupDonationUseCase.png)
 
 
 ## 2.1 Liberapay Documentation Review
