@@ -292,9 +292,11 @@ Liberapay also has several [security headers](https://github.com/liberapay/liber
 #### User Security Configuration
 
 From the customer's point of view, Liberapay does not have a lot configureable items. One of the only thing that a customer can configure, however, is based on security and privacy. Liberapay allows customers to be able to define who can access their profile and information, which is not only a privacy concern but also a security one. Having ownership about viewership amplifies protection of assets and information. (See screenshot below):
+
 ![Security Config](/Images/privacysecurityconfig.PNG)
 
 There is a security-related configuration related to changing passwords that could be a risk factor. When the user changes passwords, Liberapay double checks the password against known vulnerable passwords that have been leaked. If the user's password turns out to be one of those vulnerable passwords, Liberapay warns the user, but still allows to move forward with that password. Although it is good to give user options, in this case, the user should NOT be given the option to move forward with a vulnerable password as that will immediately endager the customer's account, which could result in a seucurity breach. (See screenshot below):
+
 ![Password Config](/Images/passwordconfig.PNG)
 
 ### Documentation Issues
