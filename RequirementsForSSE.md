@@ -280,24 +280,44 @@ The following details security measures to counter a successful attack in access
 ![Diagram 4](/Images/SA%20Organization%20Process%20(2).png)
 
 
-### 1.5. Use/Misuse Case
+### 1.5. Setup Donation Process
 
 #### *Use Case*
 <ins>Goals/Description:</ins>
-"Placeholder"
+Donor sets up a donation
 
 <ins>Scenario Example:</ins>
-"Placeholder"
+A user decides to donate supportive funds for some creators and their work
 
 <ins>Description</ins>
-"Placeholder"
+- A user navigates on Liberapay's site to set up a donation
+- The user enters their payment details and credentials as necessary
+- The user's payment is successfully processed and funds are donated to creators
+
 
 #### *Mis-Use Case(s)*
-"Placeholder"
+Below, we detail a couple of ways that an attacker tries to acquire and utilize user information:
+
+1) The attacker attempts to modify query strings in the payment form URL.
+
+2) The attacker attempts to modify the payment's profile name via URL.
+
+3) The attacker tries to spoof the payment form for stealing payment information.
+
+4) The attacker attempts to intercept user payment details by a man-in-the-middle attack.
+
 
 #### *Security Requirements*
 <ins>Derived Security Features</ins>
-"Placeholder"
+Below, we detail security measures that must be taken to mitigate and prevent the attacker's success in falsifying or intercepting payment information.
+
+1) Liberapay verifies query string values within the URL for legitimacy.
+
+2) Liberapay authenticates the profile name in the URL to ensure there's a matching user.
+
+3) Liberapay authenticates the payment form to detect if there's a potential URL redirect occurring for users
+
+4) Liberapay enables Stripe and Paypal
 
 <ins>Current Security Features</ins>
 "Placeholder"
@@ -306,7 +326,7 @@ The following details security measures to counter a successful attack in access
 "Placeholder"
 
 #### *(Mis)use case Diagram*
-![Diagram 5](/Images/LiberapaySetupDonationUseCase.png)
+"Placeholder"
 
 ## 2.1 Liberapay Documentation Review
 
