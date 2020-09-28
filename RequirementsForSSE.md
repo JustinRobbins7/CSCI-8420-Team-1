@@ -131,7 +131,7 @@ In summary, this misuse case derives the following security requirements: login 
 #### *Use Case*
 
 <ins>Goals/Description:</ins>
-The user's goal here is to sign up on Liberapay.
+User signs up on Liberapay
 
 <ins>Scenario Example:</ins>
 A user visits Liberapay to create an account
@@ -139,24 +139,24 @@ A user visits Liberapay to create an account
 <ins>Description</ins>
 - User visits Liberapay
 - The user utilizes the sign up feature to create an account
-- The user provides his email to create his account and clicks on sign up.
+- The user provides an email to create his/her account and clicks on sign up
 
 #### *Misuse Case(s)*
 
 Below, we detail a couple of ways that an attacker can abuse the sign up feature to flood the database with spam accounts.
-1) The hacker utilizes the pre-existing sign up feature available on Liberapay
+1) The hacker utilizes the pre-existing sign up feature available on Liberapay.
 2) The hacker utilizes a script to create lots of accounts. 
-3) If the system prevents the hacker from creating the accounts, then the hacker utilizes a VPN.
+3) If the system prevents the hacker from creating these accounts, then the hacker utilizes a VPN.
 
 #### *Security Requirements*
 
 <ins>Derived Security Features</ins>
 
 Below, we detail security measures that must be taken to prevent the attacker's success in this scenario. The number next to each security measure corresponds to the misuse case number from the Misuse Case(s) sub-section above.
-1) There should be a limit to how many accounts a person can be created from one IP Address in a certain time frame.
+1) There should be a limit to how many accounts a person can create from one IP Address in a certain time frame.
 2) There should be a limit to how many accounts which can be created globally in a certain time span.  
 3) Captcha technology should be utilized to slow down and prevent scripts/bots from flooding spam accounts.
-4) Liberapay should contain spam removal jobs that remove from their database spam accounts by analyzing patterns.
+4) Liberapay should contain spam removal jobs that remove spam accounts from their database by analyzing patterns.
 
 <ins>Current Security Features</ins>
 
@@ -164,7 +164,7 @@ From our analysis, it appears that Liberapay does not currently implement any me
 
 #### *Written Summary*
 
-As briefly discussed above. An analysis has been conducted on the registering process of Liberapay. The Above example illustrates the steps that the user can take to register an account. We've observed that the registering process unfortunately currently provides an opportunity for attackers. Liberapay does not have a limit or any mechanisms in place that prevent the creation of multiple accounts in a short span of time. This allows an attacker to flood the database with dummy/spam accounts which could prevent other uses from creating legitimate accounts on Liberapay. We've performed a misuse case analysis to try and think of opportunities that Liberapay can leverage to better protect their system from such attacks. We've introduced in the diagram below such opportunities and thought of ways in which the attacker can improvise against them to help provide Liberapay with multiple layers of protection against such attacks.
+As briefly discussed above. An analysis has been conducted on the registering process of Liberapay. The above example illustrates the steps that the user can take to register an account and we've observed that the registering process currently provides an opportunity for attackers. Liberapay does not have a limit or any mechanisms in place that prevent the creation of multiple accounts in a short span of time. Therefore, this allows an attacker to flood the database with dummy/spam accounts which could prevent other users from creating legitimate accounts on Liberapay. We've performed a misuse case analysis to think of opportunities that Liberapay can leverage to better protect their system from such attacks. We've introduced in the diagram below such opportunities and thought of ways in which the attacker can improvise against them to help provide Liberapay with multiple layers of protection against these attacks.
 
 #### *Use/Misuse Case Diagram*
 
