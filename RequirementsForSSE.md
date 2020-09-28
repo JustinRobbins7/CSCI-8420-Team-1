@@ -254,13 +254,17 @@ Below, we detail a couple of ways that an attacker tries to acquire and utilize 
 
 <ins>Derived Security Features</ins>
 Below, we detail security measures that must be taken to mitigate and prevent the attacker's success in falsifying or intercepting payment information.
-1) Liberapay verifies query string values within the URL for legitimacy.
-2) Liberapay authenticates the profile name in the URL to ensure there's a matching user.
-3) Liberapay authenticates the payment form to detect if there's a potential URL redirect occurring for users
-4) Liberapay enables Stripe and Paypal
+1) Query string values within the payment URLs should be checked and verified that they are not being manipulated by outside attackers.
+2) Procedures should be implemented that cross-check the URL's profile name with the current user so that sudden account changes cannot be allowed.
+3) Liberapay should implement some form of authentication on the payment form to ensure that user's are not redirected to false payment forms that could be injected by potential attackers.
+4) Liberapay must enforce forms of verification and authentication processes for the payment credentials being entered and stored about users.
 
 <ins>Current Security Features</ins>
-"Placeholder"
+Below, we detail existing security measures that Liberapay has taken to mitigate issues discussed above. The number of each security measure corresponds to the misuse case number in the misuse case section.
+1) Liberapay verifies query string values within the URL for legitimacy.
+2) Liberapay authenticates the profile name in the URL to ensure there's a matching user.
+3) Liberapay authenticates the payment form to detect if there's a potential URL redirect occurring for users.
+4) Liberapay enables Stripe and Paypal to verify payment credentials that are being processed.
 
 #### *Written Summary*
 
@@ -318,7 +322,7 @@ For the complaints above, it is worth noting that Liberapay either took on those
 Here are links to our Github Pages: \
 Master Branch: [Home Page](https://github.com/JustinRobbins7/CSCI-8420-Team-1) \
 Issues Page: [Issues Page](https://github.com/JustinRobbins7/CSCI-8420-Team-1/issues) \
-Project Board: [Project Board](https://github.com/JustinRobbins7/CSCI-8420-Team-1/projects/2) 
+Project Board: [Project Board](https://github.com/JustinRobbins7/CSCI-8420-Team-1/projects/2)
 
 Contribution Records: \
 Github Pulse: [Pulse Page](https://github.com/JustinRobbins7/CSCI-8420-Team-1/pulse) \
