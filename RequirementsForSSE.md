@@ -44,7 +44,7 @@ Below, we detail security measures that must be taken to mitigate and prevent th
 
 <ins>Current Security Features</ins>
 
-Below, we detail existing security measures that Liberapay has taken to mitigate these issues being discussed. Similarily, the number next to each security measure corresponds to the misuse case number from the Misuse Case(s) sub-section above.
+Below, we detail existing security measures that Liberapay has taken to mitigate these issues being discussed. Similarly, the number next to each security measure corresponds to the misuse case number from the Misuse Case(s) sub-section above.
 1) To mitigate against using leaked password information, Liberapay has taken the following measures:
 - All passwords get cross-checked agains a "pwned passwords" ([Link to Issue](https://github.com/liberapay/liberapay.com/issues/986))
 2) [Liberapay](https://liberapay.com/about/privacy) affirms that "All network connections are encrypted, except for some communications between machines located in the same datacenter".
@@ -101,7 +101,7 @@ Below, we detail security measures that must be taken to mitigate and prevent th
 
 <ins>Current Security Features</ins>
 
-Below, we detail existing security measures that Liberapay has taken to mitigate these issues being discussed. Similarily, the number next to each security measure corresponds to the misuse case number from the Misuse Case(s) sub-section above.
+Below, we detail existing security measures that Liberapay has taken to mitigate these issues being discussed. Similarly, the number next to each security measure corresponds to the misuse case number from the Misuse Case(s) sub-section above.
 1) Liberapay utilizes a standard email format since they automatically send emails to recurring donators.
 2) Liberapay does not have any official emailing authentication method. This is somewhat expected, since all this requirement would do is mitigate the issue but not prevent it.
 3) Liberapay does limit the amount of login attempts a single user can perform; once this occurs, users can only login through emails sent by Liberapay when requested.
@@ -134,7 +134,7 @@ In summary, this misuse case derives the following security requirements: login 
 User signs up on Liberapay
 
 <ins>Scenario Example:</ins>
-A user visits Liberapay to create an account
+A user visits Liberapay to create an account.
 
 <ins>Description</ins>
 - User visits Liberapay
@@ -175,7 +175,7 @@ As briefly discussed above. An analysis has been conducted on the registering pr
 #### *Use Case*
 
 <ins>Goals/Description:</ins>
-The Organization receives a payment.
+Organization receives a payment
 
 <ins>Scenario Example:</ins>
 An organization sets up a team and receives a payment.
@@ -187,11 +187,11 @@ An organization sets up a team and receives a payment.
 #### *Misuse Case(s)*
 
 The following details ways a '_Fraudulent Actor_' tries to access an organization's payments:
-1) Utilizing a compromised account/ known usernid & password information, the _fraudulent actor_ attempts to utilize existing account features to change an organizations account information.
+1) Utilizing a compromised account/known user id & password information, the _fraudulent actor_ attempts to utilize existing account features to change an organization's account information.
 2) If this attempt is thwarted, the _fraudulent actor_ attempts to pivot by modifying the original organization email effectively taking control of the account.
 3) Barring this, the _fraudulent actor_ adds themselves as a teammember of the organization in order to receive a portion of donations received by the organization.
 4) If the previous methods didn't work, the _fraudulent actor_ may attempt to directly change the payment address via a different process than account settings which would reroute any donations the organization receives.
-5) If situation 4 is prevented, the _fraudulent actor_ may attempt to reroute payments via Liberapay's API Widget — which acts as an extension of an organizations account.
+5) If situation 4 is prevented, the _fraudulent actor_ may attempt to reroute payments via Liberapay's API Widget — which acts as an extension of an organization's account.
 6) If the method in situation 5 fails, the attacker attempts to modify the transaction ledger in order to divert funds away from the target organization.
 7) Barring situation 6, the _fraudulent actor_ then attempts to intercept the payment information in an attempt to change the target address.
 
@@ -203,29 +203,29 @@ Below, we detail security measures that must be taken to counter a successful at
 1) Liberapay's website should send account modification verification notifications to an organization in order to alert it of account changes.
 2) Liberapay's notifications should be sent out to the organization head as well as 'team members' listed within the organization.
 3) The site should provide a feature to see all teammembers listed within an organization as well as their activity details in a dashboard.
-4) An organizations payment verification should be conducted from a payment-processor such as Stripe/PayPal/MangoPay as well as Liberapay itself.
-5) An organizations Liberapay API key should be registered with their account, and only usable in a 'read-only' format.
-6) Liberapay should implement a distributed transaction ledger shared across an organization to prevent changes/ modification to a ledger.
-7) Liberapay should include strong encryption with payment related communications to prevent attackers intercepting payment information.
+4) An organization's payment verification should be conducted from a payment-processor such as Stripe/PayPal/MangoPay as well as Liberapay itself.
+5) An organization's Liberapay API key should be registered with their account and only usable in a 'read-only' format.
+6) Liberapay should implement a distributed transaction ledger shared across an organization to prevent changes/modifications to a ledger.
+7) Liberapay should include strong encryption with payment-related communications to prevent attackers intercepting payment information.
 
 <ins>Current Security Features:</ins>
 
-Below, we detail existing security measures that Liberapay has taken to mitigate these issues being discussed. Similarily, the number next to each security measure corresponds to the misuse case number from the Misuse Case(s) sub-section above.
-1) Liberapay doesn't currently support account modification notifications for individuals or organizations.
-2) Liberapay sends payment notifications to an organizations team, but currently does not send team change notifications.
+Below, we detail existing security measures that Liberapay has taken to mitigate these issues being discussed. Similarly, the number next to each security measure corresponds to the misuse case number from the Misuse Case(s) sub-section above.
+1) Liberapay does not currently support account modification notifications for individuals or organizations.
+2) Liberapay sends payment notifications to an organization's team, but currently does not send team change notifications.
 3) Liberapay supports team [dashboards](https://en.liberapay.com/about/teams) showing members and team history as well.
 4) Liberapay currently supports using merchantIDs in order to enable payment account verifications on Stripe/PayPal.
 5) Liberapay supports a read-only [API](https://github.com/liberapay/liberapay.com/issues/688), with APIs from Stripe/PayPal for payment processing.
-6) Liberapay currently does not support a distributed/ duplicate transaction ledger across an organization. There is support for a duplicate register between Liberapay and a payment-processor such as Stripe/PayPal [suggested here](https://gitter.im/liberapay/salon) — however that is only accessible to the payment-processor account holder and not each team member.
+6) Liberapay currently does not support a distributed/duplicate transaction ledger across an organization. There is support for a duplicate register between Liberapay and a payment-processor such as Stripe/PayPal [suggested here](https://gitter.im/liberapay/salon) — however that is only accessible to the payment-processor account holder and not each team member.
 7) Liberapay currently utilizes [Fernet](https://github.com/liberapay/liberapay.com/blob/master/liberapay/security/crypto.py) for symmetric encyption of all messages passed between it and payment-platforms.
 
 #### *Written Summary*
 
-This case focuses on the scenario of using an organization account and receiving donations from that account. The associated misuse case gleaned from the regular use case for this scenario involves a _fraudulent actor_ who intends on diverting or siphoning payments from an organization. In order to achieve this goal, the attacker first attempts to exploit weaknesses in Liberapay's account management features. These include using a compromised account to change an organizations account information or changing the main email associated with an organizations account. These attack vectors would allow a _fraudulent actor_ to essentially gain control of an account or reroute payments to an alternative destination. Another extension of these attacks is the situation wherein an attacker adds themselves as a member of an organization's team. Since Liberapay doesn't set limits or defined payment allocations to individual teammembers, this type of attack would allow a _fraudulent actor_ to receive a cut of donations given to an organization. Barring these types of attacks, an attacker could always directly change the payment address. This setting is performed separately from account settings, and would allow all donations to reroute away from the intended payment accounts. An extension of this type of misuse is changing payment information via Liberapay's API Widget. If modifications to an organization fail, a _fraudulent actor_ could always change the transaction ledger itself, or intercept the payment information as it is communicated across.
+This case focuses on the scenario of using an organization account and receiving donations from that account. The associated misuse case gleaned from the regular use case for this scenario involves a _fraudulent actor_ who intends on diverting or siphoning payments from an organization. In order to achieve this goal, the attacker first attempts to exploit weaknesses in Liberapay's account management features. These include using a compromised account to change an organization's account information or changing the main email associated with an organization's account. These attack vectors would allow a _fraudulent actor_ to essentially gain control of an account or reroute payments to an alternative destination. Another extension of these attacks is the situation where an attacker adds themselves as a member of an organization's team. Since Liberapay doesn't set limits or defined payment allocations to individual teammembers, this type of attack would allow a _fraudulent actor_ to receive a cut of donations given to an organization. Barring these types of attacks, an attacker could always directly change the payment address. This setting is performed separately from account settings and would allow all donations to reroute away from the intended payment accounts. An extension of this type of misuse is changing payment information via Liberapay's API Widget. If modifications to an organization fail, a _fraudulent actor_ could always change the transaction ledger itself or intercept the payment information as it is communicated across.
 
-This misuse case generates the following security requirements: Account Change Notifications, Team-based Notifications, Team Dashboards, External Payment Verification, API Limitation, Distributed Transaction Ledgers, and Suitable Encryption. In providing notifications for changes in account settings unauthorized modifications could be caught and attacks related to compromised accounts could be mitigated. Similarly, having notifications sent out to all members within a team as opposed to an organization's primary contact would prevent a primary email being changed and thus locking out an organization. Having a team dashboard would allow for members of an organization to be aware of each other and everyone's contributions. A requirement to have an external payment verifications would mitigate and prevent misuse from the perspective of accepting payments. Similarly having a registered API key with an organization with 'read-only' capabilities prevents abuse of the LiberapayAPI for modifying transactions/ destination information. Having distributed ledgers and suitable encryption for payment information go hand-in-hand in preventing a _fraudulent actor_ from modifying or intercepting that type of information and siphoning funds away from an organization.
+This misuse case generates the following security requirements: Account Change Notifications, Team-based Notifications, Team Dashboards, External Payment Verification, API Limitation, Distributed Transaction Ledgers, and Suitable Encryption. In providing notifications for changes in account settings, unauthorized modifications could be caught and attacks related to compromised accounts could be mitigated. Similarly, having notifications sent out to all members within a team as opposed to an organization's primary contact would prevent a primary email from being changed and thus locking out an organization. Having a team dashboard would allow for members of an organization to be aware of each other and everyone's contributions. A requirement to have an external payment verification would mitigate and prevent misuse from the perspective of accepting payments. Similarly, having a registered API key with an organization with 'read-only' capabilities prevents abuse of the LiberapayAPI for modifying transactions/destination information. Having distributed ledgers and suitable encryption for payment information go hand-in-hand in preventing a _fraudulent actor_ from modifying or intercepting that type of information and siphoning funds away from an organization.
 
-Existing measure within Liberapay to address these security requirements include support for team [dashboards](https://en.liberapay.com/about/teams). These allow registered members of a team to view other members as well as participation history within that specific Liberapay organization. The platform also offers support for external payment verification via its partnered payment-platforms. The platform also currently supports a read-only [API](https://github.com/liberapay/liberapay.com/issues/688) with no native support for payment processing/ details. Liberapay also utilizes strong encryption protocols — specifically [Fernet](https://github.com/liberapay/liberapay.com/blob/master/liberapay/security/crypto.py) for symmetric encyption. There is still scope for Liberapay to implement features to address the other security requirements mentioned above. The platform does not support notifications for account changes, nor does it send notifications to all members of an organization. Liberapay also has scope to include a distributed/ duplicated ledger across an organization — where currently only a master copy is in use (refer [here](https://gitter.im/liberapay/salon) for community discussion for this topic).
+Existing measures within Liberapay to address these security requirements include support for team [dashboards](https://en.liberapay.com/about/teams). These allow registered members of a team to view other members as well as participation history within that specific Liberapay organization. The platform also offers support for external payment verification via its partnered payment-platforms. The platform also currently supports a read-only [API](https://github.com/liberapay/liberapay.com/issues/688) with no native support for payment processing/details. Liberapay also utilizes strong encryption protocols — specifically [Fernet](https://github.com/liberapay/liberapay.com/blob/master/liberapay/security/crypto.py) for symmetric encyption. There is still scope for Liberapay to implement features to address the other security requirements mentioned above. The platform does not support notifications for account changes, nor does it send notifications to all members of an organization. Liberapay also has scope to include a distributed/duplicated ledger across an organization — where currently only a master copy is in use (refer [here](https://gitter.im/liberapay/salon) for community discussion for this topic).
 
 #### *Use/Misuse Case Diagram*
  
@@ -266,7 +266,7 @@ Below, we detail security measures that must be taken to mitigate and prevent th
 
 <ins>Current Security Features</ins>
 
-Below, we detail existing security measures that Liberapay has taken to mitigate these issues being discussed. Similarily, the number next to each security measure corresponds to the misuse case number from the Misuse Case(s) sub-section above.
+Below, we detail existing security measures that Liberapay has taken to mitigate these issues being discussed. Similarly, the number next to each security measure corresponds to the misuse case number from the Misuse Case(s) sub-section above.
 1) Liberapay verifies query string values within the URL for legitimacy.
 2) Liberapay authenticates the profile name in the URL to ensure there's a matching user.
 3) Liberapay authenticates the payment form to detect if there's a potential URL redirect occurring for users.
