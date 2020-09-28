@@ -8,8 +8,7 @@ Link to Liberapay Github: [Liberapay Project](https://github.com/liberapay/liber
 
 ## 1. Use/Misuse Case Analysis
 
-### 1.1 - Customer Login
-
+### 1.1 Customer Login
 #### *Use Case*
 
 <ins>Goals/Description:</ins>
@@ -36,6 +35,7 @@ If entry is successful, the hacker then alter information in the database.
 #### *Security Requirements*
 
 <ins>Derived Security Features</ins>
+
 Below, we detail security measures that must be taken to mitigate hacker's success in accessing a user's account. The number of each security measure corresponds to the misuse case number in the misuse case section.
 1) There should be password policies set in place to ensure that user enters strong password, check against leaked password, and observe unusual activities.
 2) All communications between server and client should be secure by using protocols like SSL and firewalls, in order to mitigates issues like packet sniffing.
@@ -43,6 +43,7 @@ Below, we detail security measures that must be taken to mitigate hacker's succe
 4) Permissions for access/editing of database should be properly defined using standard policies.
 
 <ins>Current Security Features</ins>
+
 Below, we detail existing security measures that Liberapay has taken to mitigate issues discussed above. The number of each security measure corresponds to the misuse case number in the misuse case section.
 1) To mitigate against using leaked password information leak, Liberapay has taken the following measures:
 - All passwords get cross-checked agains a "pwned passwords" ([Link to Issue](https://github.com/liberapay/liberapay.com/issues/986))
@@ -60,11 +61,10 @@ Existing measure within Liberapay to address these security requirements. Libera
 
 #### *Use/Misuse Case Diagram*
 
-![Diagram 1](/Images/RequirementsDiagram1.png)
+![Customer Login Diagram](/Images/RequirementsDiagram1.png)
 
 
 ### 1.2. Donation Renewal
-
 #### *Use Case*
 
 <ins>Goals/Description:</ins>
@@ -91,6 +91,7 @@ Below, we detail couple of ways that an attacker tries to acquire and use user i
 #### *Security Requirements*
 
 <ins>Derived Security Features</ins>
+
 Below, we detail security measures that must be taken to mitigate and prevent the attacker's success in accessing a user's account.
 1) Liberapay should use a standard, official-looking emailing template to mitigate the chance that users mistake a poorly crafted email for a Liberapay email.
 2) Liberapay should have some system in place to help users verify that their emails are from the Liberapay notification system.
@@ -100,6 +101,7 @@ Below, we detail security measures that must be taken to mitigate and prevent th
 6) Liberapay should implement systems to prevent XSS attacks from bypassing their security to access users' private data and sessions.
 
 <ins>Current Security Features</ins>
+
 1) Liberapay utilizes a standard email format since they automatically send emails to recurring donators.
 2) Liberapay does not have any official emailing authentication method. This is somewhat expected, since all this requirement would do is mitigate the issue, not prevent it.
 3) Liberapay does limit the amount of login attempts a single user can perform; once this occurs, users can only login through emails sent by Liberapay when requested.
@@ -122,15 +124,14 @@ In summary, this misuse case derives the following security requirements: login 
 
 #### *Use/Misuse Case Diagram*
 
-![Donation Renewal Misuse Case Diagram](/Images/LiberapayDonationRenewalUseCase.png)
+![Donation Renewal Diagram](/Images/LiberapayDonationRenewalUseCase.png)
 
 
-### 1.3. Use/Misuse Case
-
+### 1.3. Signup Flood Attack
 #### *Use Case*
 
 <ins>Goals/Description:</ins>
-The user's goal here is to sign up on Liberapay .
+The user's goal here is to sign up on Liberapay.
 
 <ins>Scenario Example:</ins>
 A user visits Liberapay to create an account
@@ -150,6 +151,7 @@ Below, we detail a way in which an attacker can abuse the sign up feature to flo
 #### *Security Requirements*
 
 <ins>Derived Security Features</ins>
+
 Below, we detail security measures that must be taken to prevent the above from occuring. 
 1) There should be a limit to how many accounts a person can be created from one IP Address in a certain time frame.
 2) There should be a limit to how many accounts which can be created globally in a certain time span.  
@@ -157,6 +159,7 @@ Below, we detail security measures that must be taken to prevent the above from 
 4) Liberapay should contain spam removal jobs that remove from their database spam accounts by analyzing patterns.
 
 <ins>Current Security Features</ins>
+
 From our analysis it appears that Liberapay does not currently implement any measures to prevent flooding of database with spam accounts.
 
 #### *Written Summary*
@@ -165,11 +168,10 @@ As briefly discussed above. An analysis has been conducted on the registering pr
 
 #### *Use/Misuse Case Diagram*
 
-![Signup Flood Attack Misuse Case Diagram](/Images/Sign%20up%20flood%20misuse%20case.png)
+![Signup Flood Attack Diagram](/Images/Sign%20up%20flood%20misuse%20case.png)
 
 
 ### 1.4. Organization Donation Payment
-
 #### *Use Case*
 
 <ins>Goals/Description:</ins>
@@ -196,6 +198,7 @@ The following details ways a '_Fraudulent Actor_' tries to access an organizatio
 #### *Security Requirements*
 
 <ins>Derived Security Features:</ins>
+
 The following details security measures to counter a successful attack in accessing an organizations payments:
 1) Liberapay's website should send account modification verification notifications to an organization in order to alert it of account changes.
 2) Liberapay's notifications should be sent out to the organization head as well as 'team members' listed within the organization.
@@ -206,6 +209,7 @@ The following details security measures to counter a successful attack in access
 7) Liberapay should include strong encryption with payment related communications to prevent attackers intercepting payment information.
 
 <ins>Current Security Features:</ins>
+
 1) Liberapay doesn't currently support account modification notifications for individuals or organizations.
 2) Liberapay sends payment notifications to an organizations team, but currently does not send team change notifications.
 3) Liberapay supports team [dashboards](https://en.liberapay.com/about/teams) showing members and team history as well.
@@ -224,11 +228,10 @@ Existing measure within Liberapay to address these security requirements include
 
 #### *Use/Misuse Case Diagram*
  
-![Diagram 4](/Images/SA%20Organization%20Process%20(2).png)
+![Organization Donation Payment Diagram](/Images/SA%20Organization%20Process%20(2).png)
 
 
-### 1.5. Setup Donation Process
-
+### 1.5. Set Up Donation Process
 #### *Use Case*
 
 <ins>Goals/Description:</ins>
@@ -253,6 +256,7 @@ Below, we detail a couple of ways that an attacker tries to acquire and utilize 
 #### *Security Requirements*
 
 <ins>Derived Security Features</ins>
+
 Below, we detail security measures that must be taken to mitigate and prevent the attacker's success in falsifying or intercepting payment information.
 1) Query string values within the payment URLs should be checked and verified that they are not being manipulated by outside attackers.
 2) Procedures should be implemented that cross-check the URL's profile name with the current user so that sudden account changes cannot be allowed.
@@ -260,6 +264,7 @@ Below, we detail security measures that must be taken to mitigate and prevent th
 4) Liberapay must enforce forms of verification and authentication processes for the payment credentials being entered and stored about users.
 
 <ins>Current Security Features</ins>
+
 Below, we detail existing security measures that Liberapay has taken to mitigate issues discussed above. The number of each security measure corresponds to the misuse case number in the misuse case section.
 1) Liberapay verifies query string values within the URL for legitimacy.
 2) Liberapay authenticates the profile name in the URL to ensure there's a matching user.
@@ -272,7 +277,7 @@ Below, we detail existing security measures that Liberapay has taken to mitigate
 
 #### *Use/Misuse Case Diagram*
 
-![Diagram 5](/Images/LiberapaySetupDonationUseCase.png)
+![Setup Donation Process Diagram](/Images/LiberapaySetupDonationUseCase.png)
 
 
 ## 2.1 Liberapay Documentation Review
@@ -305,7 +310,7 @@ There is a security-related configuration related to changing passwords that cou
 
 ### Documentation Issues
 
-Liberaypay is a website-based product and therefore does not require any installation. Configuration occurs within the client view as denoted in the section above. However, when using the application, there are various complaints that have come from customers about the lack of information and documentation available. Below, we highlight some of them:
+Liberapay is a website-based product and therefore does not require any installation. Configuration occurs within the client view as denoted in the section above. However, when using the application, there are various complaints that have come from customers about the lack of information and documentation available. Below, we highlight some of them:
 
 - Lack of information about pledges:
 Liberapay allows pledging to people who haven't joined the site yet. No money is collected for pledges, they only become real donations when the recipients join. This could be a security issue as if a hacker was able to access a user's account, they could use that feature and potentially steal money from the user.
@@ -314,7 +319,7 @@ There was a customer who complained that they were not understanding how pledges
 - Lack of information about privacy:
 There was another customer who sent an email regarding what information was saved when it came to payment process. More importantly, there were concerned about the information cookies was transporting, whether Liberapay sells the customer's data, and whether there are any third parties involved. [Issue](https://github.com/liberapay/liberapay.com/issues/1719)
  
-For the complaints above, it is worth noting that Liberapay either took on those issues or is still addressing them by adding more documentation about security and privacy concerns. They serve as a way to examine the types of documentation issues that persist within the community/ platform. 
+For the complaints above, it is worth noting that Liberapay either took on those issues or is still addressing them by adding more documentation about security and privacy concerns. They serve as a way to examine the types of documentation issues that persist within the community/platform. 
  
 
 ## 2.2. GitHub Information
@@ -331,4 +336,4 @@ Github Contributors: [Contributors Page](https://github.com/JustinRobbins7/CSCI-
 
 ## 2.3. Planning and Reflection
 
-Our team continued to collaborate, and conduct meetings once or twice a week to report progress. We collectively analyzed Liberapay in greater detail and each team member was tasked with preparing a misuse case. During our weekly scheduled meetings we evaluated and provided constructive feedback to each other's work to make sure that we are all on track. We've realized after meeting with Dr. Robin Ghandi that we needed to simplify some of our diagrams. No major issues occurred during this phase and the team plans to continue conducting weekly meetings to stay on track and resolve any blockers.
+Our team continued to collaborate and conduct meetings once or twice a week to report project progress. We collectively analyzed Liberapay in greater detail and each team member was tasked with preparing a separate use/misuse case. During our weekly scheduled meetings, we evaluated and provided constructive feedback for everyone's work to make sure that we were all on track. We realized after meeting with Dr. Ghandi that some of our diagrams needed to be revised and simplified. No major issues occurred during this project phase and our team plans to continue conducting weekly meetings in order to stay on track and resolve any potential blockers.
