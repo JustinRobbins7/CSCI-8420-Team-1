@@ -5,24 +5,33 @@ Joel Allou, Mohammad H. Al Huneidi, Miti Mareddy, Justin Robbins, and Nicholas S
 
 Link to Liberapay Github: [Liberapay Project](https://github.com/liberapay/liberapay.com)
 
-## Claims
+## 1. Claims
 
-### Claim 1
+### 1.1. Claim 1
 
-### Claim 2 - Liberapay minmizes unauthorized account access
+### 1.2. Claim 2 - Liberapay minmizes unauthorized account access
 ![Account Access Diagram](/Images/Assurance_Case_Diagrams/Justin_Robbins-Assurance_Case.jpeg)
 
-### Claim 3
+### 1.3. Claim 3
 
-### Claim 4
+### 1.4. Claim 4
 - Miti
-### Claim 5
+### 1.5. Claim 5
 
 
-## Evidence Alignment
+## 2. Evidence Alignment
 
+### 2.1. Claim 1 Evidence Alignment
 
-## GitHub Information
+### 2.2. Claim 2 Evidence Alignment
+
+### 2.3. Claim 3 Evidence Alignment
+
+### 2.4. Claim 4 Evidence Alignment
+
+### 2.5. Claim 5 Evidence Alignment
+
+## 3. GitHub Information
 
 Here are links to our Github Pages: \
 Master Branch: [Home Page](https://github.com/JustinRobbins7/CSCI-8420-Team-1) \
@@ -34,4 +43,4 @@ Github Pulse: [Pulse Page](https://github.com/JustinRobbins7/CSCI-8420-Team-1/pu
 Github Contributors: [Contributors Page](https://github.com/JustinRobbins7/CSCI-8420-Team-1/graphs/contributors) 
 
 
-## Teamwork Reflection
+## 4. Teamwork Reflection
