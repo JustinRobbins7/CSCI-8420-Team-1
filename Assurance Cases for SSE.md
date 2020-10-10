@@ -10,6 +10,7 @@ Link to Liberapay Github: [Liberapay Project](https://github.com/liberapay/liber
 ### Claim 1
 
 ### Claim 2
+- Justin
 
 ### Claim 3
 
