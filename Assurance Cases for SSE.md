@@ -9,7 +9,7 @@ Link to Liberapay Github: [Liberapay Project](https://github.com/liberapay/liber
 
 ### 1.1. Claim 1
 
-### 1.2. Claim 2 - Liberapay minmizes unauthorized account access
+### 1.2. Claim 2 - Liberapay minimizes unauthorized account access
 ![Account Access Diagram](/Images/Assurance_Case_Diagrams/Justin_Robbins-Assurance_Case.jpeg)
 
 ### 1.3. Claim 3
