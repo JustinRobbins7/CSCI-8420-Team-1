@@ -15,7 +15,7 @@ Link to Liberapay Github: [Liberapay Project](https://github.com/liberapay/liber
 ### Claim 3
 
 ### Claim 4
-
+- Miti
 ### Claim 5
 
 
