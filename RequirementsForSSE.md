@@ -61,7 +61,7 @@ Existing measures within Liberapay help to address these security requirements. 
 
 #### *Use/Misuse Case Diagram*
 
-![Customer Login Diagram](/Images/RequirementsDiagram1.png)
+![Customer Login Diagram](/Images/SSEReqDiagrams/RequirementsDiagram1.png)
 
 
 ### 1.2. Donation Renewal
@@ -124,7 +124,7 @@ In summary, this misuse case derives the following security requirements: login 
 
 #### *Use/Misuse Case Diagram*
 
-![Donation Renewal Diagram](/Images/LiberapayDonationRenewalUseCase.png)
+![Donation Renewal Diagram](/Images/SSEReqDiagrams/LiberapayDonationRenewalUseCase.png)
 
 
 ### 1.3. Signup Flood Attack
@@ -168,7 +168,7 @@ As briefly discussed above. An analysis has been conducted on the registering pr
 
 #### *Use/Misuse Case Diagram*
 
-![Signup Flood Attack Diagram](/Images/Sign%20up%20flood%20misuse%20case.png)
+![Signup Flood Attack Diagram](/Images/SSEReqDiagrams/Sign%20up%20flood%20misuse%20case.png)
 
 
 ### 1.4. Organization Donation Payment
@@ -229,7 +229,7 @@ Existing measures within Liberapay to address these security requirements includ
 
 #### *Use/Misuse Case Diagram*
  
-![Organization Donation Payment Diagram](/Images/SA%20Organization%20Process%20(2).png)
+![Organization Donation Payment Diagram](/Images/SSEReqDiagrams/SA%20Organization%20Process%20(2).png)
 
 
 ### 1.5. Set Up Donation Process
@@ -280,7 +280,7 @@ The misuse cases for this use case revolve around an attacker attempting to modi
 
 #### *Use/Misuse Case Diagram*
 
-![Set Up Donation Process Diagram](/Images/LiberapaySetupDonationUseCase.png)
+![Set Up Donation Process Diagram](/Images/SSEReqDiagrams/LiberapaySetupDonationUseCase.png)
 
 
 ## 2.1 Liberapay Documentation Review
