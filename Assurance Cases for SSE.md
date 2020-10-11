@@ -38,7 +38,7 @@ Liberapay implements login limits true rate limiting, restricting the number of 
 Liberapay leverages https, ensuring that their communications are encrypted according to the TLS encryption algorithm. This also means that their session keys are generated from random data at the time of session initialization. These keys are also short-lived, ensuring that even if the attackers acquire a key through theft, they will not be able to use it for long.
 - Liberapay website (notice the use of https): [https://liberapay.com/](https://liberapay.com/)
 
-*E5* \ 
+*E5*\ 
 An argument for the security of Liberapay's sensitive can be found in sections 1.1. and 2.2. of this paper.
 
 
