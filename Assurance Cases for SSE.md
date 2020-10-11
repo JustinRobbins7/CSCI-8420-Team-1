@@ -29,7 +29,7 @@ Link to Liberapay Github: [Liberapay Project](https://github.com/liberapay/liber
 ### 2.1. Claim 1 Evidence Alignment
 
 #### *2.1.1 Available Evidence*
-*E1*  
+*E1* \
 Liberapay has an admin interface to allow admins to perform several actions, such as audit log/monitoring activities, view email-addresses, notifications, payments, rate limits, as well as users, among others. 
 
 Along with that, Liberapay also logs actions performed by admins. In this way, if an admin account was ever compromised, Liberapay would be able to analyze the logs to troubleshoot the issue.
@@ -182,10 +182,22 @@ The Liberapay project has been continously updating their payment handling servi
 ### 2.5. Claim 5 Evidence Alignment
 
 #### *2.5.1. Available Evidence*
+*E1 & E3* \
+Liberapay implements URL authentication on the payment form in order to prevent potential attackers from modifying the URL contents and accessing important payment-related information. Regarding the query string parameters on the payment form, Liberapay appends 'beneficiary' and 'method' query strings that must be valid for the URL to successfully open. Here, the 'beneficiary' parameter is associated with the targeted creator and the 'method' parameter is associated with the payment method (card or PayPal). When users either attempt to change the beneficiary or make the method something invalid, then Liberapay directs to a bad request URL as a result. In addition to checking the query string values, Liberapay also authenticates for a matching profile name embedded in the payment form's URL so that attackers cannot impersonate other existing users when making online donations.
+- Liberapay payment form URL example: https://liberapay.com/profilename/giving/pay/stripe/?beneficiary=3&method=card
 
+*E2 & E5* \
+Liberapay cross-matches with the user database when verifying whether or not a specific user exists. Regarding matching user validation, Liberapay checks if the profile name is an existing user in the database and then references the cache/cookies to determine whether the current user matches the provided profile name or not. Additionally, when processing the payments from donations Liberapay associates these payments with specific users from their stored database.
+
+*E4* \
+Along with all of the authentication being performed on the payment form's URL, Liberapay also verifies that no URL redirects are potentially being implemented from attackers as a means to spoof the payment form and steal information by redirecting donors to a false payment page.
+
+*E6* \
+When requiring the user to enter card payment details, Liberpay validates the card information for legitmacy and alerts the user when false card details are being provided.
 
 #### *2.5.2. Unavailable/Insufficient Evidence*
 No evidence was found that didn't support the claims discussed in the assurance case diagram.
+
 
 ## 3. GitHub Information
 
