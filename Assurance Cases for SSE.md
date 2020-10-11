@@ -69,44 +69,51 @@ Unfortunately, it seems that no concerted effort has been made to reduce the amo
 ### 2.4. Claim 4 Evidence Alignment
 
 #### *2.4.1 Available Evidence*
-*E1 & E10* \
+*E1 & E11* \
 An argument for the claims "Liberapay has account protections" and "Liberapay reduces unauthorized acccess to data" can be found in section(s) 1.1 and 1.2 above.
 
 *E2* \
 Evidence exists to suggest that Liberapay currently implements organization level acccount protections within their participant system backend service. This involves a mix of permission restrictions and validations centered around 'eslewhere accounts', 'duplicate accounts', and 'elevation' restrictions.
-- Backend system for participant code (including account protections) [Account Protections](https://github.com/liberapay/liberapay.com/blob/ca814ed2478108b119fef4498a8ee521a5553914/liberapay/models/participant.py)
+- Backend system for participant code (including account protections) [Participant.Py](https://github.com/liberapay/liberapay.com/blob/ca814ed2478108b119fef4498a8ee521a5553914/liberapay/models/participant.py)
 
 *E3*\
 Liberapay requires business accounts to be validated when registering with the service. This process is evident when trying to elevate an individual account to an organization level account.
-- Validation simplate: [Validate Simplate](https://github.com/liberapay/liberapay.com/blob/89cad02be0bdc42eafb02df2e38aff6535339095/www/%25username/identity-docs.spt)
-- Business signup page (note: only available with account) [Business Signup](https://liberapay.com/mmrdy/receiving)
+- Validation simplate: [Identity Validation Simplate](https://github.com/liberapay/liberapay.com/blob/89cad02be0bdc42eafb02df2e38aff6535339095/www/%25username/identity-docs.spt)
+- Business signup page (note: only available with account) [Business Signup Page](https://liberapay.com/mmrdy/receiving)
 
 *E4*\
 Liberapay implements logging of donation histories for an organization/account. Their implementation allows for histories of organizations created by elevating individual accounts as well as newly formed organizations.
-- Python implementation of history tracking [History](https://github.com/liberapay/liberapay.com/blob/40454cf8d899d08f8fe28559fc40a685a4033f94/liberapay/utils/history.py)
+- Python implementation of history tracking [History.Py](https://github.com/liberapay/liberapay.com/blob/40454cf8d899d08f8fe28559fc40a685a4033f94/liberapay/utils/history.py)
 
 *E5*\
 Liberapay incorporates viewing an organizations donation history over its entire lifecycle. This can be achieved either through viewing the organization card on the search page, or by viewing an organizations income history within its profile page.
-- View of multiple organizations and income per week on their cards [Income organization](https://liberapay.com/explore/organizations)
-- Select "view income history" at the bottom of the page [Organization donation history](https://liberapay.com/LiberapayOrg/)
+- View of multiple organizations and income per week on their cards [Organization Page](https://liberapay.com/explore/organizations)
+- Select "view income history" at the bottom of the page [Liberapay Income History View](https://liberapay.com/LiberapayOrg/)
 
 *E6*\
 Liberapay leverages quarantining of payments in order to protect against prematrue disbursement as well as transaction related fraud activities. This protection feature is evident through test cases as well as a simplate. The simplate is utilized by Liberapay to send standardized emails to users notifying them of quarantined funds. 
 - Test case showcasing quarantining feature [Quarantine Test](https://github.com/liberapay/liberapay.com/blob/0ec40ad7527bbb446f59c61e53d856352b7a6d1e/liberapay/testing/__init__.py)
-- Notification simplate for quarantined funds warning [Quarantine notification](https://github.com/liberapay/liberapay.com/blob/a5290b528c5d7e0f2191208305eb3d1b1b8889ad/www/about/money.spt)
+- Notification simplate for quarantined funds warning [Quarantine Simplate](https://github.com/liberapay/liberapay.com/blob/a5290b528c5d7e0f2191208305eb3d1b1b8889ad/www/about/money.spt)
 
-*E8*\
-Team Dashboards
+*E8 & E9*\
+Liberapay leverages team dashboards in order to visually represent the overall history of donations to a team as well as the aggregate disbursement to team members. This is evident in pull request no. 68 which shows the addition of a team dashboard feature into Liberapay. This process is also visible when looking at a team's page and in the backend code — specifically the membership simplate.
+- Pull request no. 68 for Team Dashboard feature [Pull No.68](https://github.com/liberapay/liberapay.com/pull/68)
+- Team Dashboard (note: only available with account) [Team Dashboard Page](https://liberapay.com/mmrdy/receiving/#teams)
+- Example team dashboard for Liberapay [Liberapay Team Dashboard](https://liberapay.com/Liberapay/income/)
+- Membership simplate [Membership Simplate](https://github.com/liberapay/liberapay.com/blob/3c77591ccf38093732c555ff588b62932857a9cc/www/%25username/membership/%25action.spt)
 
-*E9*\
-Paypal/Stripe Handler
 
-Membership simplate
-https://github.com/liberapay/liberapay.com/blob/3c77591ccf38093732c555ff588b62932857a9cc/www/%25username/membership/%25action.spt
+
 #### *2.4.2. Unavailable/Insufficient Evidence*
-*E7*\
-Account activity
+*E7*\ 
+Currently Liberapay does not support or provide a feature to view account activity apart from rough metrics on donations for teams. There is no supported feature currently to show team member activity or their histories. However, there is a recent issue (no. 482) that was created with the aim to address this issue.
+- Ledger history issue page [Issue No.482](https://github.com/liberapay/liberapay.com/issues/482)
 
+*E10*\
+Paypal/Stripe Handler
+The Liberapay project has been continously updating their payment handling services in order to keep up and meet the standards of their two payment providers: Stripe and Paypal. Currently the payment processing for stripe and paypal are undergoing changes which make the business verification occur external to the system of interest. However, there is an open issue which suggests strong interest and action towards integrating such a service into Liberapay.
+- Stripe/Paypal linking process (note: only available with account) [Payment Processing Signup Page](https://liberapay.com/mmrdy/payment)
+- Stripe account issue no. 1186 [Issue No.1186](https://github.com/liberapay/liberapay.com/issues/1186)
 
 
 ### 2.5. Claim 5 Evidence Alignment
