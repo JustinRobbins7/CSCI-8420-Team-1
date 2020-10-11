@@ -1,33 +1,34 @@
-# Team 1 Project Proposal: Liberapay
+# Team 1 Assurance Cases for Software Security Engineering: Liberapay
 
 Written by Team 1:
 Joel Allou, Mohammad H. Al Huneidi, Miti Mareddy, Justin Robbins, and Nicholas Sabata
 
 Link to Liberapay Github: [Liberapay Project](https://github.com/liberapay/liberapay.com)
 
+
 ## 1. Claims
 
 ### 1.1. Claim 1 - Liberapay minimizes unauthorized access to sensitive data
-![Account Access Diagram](/Images/Assurance_Case_Diagrams/Joel_Assurance_Case.png)
+![Claim 1 Diagram](/Images/Assurance_Case_Diagrams/Joel_Assurance_Case.png)
 
 ### 1.2. Claim 2 - Liberapay minimizes unauthorized account access
-![Account Access Diagram](/Images/Assurance_Case_Diagrams/Justin_Robbins-Assurance_CaseV2.jpeg)
+![Claim 2 Diagram](/Images/Assurance_Case_Diagrams/Justin_Robbins-Assurance_CaseV2.jpeg)
 
 ### 1.3. Claim 3 - Liberapay minimizes scripted account registration attacks
-![Registration Floods Diagram](/Images/Assurance_Case_Diagrams/Mo-AC-3-1.png)
+![Claim 3 Diagram](/Images/Assurance_Case_Diagrams/Mo-AC-3-1.png)
 
 ### 1.4. Claim 4 - Liberapay reduces the ability for attackers to impede organization activities
-![Organization Diagram](/Images/Assurance_Case_Diagrams/Miti_AC_4_1.png)
+![Claim 4 Diagram](/Images/Assurance_Case_Diagrams/Miti_AC_4_1.png)
 
 ### 1.5. Claim 5 - Liberapay minimizes the ability for attackers to interfere with donations
-![Donation Diagram](/Images/Assurance_Case_Diagrams/Nicholas_Assurance_Case.png)
+![Claim 5 Diagram](/Images/Assurance_Case_Diagrams/Nicholas_Assurance_Case.png)
+
 
 ## 2. Evidence Alignment
 
 ### 2.1. Claim 1 Evidence Alignment
 
 #### *2.1.1 Available Evidence*
-
 *E1*  
 Liberapay has an admin interface to allow admins to perform several actions, such as audit log/monitoring activities, view email-addresses, notifications, payments, rate limits, as well as users, among others. 
 
@@ -53,10 +54,7 @@ Lastly, Liberapay also has a hacker bounty program where they invite anyone to f
 *E10* \
 Liberapay has an admin page and tools that allow admins to do various actions such as blacklisting suspicious accounts, altering the database, and more. To limit damage in the case where an admin account is compromised, Liberapay has instilled rate limit on the admin accounts as well. ([Rate limit For Admin Actions](https://github.com/liberapay/liberapay.com/pull/1379))
 
-
-
 #### *2.1.2. Unavailable/Insufficient Evidence*
-
 *E2* \
 Liberapay has done some work to allow database admins to set/revoke privileges, but they still have some ways to go. As this [open request](https://github.com/liberapay/liberapay.com/issues/1312) suggests, Liberapay has built mechanism to protect against deletion of an entire production database, but it is still possible to drop or truncate entire tables. Liberapay still needs to define proper user roles. 
 
@@ -84,10 +82,7 @@ However, as suggested by this [request](https://github.com/liberapay/liberapay.c
 
 ### 2.2. Claim 2 Evidence Alignment
 
-
-
-
-#### *2.2.1 Available Evidence*
+#### *2.2.1. Available Evidence*
 *E2* \
 Liberapay leverages simplates to generate many different types of emails for different situations. These simplates act as standardization that can help reduce the chance that poorly constructed phishing emails will be able to spoof Liberapay's emails.
 - Email Simplates: [https://github.com/liberapay/liberapay.com/tree/master/emails](https://github.com/liberapay/liberapay.com/tree/master/emails)
@@ -96,17 +91,15 @@ Liberapay leverages simplates to generate many different types of emails for dif
 Liberapay implements login limits true rate limiting, restricting the number of times password login, email login, account verifications, and account creations that can be performed in an hour. This ensured that attackers cannot merely guess the login information of a user via brute force. Full details about the policy can be seen in the below issue documentation.
 - Liberapay rate limiting: [https://github.com/liberapay/liberapay.com/pull/699](https://github.com/liberapay/liberapay.com/pull/699)
 
-*E4, E6, and E9* \
+*E4, E6, & E9* \
 Liberapay leverages https, ensuring that their communications are encrypted according to the TLS encryption algorithm. This also means that their session keys are generated from random data at the time of session initialization. These keys are also short-lived, ensuring that even if the attackers acquire a key through theft, they will not be able to use it for long.
 - Liberapay website (notice the use of https): [https://liberapay.com/](https://liberapay.com/)
 
-*E5*\ 
+*E5* \
 An argument for the security of Liberapay's sensitive can be found in sections 1.1. and 2.2. of this paper.
 
-
-
 #### *2.2.2. Unavailable/Insufficient Evidence*
-*E1 and E7* \
+*E1 & E7* \
 Liberapay is in the process of implementing a time-based one time password two factor authentication system. When it is complete, it will greatly improve the security of Liberapay's login services. Until it is, attackers with user login information are not prevented from logging in using stolen user credentials. This represents a significant threat to Liberapay, as many users can be prone to using the same password across multiple web sites, whose security cannot be guaranteed by Liberapay.
 - Two-factor authentication issue on Liberapay's GitHub: [https://github.com/liberapay/liberapay.com/issues/926](https://github.com/liberapay/liberapay.com/issues/926)
 
@@ -128,22 +121,19 @@ Unfortunately, it seems that no concerted effort has been made to reduce the amo
 
 ### 2.3. Claim 3 Evidence Alignment
 
-#### *2.3.1 Available Evidence*
-
-No evidence was found was found to support the discussed claims in the diagram.
+#### *2.3.1. Available Evidence*
+No evidence was found to support the claims discussed in the diagram.
 
 #### *2.3.2. Unavailable/Insufficient Evidence*
-
-*E1, E2* \
+*E1 & E2* \
 Liberapay does not leverage CAPTCHA technologies in the registration process. The current process that is being utilized is a simple one. It only requires the user to provide an email and a password. With no limits in place. Therefore it's easy for an attacker to register multiple accounts with a script potentially flooding the database with spam accounts. There are also no issues created to address this therefore, it'd be beneficial to point this out to Liberapay so that they can implement it. As addressed in the diagram CAPTCHA technologies would greatly reduce the ability of attackers to quickly register accounts.
 
-
-*E3 \
+*E3* \
 There is no evidence that Liberapay has any registration limits in place. From analysis and investigation we've determined that it's possible to create as many accounts as desired in a short-span of time. No timeouts were in place. Liberapay would greatly benefit from a registration limit to hinder attackers ability in flooding the database with dummy accounts.
 
 ### 2.4. Claim 4 Evidence Alignment
 
-#### *2.4.1 Available Evidence*
+#### *2.4.1. Available Evidence*
 *E1 & E11* \
 An argument for the claims "Liberapay has account protections" and "Liberapay reduces unauthorized acccess to data" can be found in section(s) 1.1 and 1.2 above.
 
@@ -177,8 +167,6 @@ Liberapay leverages team dashboards in order to visually represent the overall h
 - Example team dashboard for Liberapay [Liberapay Team Dashboard](https://liberapay.com/Liberapay/income/)
 - Membership simplate [Membership Simplate](https://github.com/liberapay/liberapay.com/blob/3c77591ccf38093732c555ff588b62932857a9cc/www/%25username/membership/%25action.spt)
 
-
-
 #### *2.4.2. Unavailable/Insufficient Evidence*
 *E7* \
 Currently Liberapay does not support or provide a feature to view account activity apart from rough metrics on donations for teams. There is no supported feature currently to show team member activity or their histories. However, there is a recent issue (no. 482) that was created with the aim to address this issue.
@@ -193,6 +181,12 @@ The Liberapay project has been continously updating their payment handling servi
 
 ### 2.5. Claim 5 Evidence Alignment
 
+#### *2.5.1. Available Evidence*
+
+
+#### *2.5.2. Unavailable/Insufficient Evidence*
+No evidence was found that didn't support the claims discussed in the assurance case diagram.
+
 ## 3. GitHub Information
 
 Here are links to our Github Pages: \
@@ -206,6 +200,7 @@ Github Contributors: [Contributors Page](https://github.com/JustinRobbins7/CSCI-
 
 
 ## 4. Teamwork Reflection
+
 For this deliverable, all team members continued to meet regularly and stay in contact with each other. Each team member was tasked with identifying one claim each that represented core aspects of the Liberapay system.  We met prior to product delivery in order to align our diagrams and analyses with each other. We also proceeded to divide each remaining task among team members for the second section of the deliverable. With the groundwork set up, the assignment progressed smoothly with no conflict or major impediments.
 
 No major issues occured during the build and finalization of this deliverable, but a few minor ones did occur in regard to diagram overlap. After meeting with Dr. Ghandi we were able to sort out this issue with a reference to other team members analyses. Moving forward, we plan on continuing our weekly team meeting and keeping up to date on both Github and other communication platforms.
