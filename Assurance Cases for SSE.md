@@ -27,9 +27,7 @@ Link to Liberapay Github: [Liberapay Project](https://github.com/liberapay/liber
 #### *2.1.1 Available Evidence*
 
 *E1*  
-Liberapay has an admin interface to allow admins to perform several actions, which includes monitoring activities. As shown in the top-right hand side of the picture below, admins can audit log, view email-addresses, notifications, payments, rate limits, as well as users, among others. 
-
-![Admin Options Screenshot](/Images/Assurance_Case_Diagrams/adminOptions.png)
+Liberapay has an admin interface to allow admins to perform several actions, such audit log/monitoring activities, view email-addresses, notifications, payments, rate limits, as well as users, among others. 
 
 Along with that, Liberapay also logs actions perform by admins. In this way, if an admin account was ever compromised, Liberapay would be able to analyze the logs to troubleshoot the issue.
 
