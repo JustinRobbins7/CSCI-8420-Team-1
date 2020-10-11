@@ -83,6 +83,9 @@ However, as suggested by this [request](https://github.com/liberapay/liberapay.c
 
 ### 2.2. Claim 2 Evidence Alignment
 
+
+
+
 #### *2.2.1 Available Evidence*
 *E2* \
 Liberapay leverages simplates to generate many different types of emails for different situations. These simplates act as standardization that can help reduce the chance that poorly constructed phishing emails will be able to spoof Liberapay's emails.
@@ -123,6 +126,18 @@ Unfortunately, it seems that no concerted effort has been made to reduce the amo
 
 
 ### 2.3. Claim 3 Evidence Alignment
+
+#### *2.3.1 Available Evidence*
+
+
+#### *2.3.2. Unavailable/Insufficient Evidence*
+
+*E1, E2*
+Liberapay does not leverage CAPTCHA technologies in the registration process. The current process that is being utilized is a simple one. It only requires the user to provide an email and a password. With no limits in place. Therefore it's easy for an attacker to register multiple accounts with a script potentially flooding the database with spam accounts. There are also no issues created to address this therefore, it'd be beneficial to point this out to Liberapay so that they can implement it. As addressed in the diagram CAPTCHA technologies would greatly reduce the ability of attackers to quickly register accounts.
+
+
+*E3,E4*
+There is no evidence that Liberapay has any registration limits in place. From analysis and investigation we've determined that it's possible to create as many accounts as desired in a short-span of time. No timeouts were in place. Liberapay would greatly benefit from a registration limit to hinder attackers ability in flooding the database with dummy accounts.
 
 ### 2.4. Claim 4 Evidence Alignment
 
