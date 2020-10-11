@@ -14,6 +14,7 @@ Link to Liberapay Github: [Liberapay Project](https://github.com/liberapay/liber
 ![Account Access Diagram](/Images/Assurance_Case_Diagrams/Justin_Robbins-Assurance_CaseV2.jpeg)
 
 ### 1.3. Claim 3
+![Registration Floods Diagram](/Images/Assurance_Case_Diagrams/Mo-AC-3-1.png)
 
 ### 1.4. Claim 4
 ![Organization Diagram](/Images/Assurance_Case_Diagrams/Miti_AC_4_1.png)
