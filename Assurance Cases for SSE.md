@@ -19,8 +19,8 @@ Link to Liberapay Github: [Liberapay Project](https://github.com/liberapay/liber
 ### 1.4. Claim 4 - Liberapay reduces the ability for attackers to impede organization activities
 ![Organization Diagram](/Images/Assurance_Case_Diagrams/Miti_AC_4_1.png)
 
-### 1.5. Claim 5
-
+### 1.5. Claim 5 - Liberapay minimizes the ability for attackers to interfere with donations
+![Donation Diagram](/Images/Assurance_Case_Diagrams/Nicholas_Assurance_Case.png)
 
 ## 2. Evidence Alignment
 
