@@ -131,4 +131,4 @@ Github Contributors: [Contributors Page](https://github.com/JustinRobbins7/CSCI-
 
 
 ## 4. Teamwork Reflection
-MITI
+PLACEHOLDER==Our team continued to collaborate and conduct meetings once or twice a week to report project progress. We collectively analyzed Liberapay in greater detail and each team member was tasked with preparing a separate use/misuse case. During our weekly scheduled meetings, we evaluated and provided constructive feedback for everyone's work to make sure that we were all on track. We realized after meeting with Dr. Ghandi that some of our diagrams needed to be revised and simplified. No major issues occurred during this project phase and our team plans to continue conducting weekly meetings in order to stay on track and resolve any potential blockers.==
