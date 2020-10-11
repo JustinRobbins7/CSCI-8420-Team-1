@@ -129,6 +129,7 @@ Unfortunately, it seems that no concerted effort has been made to reduce the amo
 
 #### *2.3.1 Available Evidence*
 
+No evidence was found was found to support the discussed claims in the diagram.
 
 #### *2.3.2. Unavailable/Insufficient Evidence*
 
