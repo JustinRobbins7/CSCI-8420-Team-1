@@ -24,6 +24,62 @@ Link to Liberapay Github: [Liberapay Project](https://github.com/liberapay/liber
 
 ### 2.1. Claim 1 Evidence Alignment
 
+#### *2.1.1 Available Evidence*
+*E7* \
+Liberapay does not have a vulnerability management process in place. However, they do, on re-occuring occasions, update and patch packages, tools, and softwares.
+Below are some examples of times they have updated components:
+- [Various fixes based on findings](https://github.com/liberapay/liberapay.com/pull/1766)
+- [Patching SEPA Direct Debits to avoid failed Payment](https://github.com/liberapay/liberapay.com/pull/1369)
+- [Upgrading urllib3](https://github.com/liberapay/liberapay.com/pull/1487)
+- [Impersonation vulnerability](https://github.com/liberapay/liberapay.com/pull/1364)
+
+Liberapay also had discussion around implementing automated patches, but it has yet to be done. ([Automated Patches Discussion](https://github.com/liberapay/liberapay.com/issues/1305))
+
+Lastly, Liberapay also has a hacker bounty program where they invite anyone to flag potential vulnerability. ([Hacker Bounty Website](https://github.com/liberapay/liberapay.com/issues/549))
+
+*E3* \
+Liberapay implements symmetric encryption and decryption to ensure that sensitive data are protected. They currently rely on Fernet, which uses the AES cipher in CBC mode with PKCS7 padding and 128 bits key. For authentication, they use HMAC-SHA256 with 128 bits key. ([Crytography Code](https://github.com/liberapay/liberapay.com/blob/fb1dbeac869d235abf25f086cbc5b274931578d1/liberapay/security/crypto.py))
+
+Along with that, [Liberapay](https://liberapay.com/about/privacy) also affirms on their privacy page that all of their connections are encrypted.
+
+*E10* \
+Liberapay has an admin page and tools that allow admins to do various actions such as blacklisting suspicious accounts, altering the database, and more. To limit damage in the case where an admin account is compromised, Liberapay has instilled rate limit on the admin accounts as well. ([Rate limit For Admin Actions](https://github.com/liberapay/liberapay.com/pull/1379))
+
+
+*E1*  
+Liberapay has an admin interface to allow admins to perform several actions, which includes monitoring activities. As shown in the top-right hand side of the picture below, admins can audit log, view email-addresses, notifications, payments, rate limits, as well as users, among others. 
+
+insert picture
+
+Along with that, Liberapay also logs actions perform by admins. In this way, if an admin account was ever compromised, Liberapay would be able to analyze the logs to troubleshoot the issue.
+
+
+#### *2.1.2. Unavailable/Insufficient Evidence*
+*E2* \
+Liberapay has done some work to allow database admin to set/revoke privileges, but they still have some ways to go. As this [open request](https://github.com/liberapay/liberapay.com/issues/1312) suggests, Liberapay has built mechanism to protect against deletion of an entire production database, but it is still possible to drop or truncate entire tables. Liberapay still needs to define proper user roles. 
+
+*E8* \
+Unfortunately, Liberapay's code base and website do not provide any indication that they have packet level authentication to prevent packets spoofing. Consequently, there is not sufficient data for this evidence.
+
+*E4* \
+Liberapay has an open request to leverage Cloudflare's API to implement a "firewall" by telling Cloudflare to challenge traffic from specific IP addresses. However, that request was opened in 2017 and has yet to be completed. ([Firewall Request](https://github.com/liberapay/liberapay.com/issues/709))
+
+*E5* \
+After careful investigation into Liberapay's code base, it does not look like Liberapay uses dynamic SQL. Because the lack of dynamic SQL does not substitute for the guarantee that Liberapay does not have any, we cannot completely support this evidence.
+
+However, Liberapay has taken some measure to reduce SQL injection, as showcased in this [request](https://github.com/liberapay/liberapay.com/issues/559).
+
+*E9* \
+To succesfully create a user's account, Liberapay does employ strong password policies. However, when it comes to password policies to access decryption keys, there wasn't substantial information to support that evidence.
+
+However, as suggested by this [request](https://github.com/liberapay/liberapay.com/issues/1673), Liberapay seems to have a secret vault/manager where they store encryption keys, which could potentially also be protected by passwords.
+
+*E6* \
+Although Liberapay does not use Django validation for input validation, they do validate certain aspects of input. However, there is insufficient evidence to claim that all inputs are validated.
+- [Example of implemented input validation](https://github.com/liberapay/liberapay.com/issues/1480)
+- [Example of yet to be implemented input validation](https://github.com/liberapay/liberapay.com/issues/70)
+
+
 ### 2.2. Claim 2 Evidence Alignment
 
 #### *2.2.1 Available Evidence*
