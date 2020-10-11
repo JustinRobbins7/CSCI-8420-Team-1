@@ -29,9 +29,9 @@ Link to Liberapay Github: [Liberapay Project](https://github.com/liberapay/liber
 #### *2.1.1 Available Evidence*
 
 *E1*  
-Liberapay has an admin interface to allow admins to perform several actions, such audit log/monitoring activities, view email-addresses, notifications, payments, rate limits, as well as users, among others. 
+Liberapay has an admin interface to allow admins to perform several actions, such as audit log/monitoring activities, view email-addresses, notifications, payments, rate limits, as well as users, among others. 
 
-Along with that, Liberapay also logs actions perform by admins. In this way, if an admin account was ever compromised, Liberapay would be able to analyze the logs to troubleshoot the issue.
+Along with that, Liberapay also logs actions performed by admins. In this way, if an admin account was ever compromised, Liberapay would be able to analyze the logs to troubleshoot the issue.
 
 *E3* \
 Liberapay implements symmetric encryption and decryption to ensure that sensitive data are protected. They currently rely on Fernet, which uses the AES cipher in CBC mode with PKCS7 padding and 128 bits key. For authentication, they use HMAC-SHA256 with 128 bits key. ([Crytography Code](https://github.com/liberapay/liberapay.com/blob/fb1dbeac869d235abf25f086cbc5b274931578d1/liberapay/security/crypto.py))
@@ -46,9 +46,9 @@ Below are some examples of times they have updated components:
 - [Upgrading urllib3](https://github.com/liberapay/liberapay.com/pull/1487)
 - [Impersonation vulnerability](https://github.com/liberapay/liberapay.com/pull/1364)
 
-Liberapay also had discussion around implementing automated patches, but it has yet to be done. ([Automated Patches Discussion](https://github.com/liberapay/liberapay.com/issues/1305))
+Liberapay also had a discussion around implementing automated patches, but it has yet to be done. ([Automated Patches Discussion](https://github.com/liberapay/liberapay.com/issues/1305))
 
-Lastly, Liberapay also has a hacker bounty program where they invite anyone to flag potential vulnerability. ([Hacker Bounty Website](https://github.com/liberapay/liberapay.com/issues/549))
+Lastly, Liberapay also has a hacker bounty program where they invite anyone to flag a potential vulnerability. ([Hacker Bounty Website](https://github.com/liberapay/liberapay.com/issues/549))
 
 *E10* \
 Liberapay has an admin page and tools that allow admins to do various actions such as blacklisting suspicious accounts, altering the database, and more. To limit damage in the case where an admin account is compromised, Liberapay has instilled rate limit on the admin accounts as well. ([Rate limit For Admin Actions](https://github.com/liberapay/liberapay.com/pull/1379))
@@ -58,7 +58,7 @@ Liberapay has an admin page and tools that allow admins to do various actions su
 #### *2.1.2. Unavailable/Insufficient Evidence*
 
 *E2* \
-Liberapay has done some work to allow database admin to set/revoke privileges, but they still have some ways to go. As this [open request](https://github.com/liberapay/liberapay.com/issues/1312) suggests, Liberapay has built mechanism to protect against deletion of an entire production database, but it is still possible to drop or truncate entire tables. Liberapay still needs to define proper user roles. 
+Liberapay has done some work to allow database admins to set/revoke privileges, but they still have some ways to go. As this [open request](https://github.com/liberapay/liberapay.com/issues/1312) suggests, Liberapay has built mechanism to protect against deletion of an entire production database, but it is still possible to drop or truncate entire tables. Liberapay still needs to define proper user roles. 
 
 *E4* \
 Liberapay has an open request to leverage Cloudflare's API to implement a "firewall" by telling Cloudflare to challenge traffic from specific IP addresses. However, that request was opened in 2017 and has yet to be completed. ([Firewall Request](https://github.com/liberapay/liberapay.com/issues/709))
