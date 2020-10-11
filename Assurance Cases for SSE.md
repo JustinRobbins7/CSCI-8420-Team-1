@@ -16,8 +16,9 @@ Link to Liberapay Github: [Liberapay Project](https://github.com/liberapay/liber
 ### 1.3. Claim 3 - Liberapay minimizes scripted account registration attacks
 ![Registration Floods Diagram](/Images/Assurance_Case_Diagrams/Mo-AC-3-1.png)
 
-### 1.4. Claim 4
+### 1.4. Claim 4 - Liberapay reduces the ability for attackers to impede organization activities
 ![Organization Diagram](/Images/Assurance_Case_Diagrams/Miti_AC_4_1.png)
+
 ### 1.5. Claim 5
 
 
