@@ -9,6 +9,7 @@ Link to Liberapay Github: [Liberapay Project](https://github.com/liberapay/liber
 ## 1. Threat Modeling
 
 ## 2. Observations
+Liberapay Threat Analysis Report: [https://justinrobbins7.github.io/CSCI-8420-Team-1/docs/LiberapayThreatAnalysis.htm](https://justinrobbins7.github.io/CSCI-8420-Team-1/docs/LiberapayThreatAnalysis.htm)
 
 ## 3. GitHub information
 Here are links to our Github Pages: \
