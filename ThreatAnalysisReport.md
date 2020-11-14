@@ -73,6 +73,54 @@ Authentication code file can be found [here](https://github.com/liberapay/libera
 Authentication code file can be found [here](https://github.com/liberapay/liberapay.com/blob/f57a9fa44ce79a5339049603728be5f6a8334980/liberapay/security/authentication.py).
 Potential incorporation of 2FA [here](https://github.com/liberapay/liberapay.com/issues/926)
 
+19. _External Entity User Potentially Denies Receiving Data_
+- Description: User claims that it did not receive data from a process on the other side of the trust boundary. Consider using logging or auditing to record the source, time, and summary of the received data.
+- Justification: Audits and Logs should mitigate this threat. 
+- __Observation:__ Liberapay has an admin interface that allows admins to perform several actions, such as audit log/monitoring activities, viewing email addresses, notifications, payments, rate limits, as well as users, etc.
+Along with that, Liberapay also logs actions performed by admins. In this way, if an admin account was ever compromised, Liberapay would be able to analyze the logs to troubleshoot the issue.
+Liberapay audits and logs notifications, schedules, payments, and more. The code for the audits/logs can be found in this [folder](https://github.com/liberapay/liberapay.com/tree/17fd4d3d2f16703bd24a082fe20733da980ced46/www/admin).
+
+20. _Data Flow Reminder Emails Is Potentially Interrupted_
+- Description: An external agent interrupts data flowing across a trust boundary in either direction.
+- Justification: Liberapay maintains a schedule of sent reminders. Even if one is lost, another one will be sent after some time.
+- __Observation:__ Liberapay has a system that sends reminders, mostly for donation renewal, to the concerned parties. In an event that a DoS attack is peformed and a reminder is not consequently sent, Librapay will re-send that notification after some time since it keeps track of the notifications sent. This [link](https://github.com/liberapay/liberapay.com/pull/1193/commits/9266edad3949d30cd8da31f7163e39394102c64c) showcases the donation reminder notification process.
+
+21. _Elevation by Changing the Execution Flow in Liberapay_
+- Description: An attacker may pass data into Liberapay in order to change the flow of program execution within Liberapay to the attacker’s choosing.
+- Justification: HTTPs protocol/encryption as well as input validation should mitigate the chance of response hijacking.
+- __Observation:__ Liberapay leverages https, ensuring that their communications are encrypted according to the TLS encryption algorithm. This also means that their session keys are generated from random data at the time of session initialization. These keys are also short-lived, ensuring that even if the attackers acquire a key through theft, they will not be able to use it for long. One can notice the utlization of https on the [Liberapay's homepage](https://liberapay.com/). Adding to that, Liberapay implements symmetric encryption and decryption to ensure that sensitive data are protected. They currently rely on Fernet, which uses the AES cipher in CBC mode with PKCS7 padding and a 128 bits key. For authentication, they use HMAC-SHA256 with a 128 bits key. ([Crytography Code](https://github.com/liberapay/liberapay.com/blob/fb1dbeac869d235abf25f086cbc5b274931578d1/liberapay/security/crypto.py))
+As far as input validation, Liberapay validates certain aspects of input. However, there is insufficient evidence to claim that all inputs are validated. See examples below:
+1) [Example of implemented input validation](https://github.com/liberapay/liberapay.com/issues/1480)
+2) [Example of yet to be implemented input validation](https://github.com/liberapay/liberapay.com/issues/70)
+
+22. _Not Applicable_
+
+23. _Not Applicable_
+
+24. _Data Flow Response Is Potentially Interrupted_
+- Description: An external agent interrupts data flowing across a trust boundary in either direction.
+- Justification: Should be mitigated through the use of HTTPS and firewalls.
+- __Observation:__ Liberapay affirms that "All network connections are encrypted, except for some communications between machines located in the same datacenter".
+Furthermore, as described in _Mitigation 21_, Liberapay leverages https, ensuring that their communications are encrypted according to the TLS encryption algorithm. However, Liberapay does not appear to implement firewalls, which could mitigate this issue and reduce DoS attacks. Liberapay and its contributors did discuss the idea of implementing a firewall, but it has yet to be done. ([Discussion](https://github.com/liberapay/liberapay.com/issues/709)). This could potentially be a gap as it could potentially undermine Liberapay's network service or connectivity's robustness. However, Liberapay does implement some rate limiting techniques, aimed at preventing DoS attacks as explained in this [discussion](https://github.com/liberapay/liberapay.com/pull/699).
+
+25. _Potential Process Crash or Stop for Liberapay_
+- Description: Liberapay crashes, halts, stops or runs slowly; in all cases violating an availability metric.
+- Justification: May be outstanding issues that causes this behavior; however, Liberapay is generally a functional application and the threat of this is low.
+- __Observation:__ As explained in the justification, this threat is low as Liberapay is generally a functional application. Among things that are slow, stop, or crash Liberapay are repeated attempts by a maluser to do a task. As mentioned in the _Mitigation 24_, Liberapay did incorporate code to mitigate such events. See _Mitigation 24_ for more information.
+
+26. _Data Flow Sniffing_
+- Description: Data flowing across Response may be sniffed by an attacker. Depending on what type of data an attacker can read, it may be used to attack other parts of the system or simply be a disclosure of information leading to compliance violations. Consider encrypting the data flow.
+- Justification: HTTPS protocol and encryption should mitigate this threat.
+- __Observation:__ Please view _Mitigation 21_, as it highlights step taken to secure communication and encrypt data flow.
+
+27. _Not Applicable_
+
+28. _Potential Lack of Input Validation for Liberapay_
+- Description: Data flowing across Response may be tampered with by an attacker. This may lead to a denial of service attack against Liberapay or an elevation of privilege attack against Liberapay or an information disclosure by Liberapay. Failure to verify that input is as expected is a root cause of a very large number of exploitable issues. Consider all paths and the way they handle data. Verify that all input is verified for correctness using an approved list input validation approach.
+- Justification: The use of secure HTTPs protocol should reduce the possibility of request tampering. However, an investigation into Liberapay's request verification may be useful.
+- __Observation:__ Please view _Mitigation 21_, as it highlights step taken to secure communication and encrypt data flow.
+
+
 ## 3. GitHub information
 Here are links to our Github Pages: \
 Master Branch: [Home Page](https://github.com/JustinRobbins7/CSCI-8420-Team-1) \
