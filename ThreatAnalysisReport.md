@@ -147,20 +147,24 @@ Furthermore, as described in _Mitigation 21_, Liberapay leverages https, ensurin
 25. _Potential Process Crash or Stop for Liberapay_
 - Description: Liberapay crashes, halts, stops or runs slowly; in all cases violating an availability metric.
 - Justification: May be outstanding issues that causes this behavior; however, Liberapay is generally a functional application and the threat of this is low.
-- __Observation:__ As explained in the justification, this threat is low as Liberapay is generally a functional application. Among things that are slow, stop, or crash Liberapay are repeated attempts by a maluser to do a task. As mentioned in the _Mitigation 24_, Liberapay did incorporate code to mitigate such events. See _Mitigation 24_ for more information.
+- __Observation:__ As explained in the justification, this threat is low as Liberapay is generally a functional application. Among things that slow, stop, or crash Liberapay are repeated attempts by an attacker to do a task (i.e. bruteforce password guessing). As mentioned in the _Mitigation 24_, Liberapay did incorporate code to mitigate such events. See _Mitigation 24_ for more information.
 
 26. _Data Flow Sniffing_
 - Description: Data flowing across Response may be sniffed by an attacker. Depending on what type of data an attacker can read, it may be used to attack other parts of the system or simply be a disclosure of information leading to compliance violations. Consider encrypting the data flow.
 - Justification: HTTPS protocol and encryption should mitigate this threat.
-- __Observation:__ Please view _Mitigation 21_, as it highlights step taken to secure communication and encrypt data flow.
+- __Observation:__ Please view _Mitigation 21_, as it highlights steps taken to secure communication and encrypt data flow.
 
 27. _Not Applicable_
 
 28. _Potential Lack of Input Validation for Liberapay_
 - Description: Data flowing across Response may be tampered with by an attacker. This may lead to a denial of service attack against Liberapay or an elevation of privilege attack against Liberapay or an information disclosure by Liberapay. Failure to verify that input is as expected is a root cause of a very large number of exploitable issues. Consider all paths and the way they handle data. Verify that all input is verified for correctness using an approved list input validation approach.
 - Justification: The use of secure HTTPs protocol should reduce the possibility of request tampering. However, an investigation into Liberapay's request verification may be useful.
-- __Observation:__ Please view _Mitigation 21_, as it highlights step taken to secure communication and encrypt data flow.
+- __Observation:__ Please view _Mitigation 21_, as it highlights steps taken to secure communication and encrypt data flow.
 
+29 _Spoofing the Amazon AWS Database External Entity_
+- Description: Amazon AWS Database may be spoofed by an attacker and this may lead to unauthorized access to Liberapay. Consider using a standard authentication mechanism to identify the external entity.
+- Justification: Liberapay uses standard authentication mechanisms and HTTPs protocols to mitigate this threat.
+- __Observation:__ As explained in _Mitigation 21_, Liberapay has taken steps taken to secure communication and encrypt data flow. Adding to that, they also provide authentication mechanishms at various points during interaction with other entities that identify external entities and users to prevent attackers from spoofing and getting unauthorized access. 
 
 ## 3. GitHub Information
 
