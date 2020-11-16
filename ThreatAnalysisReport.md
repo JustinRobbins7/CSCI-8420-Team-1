@@ -146,7 +146,7 @@ Liberapay audits and logs notifications, schedules, payments, and more. The code
 21. _Elevation by Changing the Execution Flow in Liberapay_
 - Description: An attacker may pass data into Liberapay in order to change the flow of program execution within Liberapay to the attacker’s choosing.
 - Justification: HTTPs protocol/encryption as well as input validation should mitigate the chance of response hijacking.
-- __Observation:__ Liberapay leverages https, ensuring that their communications are encrypted according to the TLS encryption algorithm. This also means that their session keys are generated from random data at the time of session initialization. These keys are also short-lived, ensuring that even if the attackers acquire a key through theft, they will not be able to use it for long. One can notice the utlization of https on the [Liberapay's homepage](https://liberapay.com/). Adding to that, Liberapay implements symmetric encryption and decryption to ensure that sensitive data are protected. They currently rely on Fernet, which uses the AES cipher in CBC mode with PKCS7 padding and a 128 bits key. For authentication, they use HMAC-SHA256 with a 128 bits key. ([Crytography Code](https://github.com/liberapay/liberapay.com/blob/fb1dbeac869d235abf25f086cbc5b274931578d1/liberapay/security/crypto.py))
+- __Observation:__ Liberapay leverages HTTPS, ensuring that their communications are encrypted according to the TLS encryption algorithm. This also means that their session keys are generated from random data at the time of session initialization. These keys are also short-lived, ensuring that even if the attackers acquire a key through theft, they will not be able to use it for long. One can notice the utlization of https on the [Liberapay's homepage](https://liberapay.com/). Adding to that, Liberapay implements symmetric encryption and decryption to ensure that sensitive data are protected. They currently rely on Fernet, which uses the AES cipher in CBC mode with PKCS7 padding and a 128 bits key. For authentication, they use HMAC-SHA256 with a 128 bits key. ([Crytography Code](https://github.com/liberapay/liberapay.com/blob/fb1dbeac869d235abf25f086cbc5b274931578d1/liberapay/security/crypto.py))
 As far as input validation, Liberapay validates certain aspects of input. However, there is insufficient evidence to claim that all inputs are validated. See examples below:
 1) [Example of implemented input validation](https://github.com/liberapay/liberapay.com/issues/1480)
 2) [Example of yet to be implemented input validation](https://github.com/liberapay/liberapay.com/issues/70)
@@ -163,7 +163,7 @@ As far as input validation, Liberapay validates certain aspects of input. Howeve
 25. _Potential Process Crash or Stop for Liberapay_
 - Description: Liberapay crashes, halts, stops or runs slowly; in all cases violating an availability metric.
 - Justification: May be outstanding issues that causes this behavior; however, Liberapay is generally a functional application and the threat of this is low.
-- __Observation:__ As explained in the justification, this threat is low as Liberapay is generally a functional application. Among things that are slow, stop, or crash Liberapay are repeated attempts by a maluser to do a task. As mentioned in the _Mitigation 24_, Liberapay did incorporate code to mitigate such events. See _Mitigation 24_ for more information.
+- __Observation:__ As explained in the justification, this threat is low as Liberapay is generally a functional application. Things that may slow, stop, or crash Liberapay are repeated attempts by a maluser to do a task. As mentioned in _Mitigation 24_, Liberapay did incorporate code to mitigate such events. See _Mitigation 24_ for more information.
 
 26. _Data Flow Sniffing_
 - Description: Data flowing across Response may be sniffed by an attacker. Depending on what type of data an attacker can read, it may be used to attack other parts of the system or simply be a disclosure of information leading to compliance violations. Consider encrypting the data flow.
@@ -208,12 +208,12 @@ As far as input validation, Liberapay validates certain aspects of input. Howeve
 36. _Potential Process Crash or Stop for Liberapay_
 - Description: Liberapay crashes, halts, stops or runs slowly; in all cases violating an availability metric.
 - Justification: May be outstanding issues that cause this behavior; however, Liberapay is generally a functional application and the threat of this is low. 
-- __Observation:__ A DDoS attack could indeed impact Liberapay. From our initial investigation; there is no evidence that Liberapay employs any protections against DDoS attacks, if such an attack occurrs then there is a risk on Liberapay and it could definitely impact it's services and make their website unresponsivness. 
+- __Observation:__ A DDoS attack could indeed impact Liberapay. From our initial investigation; there is no evidence that Liberapay employs any protections against DDoS attacks, if such an attack occurrs then there is a risk on Liberapay and it could definitely impact it's services and make their website unresponsive. 
 
 37. _Data Flow Verification Is Potentially Interruptedy_
 - Description: An external agent interrupts data flowing across a trust boundary in either direction.
 - Justification: The use of HTTPS protocol should mitigate this, but it warrants further investigation concerning the possibility of this attack.
-- __Observation:__ As explained in Mitigation 37. Liberapay does not utilize any protections against DDoS attacks and therefore a risk does exist. 
+- __Observation:__ As explained in Mitigation 36. Liberapay does not utilize any protections against DDoS attacks and therefore a risk does exist. 
 
 38. _Not Applicable_
 
