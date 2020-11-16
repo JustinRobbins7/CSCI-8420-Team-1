@@ -49,9 +49,9 @@ Liberapay's cryptography implementation can be found [here](https://github.com/l
 - Justification: May be outstanding issues that cause this behavior; however, Liberapay is generally a functional application and the threat of this is low.
 - __Observation:__ While Liberapay generally runs without any interference from system crashes or halts, several project commits have been implemented in the codebase to address areas where potential crashes have/could occur as shown below.
 
-[don't crash if we can't find the version](https://github.com/liberapay/liberapay.com/commit/e0f465023f2d067d6aca84de2663bfb6a3d48003)\
+[Don't crash if we can't find the version](https://github.com/liberapay/liberapay.com/commit/e0f465023f2d067d6aca84de2663bfb6a3d48003)\
 [Don't crash in absence of rate-limit headers](https://github.com/liberapay/liberapay.com/commit/2c869d1f9a320645cd406bfd07bcf821bba286f3)\
-[after a crash don't rerun the stages that were successfully completed](https://github.com/liberapay/liberapay.com/commit/b6ca8b599c8811b903f1c01d65b8ccf1b3e5d295)
+[After a crash don't rerun the stages that were successfully completed](https://github.com/liberapay/liberapay.com/commit/b6ca8b599c8811b903f1c01d65b8ccf1b3e5d295)
 
 7. _Data Flow Credentials Is Potentially Interrupted_
 - Description: An external agent interrupts data flowing across a trust boundary in either direction.
