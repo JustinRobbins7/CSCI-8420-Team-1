@@ -74,6 +74,28 @@ then = b64decode_s(then)  # double-b64encoded to avoid other encoding issues w/ 
 
   3. CWE-94: Improper Control of Code Generation (Code Injection)
   4. CWE-291: Reliance on IP Address for Authentication
+  
+  An issue with the reliance of using the IP Address to authenticate users was found in the authentication.py script under the security directory listed [here](https://github.com/liberapay/liberapay.com/blob/748f4aa8be32f75ca9eb112be18d32ac6b92aef5/liberapay/security/authentication.py). Specifically, if a password and userid are entered multiple times from the same ip address, Liberapay refuses to admit a user. While this is designed to prevent multiple login attempts from a single IP address, there is no further safeguard to prevent an attacker from using multiple ip addresses to attempt to gain access to an account. 
+  
+  ```
+  if password and id_type:
+            website.db.hit_rate_limit('log-in.password.ip-addr', str(src_addr), TooManyLogInAttempts)
+            website.db.hit_rate_limit('hash_password.ip-addr', str(src_addr), TooManyRequests)
+  ```
+  
+  It should also be noted that obtaining the IP address for authentication purposes also poses a risk. THis can be found in the main.py script on the liberapay directory. Here the ip address used for authentication purposes is obtained from an attribute of the main process. The attribute self.environ is initialized from information obtained from a user's browser, and is not further verified.
+  
+  ```addr = self.environ.get('REMOTE_ADDR') or self.environ[b'REMOTE_ADDR']
+        addr = ip_address(addr.decode('ascii') if type(addr) is bytes else addr)
+        trusted_proxies = getattr(self.website, 'trusted_proxies', None)
+        forwarded_for = self.headers.get(b'X-Forwarded-For')
+        self.__dict__['bypasses_proxy'] = bool(trusted_proxies)
+        if not trusted_proxies or not forwarded_for:
+            return addr
+  ```
+  
+  Both of those code snippets contribute to a security deficit in authenticating users on login via their ip address. 
+  
   5. CWE-307: Improper Restriction of Excessive Authentication Attempts
   6. CWE-308: Use of Single-factor Authentication
   7. CWE-312: Cleartext Storage of Sensitive Information
