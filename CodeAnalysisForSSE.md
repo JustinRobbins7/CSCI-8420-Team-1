@@ -30,7 +30,7 @@ Based on previous work, this weakness checklist lists the 12 CWE weaknesses we u
   4. CWE-291: Reliance on IP Address for Authentication
   5. CWE-307: Improper Restriction of Excessive Authentication Attempts
   6. CWE-308: Use of Single-factor Authentication
-  7. CWE-312: Cleartext Storage of Sensitive Information
+  7. CWE-312: Cleartext Storage of Sensitive Information:
   8. CWE-319: Cleartext Transmission of Sensitive information
   9. CWE-350: Reliance on Reverse DNS Resolution for a Security-Critical Action
   10. CWE-602: Client-Side Enforcement of Server-Side Security
@@ -42,6 +42,8 @@ The checklist was produced from previously identified candidate vulnerabilities.
 #### 1.2.2. Manual Code Review Findings
 
 
+7. __CWE-312: Cleartext Storage of Sensitive Information:
+An analysis has been conducted on the parts of the Liberapay code that deal with database storage to determine whether they're storing any sensitive information without encrypting it. The result of the manual code review concluded that Liberapay utilizes: __pbkdf2_hmac__ encryption which is a type of encryption available from the hashlib python library. Sensitive data gets encrypted with it before it's inserted into the database. We've researched this encryption algorithm to determine it's encryption capabilities and we found the following description of it in the [python haslib documentation](https://docs.python.org/3/library/hashlib.html) "The function provides PKCS#5 password-based key derivation function 2. It uses HMAC as pseudorandom function." Hence we've concluded that CWE-312 is addressed adequately. 
 
 ### 1.3. Findings from Automatic Tools
 Our team utilized two distinct tools to try and locate common security issues/vulnerabilities in LiberaPay.
