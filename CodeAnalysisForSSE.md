@@ -45,7 +45,7 @@ The checklist was produced from previously identified candidate vulnerabilities.
 
 ### 1.3. Findings from Automatic Tools
 
-[Bandit-Scan](Misc Docs/Automated_Scan_Bandit.pdf)
+[Bandit-Scan](/Misc Docs/Automated_Scan_Bandit.pdf)
 
 Found new issue: 
   - CWE-916: Use of Password Hash with Insufficient Computational Effort
