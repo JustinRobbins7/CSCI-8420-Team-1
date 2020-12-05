@@ -41,11 +41,18 @@ The checklist was produced from previously identified candidate vulnerabilities.
 
 ### 1.3. Findings from Automatic Tools
 
+Found new issue: 
+  - CWE-916: Use of Password Hash with Insufficient Computational Effort
+
 ## 2. Key Findings and Contributions
 
 ### 2.1. Summary of Key Findings
 
+
+
 ### 2.2. Planned / Ongoing Contributions to Upstream Projects
+
+
 
 ## 3. GitHub Information
 
