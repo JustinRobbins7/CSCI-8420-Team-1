@@ -39,6 +39,10 @@ Based on previous work, this weakness checklist lists the 12 CWE weaknesses we u
 
 The checklist was produced from previously identified candidate vulnerabilities. Weaknesses 1, 2, and 3 were generated from the thought that Liberapay may not be properly handling user input, leading to possible vulnerabilities via code injection or similar XSS attacks. Items 7, 8, and 11 were generated from the risk the Liberapay may not be properly encrypting or otherwise protecting user communications and session data. Risks related to possible spoofing attacks matched with the CWE weaknesses 4, 9, and 10. Finally, various weaknesses that reduce the system's effectiveness against brute force attacks led to the inclusion of items 5, 6, and 12 on the checklist. These weaknesses formed the foundation of the manual code review performed on Liberapay. 
 
+#### 1.2.2. Manual Code Review Findings
+
+
+
 ### 1.3. Findings from Automatic Tools
 
 Found new issue: 
