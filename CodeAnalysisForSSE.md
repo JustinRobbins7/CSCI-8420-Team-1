@@ -26,6 +26,52 @@ The code review process could be described as follows:
 Based on previous work, this weakness checklist lists the 12 CWE weaknesses we used to evaluate Liberapay's code base during our code review:
   1. CWE-20: Improper Input Validation
   2. CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')
+  
+  Cross-site tracking or XSS is one of the main areas of concern outlined in previous deliverables. Manual code review of the main Liberapay process suggests that there is no prevention or validation of xml code within Liberapay. This leads to a security deficit in regard to cross-site scripting attacks as a malicious party can modify xml data or introduce altered xml data to the main process.
+  
+ In the main Liberapay \_base.py file, under the Platform class, a specific example is listed where only file formats are checked before parsing.
+  ```
+  # Determine the appropriate response parser using `self.api_format`
+        api_format = getattr(self, 'api_format', None)
+        if api_format == 'json':
+            self.api_parser = lambda r: r.json()
+        elif api_format == 'xml':
+            self.api_parser = lambda r: ET.fromstring(r.content)
+        elif api_format:
+            raise ValueError('unknown API format: '+str(api_format))
+  ```
+  
+  Additionally, an example of the xml data used by the api processes is shown below. The following code snippet highlights a deficit in verification and reliability of xml data within Liberapay. It should be noted that the following code was sourced from the testing directory and has no bearing on actual runtime processes. However, it does bring to light a type of vulnerability and gap within the Liberapay codebase that pertains to CWE-79.
+  
+  ```
+openstreetmap = lambda: ET.fromstring("""
+ <!-- copied from http://wiki.openstreetmap.org/wiki/API_v0.6 -->
+ <osm version="0.6" generator="OpenStreetMap server">
+   <user id="12023" display_name="jbpbis" account_created="2007-08-16T01:35:56Z">
+     <description></description>
+     <contributor-terms agreed="false"/>
+     <img href="http://www.gravatar.com/avatar/c8c86cd15f60ecca66ce2b10cb6b9a00.jpg?s=256&amp;d=http%3A%2F%2Fwww.openstreetmap.org%2Fassets%2Fusers%2Fimages%2Flarge-39c3a9dc4e778311af6b70ddcf447b58.png"/>
+     <roles>
+     </roles>
+     <changesets count="1"/>
+     <traces count="0"/>
+     <blocks>
+       <received count="0" active="0"/>
+     </blocks>
+   </user>
+ </osm>
+""")
+```
+
+A further vulnerability relating to XSS exists in the user authentication codebase. When the system checks for an appropriate cookie, the b64 decoder is susceptible to a self XSS attack. This is because the value assigned to the _then_ parameter holds the information in the upstream POST request. This was also highlighted in [Issue #1134](https://github.com/liberapay/liberapay.com/issues/1134).
+
+```
+cookie_obj = json.loads(b64decode_s(cookie_value))
+query_data, action, then, action_user_id = cookie_obj[:4]
+p_id = cookie_obj[4] if len(cookie_obj) > 4 else None
+then = b64decode_s(then)  # double-b64encoded to avoid other encoding issues w/ qs
+```
+
   3. CWE-94: Improper Control of Code Generation (Code Injection)
   4. CWE-291: Reliance on IP Address for Authentication
   5. CWE-307: Improper Restriction of Excessive Authentication Attempts
