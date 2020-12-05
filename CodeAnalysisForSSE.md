@@ -26,6 +26,22 @@ The code review process could be described as follows:
 Based on previous work, this weakness checklist lists the 12 CWE weaknesses we used to evaluate Liberapay's code base during our code review:
   1. CWE-20: Improper Input Validation
   2. CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')
+  3. CWE-94: Improper Control of Code Generation (Code Injection)
+  4. CWE-291: Reliance on IP Address for Authentication
+  5. CWE-307: Improper Restriction of Excessive Authentication Attempts
+  6. CWE-308: Use of Single-factor Authentication
+  7. CWE-312: Cleartext Storage of Sensitive Information:
+  8. CWE-319: Cleartext Transmission of Sensitive information
+  9. CWE-350: Reliance on Reverse DNS Resolution for a Security-Critical Action
+  10. CWE-602: Client-Side Enforcement of Server-Side Security
+  11. CWE-614: Sensitive Cookie in HTTPS Session Without 'Secure' Attribute
+  12. CWE-770: Allocation of Resources Without Limits or Throttling
+
+The checklist was produced from previously identified candidate vulnerabilities. Weaknesses 1, 2, and 3 were generated from the thought that Liberapay may not be properly handling user input, leading to possible vulnerabilities via code injection or similar XSS attacks. Items 7, 8, and 11 were generated from the risk the Liberapay may not be properly encrypting or otherwise protecting user communications and session data. Risks related to possible spoofing attacks matched with the CWE weaknesses 4, 9, and 10. Finally, various weaknesses that reduce the system's effectiveness against brute force attacks led to the inclusion of items 5, 6, and 12 on the checklist. These weaknesses formed the foundation of the manual code review performed on Liberapay. 
+
+#### 1.2.2. Manual Code Review Findings
+
+__2. CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')
   
   Cross-site tracking or XSS is one of the main areas of concern outlined in previous deliverables. Manual code review of the main Liberapay process suggests that there is no prevention or validation of xml code within Liberapay. This leads to a security deficit in regard to cross-site scripting attacks as a malicious party can modify xml data or introduce altered xml data to the main process.
   
@@ -72,8 +88,8 @@ p_id = cookie_obj[4] if len(cookie_obj) > 4 else None
 then = b64decode_s(then)  # double-b64encoded to avoid other encoding issues w/ qs
 ```
 
-  3. CWE-94: Improper Control of Code Generation (Code Injection)
-  4. CWE-291: Reliance on IP Address for Authentication
+
+__4. CWE-291: Reliance on IP Address for Authentication
   
   An issue with the reliance of using the IP Address to authenticate users was found in the authentication.py script under the security directory listed [here](https://github.com/liberapay/liberapay.com/blob/748f4aa8be32f75ca9eb112be18d32ac6b92aef5/liberapay/security/authentication.py). Specifically, if a password and userid are entered multiple times from the same ip address, Liberapay refuses to admit a user. While this is designed to prevent multiple login attempts from a single IP address, there is no further safeguard to prevent an attacker from using multiple ip addresses to attempt to gain access to an account. 
   
@@ -94,9 +110,9 @@ then = b64decode_s(then)  # double-b64encoded to avoid other encoding issues w/ 
             return addr
   ```
   
-  Both of those code snippets contribute to a security deficit in authenticating users on login via their ip address. 
-  
-  5. CWE-307: Improper Restriction of Excessive Authentication Attempts
+  Both of those code snippets contribute to a security deficit in authenticating users on login via their ip address.
+
+__5. CWE-307: Improper Restriction of Excessive Authentication Attempts
   
   Found in the constants.py script, restrictions of excessive authentication attempts are controlled by predefined limits within Liberapay. The enumerator RATE_LIMITS highlights some of these restrictions. Here we see that Liberapay does in fact have appropriate, albeit hardcoded limits for multiple authentication attempts. Notably, the ip address and net are two of the most prolific authentication controls within Liberapay. Their rate limits defined here are adequate for the platform since they are combined with further preventions provided by Cloudflare. The contributors of Liberapay have also identified deficiencies with the two tier system for excessive authentication attempts and currently attempting to resolve this security deficit. Further discussion of the proposed resolution can be found [here](https://github.com/liberapay/liberapay.com/issues/1727).
   
@@ -113,18 +129,6 @@ then = b64decode_s(then)  # double-b64encoded to avoid other encoding issues w/ 
     'sign-up.ip-version': (15, 15*60),  # 15 per 15 minutes per IP version
 }
 ```
-  
-  6. CWE-308: Use of Single-factor Authentication
-  7. CWE-312: Cleartext Storage of Sensitive Information:
-  8. CWE-319: Cleartext Transmission of Sensitive information
-  9. CWE-350: Reliance on Reverse DNS Resolution for a Security-Critical Action
-  10. CWE-602: Client-Side Enforcement of Server-Side Security
-  11. CWE-614: Sensitive Cookie in HTTPS Session Without 'Secure' Attribute
-  12. CWE-770: Allocation of Resources Without Limits or Throttling
-
-The checklist was produced from previously identified candidate vulnerabilities. Weaknesses 1, 2, and 3 were generated from the thought that Liberapay may not be properly handling user input, leading to possible vulnerabilities via code injection or similar XSS attacks. Items 7, 8, and 11 were generated from the risk the Liberapay may not be properly encrypting or otherwise protecting user communications and session data. Risks related to possible spoofing attacks matched with the CWE weaknesses 4, 9, and 10. Finally, various weaknesses that reduce the system's effectiveness against brute force attacks led to the inclusion of items 5, 6, and 12 on the checklist. These weaknesses formed the foundation of the manual code review performed on Liberapay. 
-
-#### 1.2.2. Manual Code Review Findings
 
 __7. CWE-312: Cleartext Storage of Sensitive Information:__
 
