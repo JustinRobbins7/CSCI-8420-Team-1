@@ -45,10 +45,27 @@ The checklist was produced from previously identified candidate vulnerabilities.
 
 ### 1.3. Findings from Automatic Tools
 
-[Bandit Scan](/Images/Automated_Scan_Bandit.pdf)
+For automated code scanning, we used [Bandit](https://pypi.org/project/bandit/) over the project files related to the areas of interest revealed in previous deliverables. Initially, the automated code scan resulted in over one thousand issues of low priority. However, once we filtered based on issue severity we found that a lot of the issues brought up were code style or convention related problems. Filtering for issues of medium to high security risk revealed ten major issues in the areas of interest. From these issues two stood out as new findings which we didn't cover in the manual review process.
 
-Found new issue: 
-  - CWE-916: Use of Password Hash with Insufficient Computational Effort
+The findings of the automated code scan performed by Bandit are linked below:
+
+- [Bandit Scan](/Images/Automated_Scan_Bandit.pdf)
+
+ - CWE-916: Use of Password Hash with Insufficient Computational Effort
+Apart from issues covered during the manual code review, a new recommendation by Bandit which correspond to CWE-916. Bandit recommended in its _Issue B303_ that there was use of an insecure hash function in both the \_base.py file as well as the extract.py files. These are both located in the main Liberapay project repository and involve message encryptions. 
+
+The \_base.py issue is as follows : 
+```
+264 bs = r.email.strip().lower().encode('utf8')
+265 gravatar_id = hashlib.md5(bs).hexdigest()
+266 if gravatar_id:
+```
+The extract.py issue is as follows :
+```
+12 if isinstance(msg, tuple) and msg[0] == '':
+13 unused = "<unused singular (hash=%s)>" % md5(msg[1].encode('utf8')).hexdigest()
+14 msg = (unused, msg[1], msg[2])
+```
 
 ## 2. Key Findings and Contributions
 
