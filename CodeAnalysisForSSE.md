@@ -97,6 +97,23 @@ then = b64decode_s(then)  # double-b64encoded to avoid other encoding issues w/ 
   Both of those code snippets contribute to a security deficit in authenticating users on login via their ip address. 
   
   5. CWE-307: Improper Restriction of Excessive Authentication Attempts
+  
+  Found in the constants.py script, restrictions of excessive authentication attempts are controlled by predefined limits within Liberapay. The enumerator RATE_LIMITS highlights some of these restrictions. Here we see that Liberapay does in fact have appropriate, albeit hardcoded limits for multiple authentication attempts. Notably, the ip address and net are two of the most prolific authentication controls within Liberapay. Their rate limits defined here are adequate for the platform since they are combined with further preventions provided by Cloudflare. The contributors of Liberapay have also identified deficiencies with the two tier system for excessive authentication attempts and currently attempting to resolve this security deficit. Further discussion of the proposed resolution can be found [here](https://github.com/liberapay/liberapay.com/issues/1727).
+  
+  ```
+  RATE_LIMITS = {
+    'add_email.source': (5, 60*60*24),  # 5 per day
+    'add_email.target': (2, 60*60*24),  # 2 per day
+    'log-in.email': (10, 60*60*24),  # 10 per day
+    'log-in.email.not-verified': (2, 60*60*24),  # 2 per day
+    'log-in.email.verified': (10, 60*60*24),  # 10 per day
+    'log-in.password': (3, 60*60),  # 3 per hour
+    'sign-up.ip-addr': (5, 60*60),  # 5 per hour per IP address
+    'sign-up.ip-net': (15, 15*60),  # 15 per 15 minutes per IP network
+    'sign-up.ip-version': (15, 15*60),  # 15 per 15 minutes per IP version
+}
+```
+  
   6. CWE-308: Use of Single-factor Authentication
   7. CWE-312: Cleartext Storage of Sensitive Information
   8. CWE-319: Cleartext Transmission of Sensitive information
