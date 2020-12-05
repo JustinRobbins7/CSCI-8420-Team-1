@@ -28,8 +28,8 @@ Based on previous work, this weakness checklist lists the 12 CWE weaknesses we u
   2. CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')
   3. CWE-94: Improper Control of Code Generation (Code Injection)
   4. CWE-291: Reliance on IP Address for Authentication
-  5. CWE 307: Improper Restriction of Excessive Authentication Attempts
-  6. CWE 308: Use of Single-factor Authentication
+  5. CWE-307: Improper Restriction of Excessive Authentication Attempts
+  6. CWE-308: Use of Single-factor Authentication
   7. CWE-312: Cleartext Storage of Sensitive Information
   8. CWE-319: Cleartext Transmission of Sensitive information
   9. CWE-350: Reliance on Reverse DNS Resolution for a Security-Critical Action
