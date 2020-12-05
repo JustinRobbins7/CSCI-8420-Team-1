@@ -52,6 +52,7 @@ The findings of the automated code scan performed by Bandit are linked below:
 - [Bandit Scan](/Images/Automated_Scan_Bandit.pdf)
 
  - CWE-916: Use of Password Hash with Insufficient Computational Effort
+
 Apart from issues covered during the manual code review, a new recommendation by Bandit which correspond to CWE-916. Bandit recommended in its _Issue B303_ that there was use of an insecure hash function in both the \_base.py file as well as the extract.py files. These are both located in the main Liberapay project repository and involve message encryptions. 
 
 The \_base.py issue is as follows : 
