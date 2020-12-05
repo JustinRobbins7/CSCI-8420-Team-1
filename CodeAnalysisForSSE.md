@@ -134,6 +134,28 @@ __7. CWE-312: Cleartext Storage of Sensitive Information:__
 
 An analysis has been conducted on the parts of the Liberapay code that deal with database storage to determine whether they're storing any sensitive information without encrypting it. The result of the manual code review concluded that Liberapay utilizes: __pbkdf2_hmac__ encryption which is a type of encryption available from the hashlib python library. Sensitive data gets encrypted with it before it's inserted into the database. We've researched this encryption algorithm to determine it's encryption capabilities and we found the following description of it in the [python hashlib documentation](https://docs.python.org/3/library/hashlib.html) "The function provides PKCS#5 password-based key derivation function 2. It uses HMAC as pseudorandom function." Hence we've concluded that CWE-312 is addressed adequately. 
 
+PBKDF2_HMAC utilization:
+```
+    @classmethod
+    def hash_password(cls, password):
+        # Using SHA-256 as the HMAC algorithm (PBKDF2 + HMAC-SHA-256)
+        algo = 'sha256'
+        # Generate 32 random bytes for the salt
+        salt = urandom(32)
+        rounds = website.app_conf.password_rounds
+        hashed = cls._hash_password(password, algo, salt, rounds)
+        hashed = '$'.join((
+            algo,
+            str(rounds),
+            b64encode(salt).decode('ascii'),
+            b64encode(hashed).decode('ascii')
+        ))
+        return hashed
+
+    @staticmethod
+    def _hash_password(password, algo, salt, rounds):
+        return pbkdf2_hmac(algo, password.encode('utf8'), salt, rounds)
+```
 
 __8. CWE-319: Cleartext Transmission of Sensitive information:__
 
