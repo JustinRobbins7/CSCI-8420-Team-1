@@ -44,9 +44,22 @@ The checklist was produced from previously identified candidate vulnerabilities.
 
 
 ### 1.3. Findings from Automatic Tools
+Our team utilized two distinct tools to try and locate common security issues/vulnerabilities in LiberaPay.
+
+SonarQube:
+We've setup a SonarQube server along with a Python  plugin. We went with a Python  plugin because the Liberpay code base is comprised predominantely of Python code. We also installed a SonarQube Python-Based scanner to conduct a scan on the Liberapay code base. The scanner generated a report that we accessed through the SonarQube server. The findings of the scanner did not indicate any vulnerabilities in the code. Attached below is a screenshot of the result. However it did detect three bugs in the codebase, we've decided to manually validate the bugs to ensure that they did not pose any security concerns.
+
+Link To [SonarQube Scan Results]: (https://github.com/JustinRobbins7/CSCI-8420-Team-1/blob/master/Images/sonarqube-scan-result.png)
+
+
+
+
 
 Found new issue: 
+
   - CWE-916: Use of Password Hash with Insufficient Computational Effort
+  
+ 
 
 ## 2. Key Findings and Contributions
 
