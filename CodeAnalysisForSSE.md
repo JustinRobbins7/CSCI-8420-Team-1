@@ -115,7 +115,7 @@ then = b64decode_s(then)  # double-b64encoded to avoid other encoding issues w/ 
 ```
   
   6. CWE-308: Use of Single-factor Authentication
-  7. CWE-312: Cleartext Storage of Sensitive Information
+  7. CWE-312: Cleartext Storage of Sensitive Information:
   8. CWE-319: Cleartext Transmission of Sensitive information
   9. CWE-350: Reliance on Reverse DNS Resolution for a Security-Critical Action
   10. CWE-602: Client-Side Enforcement of Server-Side Security
@@ -126,9 +126,26 @@ The checklist was produced from previously identified candidate vulnerabilities.
 
 #### 1.2.2. Manual Code Review Findings
 
+__7. CWE-312: Cleartext Storage of Sensitive Information:__
 
+An analysis has been conducted on the parts of the Liberapay code that deal with database storage to determine whether they're storing any sensitive information without encrypting it. The result of the manual code review concluded that Liberapay utilizes: __pbkdf2_hmac__ encryption which is a type of encryption available from the hashlib python library. Sensitive data gets encrypted with it before it's inserted into the database. We've researched this encryption algorithm to determine it's encryption capabilities and we found the following description of it in the [python hashlib documentation](https://docs.python.org/3/library/hashlib.html) "The function provides PKCS#5 password-based key derivation function 2. It uses HMAC as pseudorandom function." Hence we've concluded that CWE-312 is addressed adequately. 
+
+
+__8. CWE-319: Cleartext Transmission of Sensitive information:__
+
+Liberapay communicates with two external systems with sensitive information. Those two external systems are Paypal and Stripe. A code review has been conducted on the code that communicates with Paypal and Stripe to determine the mechanism of communciation and whether it poses any security concerns. Liberapay makes requests to RESTful APIs exposed by Paypal and Stripe. The API's are of type "POST, and Liberapay passes in the request body data pertaining to a particular donation order. The request body for both of the API calls (Paypal and Stripe) abides by their respective specs. The notable information being passed include the donator's user name, transaction amount, and the team/user name the donated is being sent to. This information does not include any monetary concerns or sensitive information per say such as a password or a credit card number. The actual transaction is conducted on Paypal/Stripe and Liberapay simply acts as a delegator. However one could argue that the donation that is happening could be a piece of information that a user wishes to keep private hence it's important that the request body is encrypted in some fashion to protect it from potential attackers. Going back to the fact that the communication is conducted via RESTful APIs. Those APIs use HTTP and support Transport Layer Security (TLS) encryption. TLS is a standard that keeps an internet connection private and checks that the data sent between two systems (a server and a server, or a server and a client) is encrypted and unmodified. Since Liberapay is using restful services to communicate with Paypal and stripe. We deem that the communication is safe and Liberapay has sufficient protections in place.
 
 ### 1.3. Findings from Automatic Tools
+Our team utilized two distinct tools to try and locate common security issues/vulnerabilities in LiberaPay.
+
+**SonarQube**:
+
+We've setup a SonarQube server along with a Python plugin. We used a Python  plugin because the Liberpay code base is comprised predominantely of Python. And consequently all of the logic that deals with security related concerns is written in Python. We also installed a SonarQube Python-Based scanner to conduct a scan on the Liberapay code base. The scanner generated a report that we accessed through the SonarQube server. Over 16000 lines of code were scanned by the Python scanner. The findings of the scanner did not indicate any vulnerabilities in the code. Attached below is a screenshot of the result. However it did detect three bugs in the codebase, we've decided to manually validate the bugs to ensure that they did not pose any security concerns. But we deemed that those bugs are just related to code maintainability and do not pose any security threats.
+
+![SonarQube Scan Results](/Images/sonarqube-scan-result.png)
+
+
+**Bandit**
 
 For automated code scanning, we used [Bandit](https://pypi.org/project/bandit/) over the project files related to the areas of interest revealed in previous deliverables. Initially, the automated code scan resulted in over one thousand issues of low priority. However, once we filtered based on issue severity we found that a lot of the issues brought up were code style or convention related problems. Filtering for issues of medium to high security risk revealed ten major issues in the areas of interest. From these issues two stood out as new findings which we didn't cover in the manual review process.
 
