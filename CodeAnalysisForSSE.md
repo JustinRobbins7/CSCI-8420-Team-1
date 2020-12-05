@@ -135,6 +135,11 @@ __8. CWE-319: Cleartext Transmission of Sensitive information:__
 
 Liberapay communicates with two external systems with sensitive information. Those two external systems are Paypal and Stripe. A code review has been conducted on the code that communicates with Paypal and Stripe to determine the mechanism of communciation and whether it poses any security concerns. Liberapay makes requests to RESTful APIs exposed by Paypal and Stripe. The API's are of type "POST, and Liberapay passes in the request body data pertaining to a particular donation order. The request body for both of the API calls (Paypal and Stripe) abides by their respective specs. The notable information being passed include the donator's user name, transaction amount, and the team/user name the donated is being sent to. This information does not include any monetary concerns or sensitive information per say such as a password or a credit card number. The actual transaction is conducted on Paypal/Stripe and Liberapay simply acts as a delegator. However one could argue that the donation that is happening could be a piece of information that a user wishes to keep private hence it's important that the request body is encrypted in some fashion to protect it from potential attackers. Going back to the fact that the communication is conducted via RESTful APIs. Those APIs use HTTP and support Transport Layer Security (TLS) encryption. TLS is a standard that keeps an internet connection private and checks that the data sent between two systems (a server and a server, or a server and a client) is encrypted and unmodified. Since Liberapay is using restful services to communicate with Paypal and stripe. We deem that the communication is safe and Liberapay has sufficient protections in place.
 
+
+__9. CWE-350: Reliance on Reverse DNS Resolution for a Security-Critical Action:
+
+A code review has been conducted to determine whether Liberapay conducts any Reverse DNS lookups. But it does not appear that Liberapay does any reverse look ups. Hence we've determined that CWE-350 is not of concern as we've thought previously.
+
 ### 1.3. Findings from Automatic Tools
 Our team utilized two distinct tools to try and locate common security issues/vulnerabilities in LiberaPay.
 
