@@ -41,7 +41,7 @@ The checklist was produced from previously identified candidate vulnerabilities.
 
 #### 1.2.2. Manual Code Review Findings
 
-__2. CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')
+__2. CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')__
   
   Cross-site tracking or XSS is one of the main areas of concern outlined in previous deliverables. Manual code review of the main Liberapay process suggests that there is no prevention or validation of xml code within Liberapay. This leads to a security deficit in regard to cross-site scripting attacks as a malicious party can modify xml data or introduce altered xml data to the main process.
   
@@ -89,7 +89,7 @@ then = b64decode_s(then)  # double-b64encoded to avoid other encoding issues w/ 
 ```
 
 
-__4. CWE-291: Reliance on IP Address for Authentication
+__4. CWE-291: Reliance on IP Address for Authentication__
   
   An issue with the reliance of using the IP Address to authenticate users was found in the authentication.py script under the security directory listed [here](https://github.com/liberapay/liberapay.com/blob/748f4aa8be32f75ca9eb112be18d32ac6b92aef5/liberapay/security/authentication.py). Specifically, if a password and userid are entered multiple times from the same ip address, Liberapay refuses to admit a user. While this is designed to prevent multiple login attempts from a single IP address, there is no further safeguard to prevent an attacker from using multiple ip addresses to attempt to gain access to an account. 
   
@@ -112,7 +112,7 @@ __4. CWE-291: Reliance on IP Address for Authentication
   
   Both of those code snippets contribute to a security deficit in authenticating users on login via their ip address.
 
-__5. CWE-307: Improper Restriction of Excessive Authentication Attempts
+__5. CWE-307: Improper Restriction of Excessive Authentication Attempts__
   
   Found in the constants.py script, restrictions of excessive authentication attempts are controlled by predefined limits within Liberapay. The enumerator RATE_LIMITS highlights some of these restrictions. Here we see that Liberapay does in fact have appropriate, albeit hardcoded limits for multiple authentication attempts. Notably, the ip address and net are two of the most prolific authentication controls within Liberapay. Their rate limits defined here are adequate for the platform since they are combined with further preventions provided by Cloudflare. The contributors of Liberapay have also identified deficiencies with the two tier system for excessive authentication attempts and currently attempting to resolve this security deficit. Further discussion of the proposed resolution can be found [here](https://github.com/liberapay/liberapay.com/issues/1727).
   
