@@ -139,7 +139,7 @@ __4. CWE-291: Reliance on IP Address for Authentication__
             website.db.hit_rate_limit('hash_password.ip-addr', str(src_addr), TooManyRequests)
   ```
   
-  It should also be noted that obtaining the IP address for authentication purposes also poses a risk. THis can be found in the main.py script on the liberapay directory. Here the ip address used for authentication purposes is obtained from an attribute of the main process. The attribute self.environ is initialized from information obtained from a user's browser, and is not further verified.
+  It should also be noted that obtaining the IP address for authentication purposes also poses a risk. This can be found in the main.py script on the liberapay directory. Here the ip address used for authentication purposes is obtained from an attribute of the main process. The attribute self.environ is initialized from information obtained from a user's browser, and is not further verified.
   
   ```addr = self.environ.get('REMOTE_ADDR') or self.environ[b'REMOTE_ADDR']
         addr = ip_address(addr.decode('ascii') if type(addr) is bytes else addr)
@@ -226,7 +226,7 @@ Trusting information coming from the front-end can often be detrimental. In the 
 ```
 
 
-__11. Sensitive Cookie in HTTPS Session Without 'Secure' Attribute__
+__11. CWE-614: Sensitive Cookie in HTTPS Session Without 'Secure' Attribute__
 
 Sensitive Cookie in HTTPS without the 'secure' attribute could result in sending information about the cookie via plain text. If such is a case and the cookie contains critical data, this could jeopardize Liberapay and its users. Liberpay uses cookies which are required to authenticate the user or to perform a specific operation. These cookies are restricted to same-site requests. During the manual coding review, the code was thoroughly analyzed to try and find spots where the setting of cookies was not done securely. Howevever, no such place was found. Liberapay does indeed secure sensitive cookies in HTTPS sessions. In fact, everytime a cookie is created/set, as long as the session was HTTPS protocol (which Liberapay uses), the particurlar cookie is made secure. As one can see in the code snippet below, everytime a cookie is set, Liberapay sets a lot of options associated with the cookie, such as the path, samesite, httponly, security of the cookie, and more. Therefore, Liberapay eradicates the potential data interception by a bad actor via cookies. Below, we highlight the snippet of code that showcases the findings:
 
@@ -253,7 +253,7 @@ Sensitive Cookie in HTTPS without the 'secure' attribute could result in sending
         cookie['secure'] = True
 ```
 
-__12. Allocation of Resources Without Limits or Throttling__
+__12. CWE-770: Allocation of Resources Without Limits or Throttling__
 
 Resources are valuable and can be extremely limited in a software/product. Therefore, ensuring that they have limits placed on them is necessary. Adding to that, it prevents bad actors from doing various techniques that could impact a system, such as flooding it with requests, brute forcing password attempts, and more. After a careful manual code review of Liberapay's code, and as explained in Bullet 5 (CWE-307: Improper Restriction of Excessive Authentication Attempts), we noticed that Liberapay rate limits various resources and components. When verifying emails for when a new account is created or an email address is added to an existing account, Liberapay allows 5 calls per day per user, and 2 per day per email address. For email logins, Liberapay allows for 10 per day per user, 2 per day per unverified email address. For password logins, they have allocated 3 per hour per user. Finally, for account creations, they allow for  5 per hour per IP address, 15 per 15 minutes per IP network (/16 for IPv4, /32 for IPv6), 15 per 15 minutes per IP version (IPv4 or IPv6). Each of those components call the rate limit checker (as seen below) which checks the database for the number of recent hits. If the number of hits equals or surpasses the threshold defined earlier, the rate limit occurs.
 
@@ -316,11 +316,23 @@ The extract.py issue is as follows :
 
 ### 2.1. Summary of Key Findings
 
+Vulnerabilities
+  - CWE-79: XSS - Avenues of attacks exist
+  - CWE-916: Use of Password Hash with Insufficient Computational Effort - Uncovered from automatic tool use
 
+Non-Vulns
+  - CWE-312: Cleartext storage of sensitive information - Encryption is used and is secure
+  - CWE-319: Cleartext transmission of sensitive information - TLS encryption is used when Liberapay channels are is question; payment processor security is not Liberapay's responsibility.
+  - CWE-350: Reverse DNS Resolution - Not performed
+  - CWE-602: Client-Side enforcement of server-side security - Liberapay has sufficiently addressed this problem in their code base, resolving this weakness.
+  - CWE-614: Insecure cookies - Cookies are made secure
+  - CWE-770: Rate limiter is in place, further limits b type of IP address to resolve issues CWE-291 and CWE-307
+     - CWE-291: Auth by IP - Problems exist in IP verification such that the IP could be spoofed. Unfortunately, Liberapay uses the IP address to limit login attempts, so this could be a problem iif a user rapidly alternates between spoofing a new IP address and attempting to login to Liberapay.
+     - CWE-307: Improper Auth Attempt controls - CWE-291 shows the problems in Liberapay's controls, violating this issue. Liberpay is currently trying to fix this error.
 
 ### 2.2. Planned / Ongoing Contributions to Upstream Projects
 
-
+To the Liberapay team's credit, the majority of the connjectured weaknesses turned out to already be addressed by the current version of the code base. In addition, many of the remaining issues are already under examination for future fix development. Most of our weakness do not need to be brough to the Liberapay team since they have already been identified or addressed in one way or another. Despite this, the few weaknesses we have found can be brought to the attention of the Liberapay team via posting an issue.
 
 ## 3. GitHub Information
 
