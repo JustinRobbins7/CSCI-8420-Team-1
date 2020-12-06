@@ -193,6 +193,30 @@ Sensitive Cookie in HTTPS without the 'secure' attribute could result in sending
         cookie['secure'] = True
 ```
 
+__12. Allocation of Resources Without Limits or Throttling__
+
+Resources are valuable and can be extremely limited in a software/product. Therefore, ensuring that they have limits placed on them is necessary. Adding to that, it prevents bad actors from doing various techniques that could impact a system, such as flooding it with requests, brute forcing password attempts, and more. After a careful manual code review of Liberapay's code, and as explained in Bullet 5 (CWE-307: Improper Restriction of Excessive Authentication Attempts), we noticed that Liberapay rate limits various resources and components. When verifying emails for when a new account is created or an email address is added to an existing account, Liberapay allows 5 calls per day per user, and 2 per day per email address. For email logins, Liberapay allows for 10 per day per user, 2 per day per unverified email address. For password logins, they have allocated 3 per hour per user. Finally, for account creations, they allow for  5 per hour per IP address, 15 per 15 minutes per IP network (/16 for IPv4, /32 for IPv6), 15 per 15 minutes per IP version (IPv4 or IPv6). Each of those components call the rate limit checker (as seen below) which checks the database for the number of recent hits. If the number of hits equals or surpasses the threshold defined earlier, the rate limit occurs.
+
+Below, we highlight code snippets of the rate limiting mentionned above.
+
+Rate Limit Checker
+```
+def hit_rate_limit(db, key_prefix, key_unique, exception=None):
+    try:
+        cap, period = RATE_LIMITS[key_prefix]
+        key = '%s:%s' % (key_prefix, key_unique)
+        r = db.one("SELECT hit_rate_limit(%s, %s, %s)", (key, cap, period))
+    except Exception as e:
+        from liberapay.website import website
+        website.tell_sentry(e, {})
+        return -1
+    if r is None and exception is not None:
+        raise exception(key_unique)
+    return r
+
+DB.hit_rate_limit = SimpleCursorBase.hit_rate_limit = hit_rate_limit
+```
+
 ### 1.3. Findings from Automatic Tools
 Our team utilized two distinct tools to try and locate common security issues/vulnerabilities in LiberaPay.
 
