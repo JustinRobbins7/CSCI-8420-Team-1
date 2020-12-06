@@ -41,6 +41,25 @@ The checklist was produced from previously identified candidate vulnerabilities.
 
 #### 1.2.2. Manual Code Review Findings
 
+__1. CWE-20: Improper Input Validation__
+
+Input validation is an important security technique that checks for potentially dangerous inputs in order to ensure that they are safe within the code while communicating with other software components. If the system is allowed to receive unintended inputs, this may lead to unexpected system behaviors that could potentially enable an attacker to assume arbitrary control over resources or execution. While conducting a manual code review in regards to this CWE, it was found that Liberapay incorporates input validation for verifying the correctness of data and how it is handled. Regarding input fields, Liberapay verifies that valid input characters, symbols, and string sizes are entered by users. Additionally, Liberapay verifies that the contents of these input fields are correct such as valid email addresses, passwords, and payment quantities. In the Liberapay project, [authentication.py](https://github.com/liberapay/liberapay.com/blob/03bdc7b9d5c101eeec521307f795c47034fae17c/liberapay/security/authentication.py) and [exceptions.py](https://github.com/liberapay/liberapay.com/blob/03bdc7b9d5c101eeec521307f795c47034fae17c/liberapay/exceptions.py) are two important project files that have been implemented to authenticate input data for Liberapay. In the code snippet below, three example classes for input validation have been provided from Liberapay's exceptions.py file in the open source project:
+
+```
+class UsernameTooLong(UsernameError):
+    def msg(self, _):
+        return _("The username '{0}' is too long.", self.username)
+
+class UsernameContainsInvalidCharacters(UsernameError):
+    def msg(self, _):
+        return _("The username '{0}' contains invalid characters.", self.username)
+
+class BadPasswordSize(LazyResponse400):
+    def msg(self, _):
+        return _("The password must be at least {0} and at most {1} characters long.",
+                 PASSWORD_MIN_SIZE, PASSWORD_MAX_SIZE)
+```
+
 __2. CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')__
   
   Cross-site tracking or XSS is one of the main areas of concern outlined in previous deliverables. Manual code review of the main Liberapay process suggests that there is no prevention or validation of xml code within Liberapay. This leads to a security deficit in regard to cross-site scripting attacks as a malicious party can modify xml data or introduce altered xml data to the main process.
@@ -88,6 +107,27 @@ p_id = cookie_obj[4] if len(cookie_obj) > 4 else None
 then = b64decode_s(then)  # double-b64encoded to avoid other encoding issues w/ qs
 ```
 
+__3. CWE-94: Improper Control of Code Generation (Code Injection)__
+
+When software allows a user's input to contain code syntax, it may be possible for an attacker to modify the code in such a way that it alters the intended control flow of the software or leads to arbitrary code execution. Code injection problems encompass a wide variety of issues, such as SQL injection and format string vulnerablities, that are all mitigated in different ways. While conducting a manual code review on Liberapay for code injection, it was found that this open source project implements some security measures for preventing code injection. For start, some commits and issues have been addressed in the Liberapay project to implement additional protection against potential code injection attacks. For example, [Add extra protection against a possible SQL injection](https://github.com/liberapay/liberapay.com/commit/7a1c487949aaa43638eb90d1345df6fb7d6a28f6) is a commit that was added for countering SQL injection while [Parse integers before passing them to mangopay](https://github.com/liberapay/liberapay.com/pull/1162) and [SQL injection vulnerability in liberapay](https://github.com/liberapay/liberapay.com/search?q=sql+injection&type=issues) are two issues that were discussed over countering SQL injection and analyzing how certain data is being both parsed and sent. For instance, the code snippet shown below from [identity-docs.spt](https://github.com/liberapay/liberapay.com/blob/2029400a41d742a111e8eebc9a0523b0f5d06055/www/%25username/identity-docs.spt) identifies how Liberapay parses integers before passing this data over to mangopay in order to proect the information against potential code injection attacks.
+
+```
+if action == 'create_doc':
+    doc = Document(type=body['doc_type'], user=mp_user)
+    doc.save()
+    r = {"doc_id": doc.Id}
+elif action == 'add_page':
+    data = b64encode(body['qqfile'].value)
+    doc_id = body.get_int('doc_id', minimum=1)
+    page = Page(document=Document(id=doc_id), user=mp_user, file=data)
+    page.save()
+    r = {"success": True}
+elif action == 'validate_doc':
+    doc_id = body.get_int('doc_id', minimum=1)
+    doc = Document(id=doc_id, user=mp_user, status='VALIDATION_ASKED')
+    doc.save()
+    r = {"success": True}
+```
 
 __4. CWE-291: Reliance on IP Address for Authentication__
   
@@ -129,6 +169,10 @@ __5. CWE-307: Improper Restriction of Excessive Authentication Attempts__
     'sign-up.ip-version': (15, 15*60),  # 15 per 15 minutes per IP version
 }
 ```
+
+__6. CWE-308: Use of Single-factor Authentication__
+
+Single-factor authentication is a common form of authentication where users match one credential (such as email and password) to verify themselves online. Although single-factor authentication is a useful security technique, this form of authentication is still prone to risks if an attacker manages to obtain any user credentials. For example, weak, resused, and common passwords are vulnerable to attackers and may compromise an account once uncovered. However, multiple authentication schemes, such as two-factor authentication, add more complexity on top of authentication and increase the protection measures for user accounts. While carefully investigating Liberapay's codebase, it was found that the open source project does not currently have a two-factor authentication process in place which presents a gap in the security enhancements offered by the platform in regard to protecting user accounts from spoofing. As an alternative, Liberapay has some mitigations in place that don't require two-factor authentication to prevent the spoofing of user accounts, such as session management and email-based authorization. Session management only mitigates the threat of altered user accounts after the initial session is established. To authenticate a user however, Liberapay provides the ability for a user to login via email link instead of direct password. This authentication still presents a gap in verifying the authenticity of a user, but allows for a slight added layer of protection. Liberapay performs authentication measures in [authentication.py](https://github.com/liberapay/liberapay.com/blob/f57a9fa44ce79a5339049603728be5f6a8334980/liberapay/security/authentication.py), and for additional reference the potential incorporation of two-factor authentication of Liberapay can be found [here](https://github.com/liberapay/liberapay.com/issues/926).
 
 __7. CWE-312: Cleartext Storage of Sensitive Information:__
 
