@@ -316,23 +316,40 @@ The extract.py issue is as follows :
 
 ### 2.1. Summary of Key Findings
 
-Vulnerabilities
-  - CWE-79: XSS - Avenues of attacks exist
-  - CWE-916: Use of Password Hash with Insufficient Computational Effort - Uncovered from automatic tool use
+Discovered Weaknesses
+  - CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')
+  - CWE-308: Use of Single-factor Authentication
+  - CWE-916: Use of Password Hash with Insufficient Computational Effort
 
-Non-Vulns
-  - CWE-312: Cleartext storage of sensitive information - Encryption is used and is secure
-  - CWE-319: Cleartext transmission of sensitive information - TLS encryption is used when Liberapay channels are is question; payment processor security is not Liberapay's responsibility.
-  - CWE-350: Reverse DNS Resolution - Not performed
-  - CWE-602: Client-Side enforcement of server-side security - Liberapay has sufficiently addressed this problem in their code base, resolving this weakness.
-  - CWE-614: Insecure cookies - Cookies are made secure
-  - CWE-770: Rate limiter is in place, further limits b type of IP address to resolve issues CWE-291 and CWE-307
-     - CWE-291: Auth by IP - Problems exist in IP verification such that the IP could be spoofed. Unfortunately, Liberapay uses the IP address to limit login attempts, so this could be a problem iif a user rapidly alternates between spoofing a new IP address and attempting to login to Liberapay.
-     - CWE-307: Improper Auth Attempt controls - CWE-291 shows the problems in Liberapay's controls, violating this issue. Liberpay is currently trying to fix this error.
+Resolved Weaknesses:
+  - CWE-20: Improper Input Validation
+  - CWE-94: Improper Control of Code Generation (Code Injection)
+  - CWE-291: Reliance on IP Address for Authentication
+  - CWE-307: Improper Restriction of Excessive Authentication Attempts
+  - CWE-312: Cleartext Storage of Sensitive Information
+  - CWE-319: Cleartext Transmission of Sensitive information
+  - CWE-350: Reliance on Reverse DNS Resolution for a Security-Critical Action
+  - CWE-602: Client-Side Enforcement of Server-Side Security
+  - CWE-614: Sensitive Cookie in HTTPS Session Without 'Secure' Attribute
+  - CWE-770: Allocation of Resources Without Limits or Throttling
+
+Our manual code review process found material related to each CWE that we identified as a possible weakness in Liberapay. Fortunately for project security, most of our weaknesses had already been identified or resolved entirely by the Liberapay team. CWE-312 and CWE-319 were resolved by use of robust encryption algorithms that protect data from being read in an unencrypted state. Session cookies were so found to be securely generated, nullifying the threats from CWE-614. No instances for reverse DNS lookup use could be found, reducing the risk of user spoofing that CWE-350 presents. Investigations into Liberapay's input validation systems resolved a couple more of our target weaknesses, namely CWE-20 and CWE-94, making it far more difficult to inject code into Liberapay and manipulate its activities.
+
+CWE-291 is somewhat of a special case. Liberapay does not use IP addresses for login valdiation, mostly nullifying this weakness. However, IP addresses are used to limit the total amount of login attempts, leading to another possible weakness in CWE-307. Add to that that Liberapay has little in the way of anti IP-spoofing measures and the potential weaknesses is more likely. IP spoofing could lead to CWE-307, due to the inability to prevent a malicious user from spoofing their address and continuously brute forcing the password of the machine. However, findings from investigations into another weakness, CWE-770, resolved this problem. Since Liberapay implements a rate limiting system that limits the number of requests from a particular network, it becomes much more difficult to flood Liberapay with login requests, resolving all three issues.
+
+Despite the majority of our target weaknesses being resolved, we did find a handful of legitimate weaknesses that need fixing. Examinations into the xml page generation revealed vulnerabilities that could allow malicious users to perform an XSS attack on Liberapay. XSS-based vulnerabilities were foudn by both manual code review and by the automatic scanning tool, BANDIT. In addition our findings, a previously XSS issue found by Liberapay has not been fixed as of the writing of this analysis. Our manual code review uncovered one more vulnerability corresponding to CWE-308. This weakness lies in Liberapay's implementation of single factor authentication, although Liberapay has recognized this threat, it still has not been mended as of this analysis.
+
+Our automatic code review with BANDIT uncovered another problem in Liberapay, one that we were not originally looking for. The tool discovered Liberapay's use of insecure hashing functions. This weakness corresponds to CWE-916, and can be solved by implementing a more effective hashing algorithm. 
+
 
 ### 2.2. Planned / Ongoing Contributions to Upstream Projects
 
-To the Liberapay team's credit, the majority of the connjectured weaknesses turned out to already be addressed by the current version of the code base. In addition, many of the remaining issues are already under examination for future fix development. Most of our weakness do not need to be brough to the Liberapay team since they have already been identified or addressed in one way or another. Despite this, the few weaknesses we have found can be brought to the attention of the Liberapay team via posting an issue.
+To the Liberapay team's credit, the majority of the conjectured weaknesses turned out to already be addressed by the current version of the code base. In addition, many of the remaining issues are already under examination for future fix development. Most of our weakness do not need to be brought to the Liberapay team since they have already been identified or addressed in one way or another. Despite this, the few weaknesses we have found can be brought to the attention of the Liberapay team via posting an issue. however, the XSS vulnerabilities found by manual code review and through automatic code review could be added as an issue to the Liberapay project. Additionally, the use of the insecure hash function uncovered by BANDIT could also be placed in an issue on the project.
+
+Writing a post to notify the main Liberapay develoepr base of the following weaknesses could improve Liberapay's security:
+  1. CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')
+  2. CWE-916: Use of Password Hash with Insufficient Computational Effort
+
 
 ## 3. GitHub Information
 
