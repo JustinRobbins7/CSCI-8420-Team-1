@@ -166,6 +166,22 @@ __9. CWE-350: Reliance on Reverse DNS Resolution for a Security-Critical Action:
 
 A code review has been conducted to determine whether Liberapay makes use of reverse DNS lookups. But it does not appear that Liberapay does any reverse look ups. Hence we've determined that CWE-350 is not of concern as we've thought previously.
 
+__10. CWE-602: Client-Side Enforcement of Server-Side Security__
+
+Trusting information coming from the front-end can often be detrimental. In the case where a bad actor is able to modify the data getting sent to the back-end, they would be able to access critical information, and perform techniques that could be detrimental to Liberapay. Therefore, it is important to ensure that any verification done on the front-end is also replicated on the back-end to assure integrity of data. After carefully observing Liberapay's code, we conclude that Liberapay does indeed verify incoming data in the back-end. Even though, that data is not always verified from the front-end, Liberapay has done due diligence in asserting the data from the back-end standpoint. In this file, [Exceptions.py](https://github.com/liberapay/liberapay.com/blob/03bdc7b9d5c101eeec521307f795c47034fae17c/liberapay/exceptions.py), Liberapay catches most if not all of the validation necessary to assure confidence in their authentication and verification system. Below, we also provide a snippert of one example of back-end verification during the authentication task. The rest of the verification of the authentication system can be found in this [link](https://github.com/liberapay/liberapay.com/blob/03bdc7b9d5c101eeec521307f795c47034fae17c/liberapay/security/authentication.py).
+
+
+```
+ if currency not in CURRENCIES:
+            raise response.invalid_input(currency, 'sign-in.currency', 'body')
+        password = body.get('sign-in.password')
+        if password:
+            l = len(password)
+            if l < PASSWORD_MIN_SIZE or l > PASSWORD_MAX_SIZE:
+                raise BadPasswordSize
+```
+
+
 __11. Sensitive Cookie in HTTPS Session Without 'Secure' Attribute__
 
 Sensitive Cookie in HTTPS without the 'secure' attribute could result in sending information about the cookie via plain text. If such is a case and the cookie contains critical data, this could jeopardize Liberapay and its users. Liberpay uses cookies which are required to authenticate the user or to perform a specific operation. These cookies are restricted to same-site requests. During the manual coding review, the code was thoroughly analyzed to try and find spots where the setting of cookies was not done securely. Howevever, no such place was found. Liberapay does indeed secure sensitive cookies in HTTPS sessions. In fact, everytime a cookie is created/set, as long as the session was HTTPS protocol (which Liberapay uses), the particurlar cookie is made secure. As one can see in the code snippet below, everytime a cookie is set, Liberapay sets a lot of options associated with the cookie, such as the path, samesite, httponly, security of the cookie, and more. Therefore, Liberapay eradicates the potential data interception by a bad actor via cookies. Below, we highlight the snippet of code that showcases the findings:
