@@ -166,6 +166,33 @@ __9. CWE-350: Reliance on Reverse DNS Resolution for a Security-Critical Action:
 
 A code review has been conducted to determine whether Liberapay makes use of reverse DNS lookups. But it does not appear that Liberapay does any reverse look ups. Hence we've determined that CWE-350 is not of concern as we've thought previously.
 
+__11. Sensitive Cookie in HTTPS Session Without 'Secure' Attribute__
+
+Sensitive Cookie in HTTPS without the 'secure' attribute could result in sending information about the cookie via plain text. If such is a case and the cookie contains critical data, this could jeopardize Liberapay and its users. Liberpay uses cookies which are required to authenticate the user or to perform a specific operation. These cookies are restricted to same-site requests. During the manual coding review, the code was thoroughly analyzed to try and find spots where the setting of cookies was not done securely. Howevever, no such place was found. Liberapay does indeed secure sensitive cookies in HTTPS sessions. In fact, everytime a cookie is created/set, as long as the session was HTTPS protocol (which Liberapay uses), the particurlar cookie is made secure. As one can see in the code snippet below, everytime a cookie is set, Liberapay sets a lot of options associated with the cookie, such as the path, samesite, httponly, security of the cookie, and more. Therefore, Liberapay eradicates the potential data interception by a bad actor via cookies. Below, we highlight the snippet of code that showcases the findings:
+
+```
+  def set_cookie(cookies, key, value, expires=None, httponly=True, path='/', samesite='lax'):
+    key = ensure_str(key)
+    cookies[key] = ensure_str(value)
+    cookie = cookies[key]
+    if expires:
+        if isinstance(expires, timedelta):
+            expires += utcnow()
+        if isinstance(expires, datetime):
+            expires = to_rfc822(expires)
+        cookie['expires'] = ensure_str(expires)
+    if httponly:
+        cookie['httponly'] = True
+    if path:
+        cookie['path'] = ensure_str(path)
+    if samesite:
+        cookie['samesite'] = ensure_str(samesite)
+    if website.cookie_domain:
+        cookie['domain'] = ensure_str(website.cookie_domain)
+    if website.canonical_scheme == 'https':
+        cookie['secure'] = True
+```
+
 ### 1.3. Findings from Automatic Tools
 Our team utilized two distinct tools to try and locate common security issues/vulnerabilities in LiberaPay.
 
